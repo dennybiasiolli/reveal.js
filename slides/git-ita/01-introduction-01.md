@@ -1,0 +1,7 @@
+### Controllo di versione
+
+È un sistema che registra, nel tempo, i cambiamenti ad un file o ad una serie di file,
+così da poter richiamare una specifica versione in un secondo momento.
+
+<aside class="notes">
+</aside>
