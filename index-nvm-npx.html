@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown="slides/nvm-npx/index.md"></section>
+				<section data-markdown="slides/nvm-npx/whoami.md"></section>
+				<section data-markdown="slides/nvm-npx/problem-1.md"></section>
+				<section data-markdown="slides/nvm-npx/problem-1-solutions.md"></section>
+				<section data-markdown="slides/nvm-npx/ask-the-maintainer.md"></section>
+				<section data-markdown="slides/nvm-npx/readme-contributing-files.md"></section>
+				<section>
+					<section data-markdown="slides/nvm-npx/package-json-engine-01.md"></section>
+					<section data-markdown="slides/nvm-npx/package-json-engine-02.md"></section>
+					<section data-markdown="slides/nvm-npx/package-json-engine-03.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/nvm-npx/package-yarn-lockfiles-01.md"></section>
+					<section data-markdown="slides/nvm-npx/package-yarn-lockfiles-02.md"></section>
+				</section>
+				<section data-markdown="slides/nvm-npx/ci-cd-files.md"></section>
+				<section>
+					<section data-markdown="slides/nvm-npx/nvmrc-01.md"></section>
+					<section data-markdown="slides/nvm-npx/nvmrc-02.md"></section>
+				</section>
+				<section data-markdown="slides/nvm-npx/problem-2.md"></section>
+				<section data-markdown="slides/nvm-npx/problem-2-solutions.md"></section>
+				<section data-markdown="slides/nvm-npx/nvm-n-comparison-01.md"></section>
+				<section data-markdown="slides/nvm-npx/nvm.md"></section>
+				<section>
+					<section data-markdown="slides/nvm-npx/installing-nvm-01.md"></section>
+					<section data-markdown="slides/nvm-npx/installing-nvm-02.md"></section>
+					<section data-markdown="slides/nvm-npx/installing-nvm-03.md"></section>
+				</section>
+				<section data-markdown="slides/nvm-npx/nvm-install.md"></section>
+				<section data-markdown="slides/nvm-npx/nvm-ls.md"></section>
+				<section data-markdown="slides/nvm-npx/nvm-alias.md"></section>
+				<section data-markdown="slides/nvm-npx/nvm-upgrade-node.md"></section>
+				<section data-markdown="slides/nvm-npx/q-and-a.md"></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
