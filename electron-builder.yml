@@ -3,6 +3,17 @@ productName: Electron Talk 2020
 copyright: Copyright © 2020 ${author}
 icon: icons/icon.png
 
+files:
+    - css/**/*
+    - dist/theme/**/*
+    - dist/*.css
+    - dist/*.js
+    - dist/*.map
+    - js/**/*
+    - plugin/**/*
+    - slides/**/*
+    - index*.html
+
 mac:
     category: public.app-category.utilities
     target: dmg
