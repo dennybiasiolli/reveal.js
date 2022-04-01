@@ -1,11 +1,13 @@
 #### Mal di Montagna
 
-Tra i 2000 e i 3000 metri di quota possono riscontrarsi sintomi attribuibili al male di montagna, definito dalla presenza di **cefalea**, più almeno uno dei seguenti sintomi:
+Tra i 2000 e i 3000 metri di quota possono riscontrarsi sintomi attribuibili al male di montagna.
 
-- disturbi gastro-intestinali (perdita di appetito, nausea, vomito);
-- astenia/affaticamento eccessivo;
-- vertigini/sensazione di testa leggera;
-- disturbi del sonno, irritabilità;
+**Cefalea**, più almeno uno dei seguenti sintomi:
+
+- disturbi gastro-intestinali (perdita di appetito, nausea, vomito)
+- astenia/affaticamento eccessivo
+- vertigini/sensazione di testa leggera
+- disturbi del sonno, irritabilità
 
 
 Fonte:
