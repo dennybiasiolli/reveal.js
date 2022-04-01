@@ -6,7 +6,7 @@ Bevete acqua spesso e a piccoli sorsi, gli integratori aiutano a compensare la p
 Evitate invece
 tisane (effetto drenante), bibite gassate,<br>
 caffè (effetto diuretico, perdita di sali)<br>
-e alcolici (rallentano i riflessi e possono alterare la termoregloazione).
+e alcolici (rallentano i riflessi e possono alterare la termoregolazione).
 
 
 <small>
