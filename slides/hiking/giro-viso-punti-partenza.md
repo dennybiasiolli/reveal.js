@@ -1,5 +1,8 @@
 #### Punti di partenza
 
+- Pian del Re, Valle Po<br>
+    Parcheggio 10 €/giorno
+
 - Castello di Pontechianale, Valle Varaita<br>
     
     <ul>
@@ -7,9 +10,6 @@
         <li>Tratto aggiuntivo di 2,53 (5,06 A/R) km (341 m D+)</li>
     </ul>
     
-
-- Pian del Re, Valle Po<br>
-    Parcheggio 10 €/giorno
 
 - Pian della Regina, Valle Po<br>
     
