@@ -1,4 +1,4 @@
-#### Date plausibili - Giugno
+#### Date plausibili - Luglio
 
 <table>
     <thead>
@@ -14,60 +14,66 @@
     </thead>
     <tbody>
         <tr>
+            <td><span style="color:grey;">27</span></td>
+            <td><span style="color:grey;">28</span></td>
+            <td><span style="color:grey;">29</span></td>
             <td><span style="color:grey;">30</span></td>
-            <td><span style="color:grey;">31</span></td>
             <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td title="Denny al PyCon Firenze"><span style="font-weight:bold; color:red;">4</span></td>
-            <td title="Denny al PyCon Firenze"><span style="font-weight:bold; color:red;">5</span></td>
+            <td><span style="font-weight:bold; color:green;">2</span></td>
+            <td><span style="font-weight:bold; color:green;">3</span></td>
         </tr>
         <tr></tr>
         <tr>
+            <td>4</td>
+            <td>5</td>
             <td>6</td>
             <td>7</td>
             <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td><span style="font-weight:bold; color:green;">11</span></td>
-            <td><span style="font-weight:bold; color:green;">12</span></td>
+            <td><span style="font-weight:bold; color:green;">9</span></td>
+            <td title="Concerto Pinguini Tattici Nucleari ore 20:00"><span style="font-weight:bold; color:red;">10</span></td>
         </tr>
         <tr>
-            <td><span style="font-weight:bold; color:green;">13</span></td>
-            <td><span style="font-weight:bold; color:green;">14</span></td>
-            <td><span style="font-weight:bold; color:green;">15</span></td>
-            <td><span style="font-weight:bold; color:green;">16</span></td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td title="Pian del Re chiuso al traffico da Crissolo"><span style="font-weight:bold; color:orange;">16</span></td>
             <td><span style="font-weight:bold; color:green;">17</span></td>
-            <td title="Matrimonio Nadia e Paul Red"><span style="font-weight:bold; color:red;">18</span></td>
-            <td><span style="font-weight:bold; color:green;">19</span></td>
         </tr>
         <tr>
-            <td>20</td>
-            <td>21</td>
-            <td>22</td>
-            <td>23</td>
-            <td>24</td>
+            <td><span style="font-weight:bold; color:green;">18</span></td>
+            <td><span style="font-weight:bold; color:green;">19</span></td>
+            <td><span style="font-weight:bold; color:green;">20</span></td>
+            <td><span style="font-weight:bold; color:green;">21</span></td>
+            <td><span style="font-weight:bold; color:green;">22</span></td>
+            <td><span style="font-weight:bold; color:green;">23</span></td>
+            <td><span style="font-weight:bold; color:green;">24</span></td>
+        </tr>
+        <tr>
             <td><span style="font-weight:bold; color:green;">25</span></td>
             <td><span style="font-weight:bold; color:green;">26</span></td>
-        </tr>
-        <tr>
-            <td>27</td>
-            <td>28</td>
-            <td>29</td>
-            <td>30</td>
-            <td><span style="color:grey;">1</span></td>
-            <td><span style="color:grey;">2</span></td>
-            <td><span style="color:grey;">3</span></td>
+            <td><span style="font-weight:bold; color:green;">27</span></td>
+            <td><span style="font-weight:bold; color:green;">28</span></td>
+            <td><span style="font-weight:bold; color:green;">29</span></td>
+            <td><span style="font-weight:bold; color:green;">30</span></td>
+            <td><span style="font-weight:bold; color:green;">31</span></td>
         </tr>
     </tbody>
 </table>
 
 <aside class="notes">
 
-- 4 - 5: no Denny
+- 2 - 3
 
-- 12 - 19: ferie Dona e Marco
+- 9 - 10
 
-- 18: matrimonio Nadia e Paul Red
+- 16 - 17 (16: Pian del Re chiuso al traffico da Crissolo)
+
+- 18 - 24: ferie Dona e Marco
+
+- 23 - 24
+
+- 30 - 31
 
 </aside>
