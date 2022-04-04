@@ -6,7 +6,7 @@
 <a href="https://www.escursionismo.it/rifugi-bivacchi/vallanta-15609" target="_blank">escursionismo.it</a>
 
 **Tariffe estate 2021**<br>
-€ 51,00 mezza pensione
+51 € mezza pensione (caparra 20 € a persona)
 
 - cena con primo (pasta o minestra), secondo, contorno, dolce
 - pernottamento
