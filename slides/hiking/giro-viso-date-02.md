@@ -37,9 +37,9 @@
             <td>16</td>
             <td>17</td>
             <td>18</td>
-            <td>19</td>
-            <td><span style="font-weight:bold; color:green;">20</span></td>
-            <td><span style="font-weight:bold; color:green;">21</span></td>
+            <td title="100 Miglia del Monviso"><span style="color:orange;">19</span></td>
+            <td title="Monviso Trail da Crissolo"><span style="font-weight:bold; color:orange;">20</span></td>
+            <td title="Monviso Vertical da Pontechianale"><span style="font-weight:bold; color:orange;">21</span></td>
         </tr>
         <tr>
             <td>22</td>
