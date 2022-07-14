@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section data-markdown="slides/django-reversion/index.md"></section>
+				<section data-markdown="slides/django-reversion/whoami.md"></section>
+
+				<section>
+					<section data-markdown="slides/django-reversion/intro-01.md"></section>
+					<section data-markdown="slides/django-reversion/intro-02.md"></section>
+				</section>
+
+				<section data-markdown="slides/django-reversion/installation.md"></section>
+				<section>
+					<section data-markdown="slides/django-reversion/admin-integration-01.md"></section>
+					<section data-markdown="slides/django-reversion/admin-integration-02.md"></section>
+					<section data-markdown="slides/django-reversion/admin-integration-03.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-reversion/management-commands-01.md"></section>
+					<section data-markdown="slides/django-reversion/management-commands-02.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-reversion/registering-models-01.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-reversion/django-reversion-rest-framework-01.md"></section>
+					<section data-markdown="slides/django-reversion/django-reversion-rest-framework-02.md"></section>
+					<section data-markdown="slides/django-reversion/django-reversion-rest-framework-03.md"></section>
+					<section data-markdown="slides/django-reversion/django-reversion-rest-framework-04.md"></section>
+					<section data-markdown="slides/django-reversion/django-reversion-rest-framework-05.md"></section>
+				</section>
+
+				<section data-markdown="slides/django-reversion/q-and-a.md"></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
