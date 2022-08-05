@@ -1,8 +1,6 @@
 #### Installation
 
-- install with pip
-
-    `pip install django-reversion`
+- `pip install django-reversion`
 
 - add `'reversion'` to `INSTALLED_APPS`
 
