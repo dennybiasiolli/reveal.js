@@ -1,6 +1,6 @@
 #### management commands
 
-##### deleterevisions
+`deleterevisions`
 
 <small>
 
