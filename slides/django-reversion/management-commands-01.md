@@ -1,6 +1,6 @@
 #### management commands
 
-##### createinitialrevisions
+`createinitialrevisions`
 
 ```sh
 manage.py createinitialrevisions
