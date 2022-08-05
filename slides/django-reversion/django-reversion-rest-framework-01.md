@@ -1,6 +1,6 @@
-#### what about<br>django-rest-framework?
+or use
 
-You can use django-reversion-rest-framework
+#### django-reversion-rest-framework
 
 <aside class="notes">
 </aside>
