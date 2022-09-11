@@ -3,13 +3,13 @@ Mixins
 ```py
 from rest_framework import viewsets
 from reversion_rest_framework.mixins import (
-    HistoryOnlyMixin,     # `history` and `version`
-    DeletedOnlyMixin,     # `deleted`
-    ReadOnlyHistoryModel, # `history`, `version` and `deleted`
-    RevertMixin,          # `history`, `version` and `revert`
+    HistoryMixin,  # `history` and `version`
+    DeletedMixin,  # `deleted`
+    RevertMixin,   # `history`, `version` and `revert`
 )
 
-class MyModelViewSet(ReadOnlyHistoryModel,
+class MyModelViewSet(HistoryMixin,
+                     DeletedMixin,
                      viewsets.ModelViewSet):
     # ...
 ```
