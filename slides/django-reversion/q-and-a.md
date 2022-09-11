@@ -1,5 +1,9 @@
 ### THANK YOU
 
+#### Credits
+
+Artur Czepiel
+
 #### Links
 
 <small>

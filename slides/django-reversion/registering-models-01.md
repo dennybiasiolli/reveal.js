@@ -3,16 +3,20 @@
 ```py
 from django.db import models
 import reversion
+```
 
+```py
 @reversion.register()
-class YourModel(models.Model):
+class Pizza(models.Model):
     pass
+```
 
+```py
 @reversion.register(
-    fields=('name', 'surname', 'address'),
-    exclude=('profile_photo',)
+    fields=('flour', 'oil', 'sauce', 'toppings'),
+    exclude=('photo',)
 )
-class YourOtherModel(models.Model):
+class Pizza(models.Model):
     pass
 ```
 

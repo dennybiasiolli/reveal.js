@@ -4,8 +4,8 @@
 from django.contrib import admin
 from reversion.admin import VersionAdmin
 
-@admin.register(YourModel)
-class YourModelAdmin(VersionAdmin):
+@admin.register(Pizza)
+class PizzaAdmin(VersionAdmin):
     pass
 ```
 
