@@ -3,14 +3,14 @@
 Pinia can coexist with Vuex
 <br><br>
 
-Vue 3.x
+Vue 3.x and 2.7.x
 
 ```sh
 npm install -S pinia
 ```
 
 
-Vue 2.x
+Vue 2.6.x
 
 ```sh
 npm install -S @vue/composition-api

@@ -3,4 +3,4 @@
 
 Can Vuex and Pinia coexist?
 
-Yes, but make sure to migrate entire modules, not entire components
+Yes, but...<br>make sure to migrate entire modules,<br>not entire components.
