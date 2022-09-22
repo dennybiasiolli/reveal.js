@@ -8,5 +8,6 @@ and decided to make it the new recommendation instead.
 
 <small>https://pinia.vuejs.org/introduction.html#comparison-with-vuex</small>
 
+
 <aside class="notes">
 </aside>

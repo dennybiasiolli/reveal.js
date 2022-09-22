@@ -15,3 +15,7 @@ autoUpdater.on('update-not-available', (info) => {
   sendStatusToWindow('Update not available.')
 })
 ```
+
+
+<aside class="notes">
+</aside>

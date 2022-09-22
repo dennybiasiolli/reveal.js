@@ -7,3 +7,7 @@
 ![auto-update-notification-win](slides/electron/images/auto-update-notification-win.png)
 
 ![auto-update-notification-lin](slides/electron/images/auto-update-notification-lin.png)
+
+
+<aside class="notes">
+</aside>

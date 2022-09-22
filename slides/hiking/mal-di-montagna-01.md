@@ -14,3 +14,7 @@ Fonte:
 <a href="https://www.cai.it/organo_tecnico/commissione-centrale-medica/lalta-quota-e-gli-effetti-sullorganismo/" target="_blank">
 cai.it
 </a>
+
+
+<aside class="notes">
+</aside>

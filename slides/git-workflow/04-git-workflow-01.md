@@ -7,3 +7,7 @@ A Git project can be thought of as having three parts:
 2. A Staging Area: where you'll list changes you make to the working directory
 
 3. A Repository: where Git permanently stores those changes as different versions of the project
+
+
+<aside class="notes">
+</aside>

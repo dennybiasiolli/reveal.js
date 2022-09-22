@@ -11,3 +11,7 @@
     - <a href="https://threejs.org/editor/"  target="_blank">editor</a>
 
     - <a href="https://www.youtube.com/watch?v=e21tqZebl60"  target="_blank">esempio CAD</a>
+
+
+<aside class="notes">
+</aside>
