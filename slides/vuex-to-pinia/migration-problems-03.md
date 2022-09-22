@@ -17,3 +17,7 @@ will give you this error
 getActivePinia was called with no active Pinia.
 Did you forget to install pinia?
 ```
+
+
+<aside class="notes">
+</aside>

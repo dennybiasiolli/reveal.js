@@ -9,3 +9,7 @@ Let's take a moment to generalize:
 - Git is the industry-standard version control system for developers
 
 - Use Git commands to help keep track of changes made to a project
+
+
+<aside class="notes">
+</aside>

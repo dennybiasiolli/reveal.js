@@ -7,3 +7,7 @@ Esempi di architettura software
         Credits
     </a>
 </small>
+
+
+<aside class="notes">
+</aside>

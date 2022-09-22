@@ -9,3 +9,7 @@
  import Counter from '@/components/Counter.vue'
 +import { useStore } from '@/stores/main'
 ```
+
+
+<aside class="notes">
+</aside>

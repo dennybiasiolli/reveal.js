@@ -18,3 +18,7 @@ trekking.it
 garmin.com
 </a>
 </small>
+
+
+<aside class="notes">
+</aside>

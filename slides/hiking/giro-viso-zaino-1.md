@@ -27,3 +27,7 @@
         Carta igienica, fazzoletti, ecc...
     </li>
 </ul>
+
+
+<aside class="notes">
+</aside>

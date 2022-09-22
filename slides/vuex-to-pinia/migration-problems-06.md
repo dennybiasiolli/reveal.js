@@ -28,3 +28,7 @@ pinia.state.value = { /* ... */ }
 https://pinia.vuejs.org/core-concepts/state.html#subscribing-to-the-state
 
 </small>
+
+
+<aside class="notes">
+</aside>

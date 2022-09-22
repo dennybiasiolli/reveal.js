@@ -18,3 +18,7 @@
     mac:
         target: [dmg, zip]  # add zip, important!
     ```
+
+
+<aside class="notes">
+</aside>

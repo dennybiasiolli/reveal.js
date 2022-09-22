@@ -18,3 +18,7 @@
 doccia non garantita, no riscaldamento
 
 </small>
+
+
+<aside class="notes">
+</aside>

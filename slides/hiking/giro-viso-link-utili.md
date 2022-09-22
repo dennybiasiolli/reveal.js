@@ -23,4 +23,6 @@
 
 </small>
 
-</small>
+
+<aside class="notes">
+</aside>

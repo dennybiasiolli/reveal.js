@@ -7,3 +7,7 @@ git diff filename
 ```
 
 Here, `filename` is the actual name of the file.
+
+
+<aside class="notes">
+</aside>

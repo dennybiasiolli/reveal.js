@@ -5,3 +5,7 @@
 - 13/03 Saluzzo - Santa Cristina
 
 - 27/03 Villar, S.Costanzo al Monte, Monte S.Bernardo
+
+
+<aside class="notes">
+</aside>

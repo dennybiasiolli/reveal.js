@@ -15,3 +15,7 @@
     -expect(context.commit).toHaveBeenCalled()
     +expect(state.increment).toHaveBeenCalled()
     ```
+
+
+<aside class="notes">
+</aside>

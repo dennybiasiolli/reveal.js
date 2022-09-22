@@ -26,3 +26,7 @@ beforeEach(() => {
 // tests
 const wrapper = shallowMount(Component, { localVue, pinia })
 ```
+
+
+<aside class="notes">
+</aside>

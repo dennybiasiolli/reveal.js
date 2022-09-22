@@ -7,3 +7,7 @@ Standard Conventions for Commit Messages:
 - Written in the present tense
 
 - Should be brief (50 characters or less) when using -m
+
+
+<aside class="notes">
+</aside>

@@ -9,3 +9,7 @@ git add filename
 ```
 
 The word `filename` here refers to the name of the file you are editing, such as `file1.txt`.
+
+
+<aside class="notes">
+</aside>

@@ -7,3 +7,7 @@ People ranging from hobbyists to professionals are adopting Electron as their
 tool for building modern desktop applications.
 
 In fact you may already be using software built on Electron and not even knew it.
+
+
+<aside class="notes">
+</aside>

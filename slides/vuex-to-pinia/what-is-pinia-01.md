@@ -6,5 +6,6 @@ Started as an experiment to redesign what a Store for Vue could look like with t
 
 <small>https://pinia.vuejs.org/introduction.html</small>
 
+
 <aside class="notes">
 </aside>

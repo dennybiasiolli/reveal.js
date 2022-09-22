@@ -25,3 +25,7 @@ const wrapper = shallowMount(Component, {
   global: { plugins: [pinia] }
 })
 ```
+
+
+<aside class="notes">
+</aside>
