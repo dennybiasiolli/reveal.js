@@ -7,3 +7,7 @@ You can check the status of those changes with:
 ```sh
 git status
 ```
+
+
+<aside class="notes">
+</aside>

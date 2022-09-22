@@ -15,3 +15,7 @@ Use store **actions**
 const myStore = useMyStore()
 myStore.actionName()
 ```
+
+
+<aside class="notes">
+</aside>

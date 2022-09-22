@@ -24,6 +24,7 @@ const { count, isEven, isOdd } = storeToRefs(store)
 const { increment } = store
 ```
 
+
 <aside class="notes">
 https://pinia.vuejs.org/core-concepts/#using-the-store
 </aside>
