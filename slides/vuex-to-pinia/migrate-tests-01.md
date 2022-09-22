@@ -10,3 +10,7 @@
     -expect(getters.isOdd({}, { isEven: false })).toBe(true)
     +expect(getters.isOdd.call({ isEven: false })).toBe(true)
     ```
+
+
+<aside class="notes">
+</aside>

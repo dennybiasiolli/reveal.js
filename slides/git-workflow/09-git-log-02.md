@@ -9,3 +9,7 @@ In the output, notice:
 - The date and time of the commit
 
 - The commit message
+
+
+<aside class="notes">
+</aside>

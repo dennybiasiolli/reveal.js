@@ -12,3 +12,7 @@ to approach.
     - Translate design for different operating systems
 
     - Use of native features (menus, notifications)
+
+
+<aside class="notes">
+</aside>

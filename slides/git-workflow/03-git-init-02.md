@@ -16,3 +16,7 @@ And provide missing/wrong settings with
 git config --global user.name "Name Surname"
 git config --global user.email "address@example.com"
 ```
+
+
+<aside class="notes">
+</aside>

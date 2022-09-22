@@ -32,3 +32,7 @@
 ![Mail](slides/images/mail.png) <a href="mailto:denny.biasiolli@gmail.com" target="_blank">denny.biasiolli@gmail.com</a>
 
 ![Website](slides/images/feed.png) <a href="http://dennybiasiolli.com" target="_blank">dennybiasiolli.com</a>
+
+
+<aside class="notes">
+</aside>

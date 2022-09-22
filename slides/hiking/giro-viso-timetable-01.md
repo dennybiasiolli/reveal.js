@@ -190,3 +190,7 @@ Al Rifugio Vallanta entro le 17:00
 </table>
 
 </small>
+
+
+<aside class="notes">
+</aside>

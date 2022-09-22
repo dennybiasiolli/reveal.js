@@ -21,3 +21,7 @@ No riscaldamento
 **Posteggio gratuito a Pian del Re se ospiti del rifugio**
 
 </small>
+
+
+<aside class="notes">
+</aside>

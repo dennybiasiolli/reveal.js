@@ -22,5 +22,6 @@ Vue.use(PiniaVuePlugin)
 export default createPinia()
 ```
 
+
 <aside class="notes">
 </aside>
