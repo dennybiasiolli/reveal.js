@@ -11,3 +11,7 @@ store.$patch({
   // other properties
 })
 ```
+
+
+<aside class="notes">
+</aside>

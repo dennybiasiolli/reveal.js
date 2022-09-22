@@ -19,6 +19,7 @@ export const useStore = defineStore('main', {
   },
 ```
 
+
 <aside class="notes">
 https://pinia.vuejs.org/core-concepts/#defining-a-store
 </aside>

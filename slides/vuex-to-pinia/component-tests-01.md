@@ -15,3 +15,7 @@ createTestingPinia({
   initialState: { main: { count: 0 } },
 })
 ```
+
+
+<aside class="notes">
+</aside>
