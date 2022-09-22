@@ -8,3 +8,7 @@ Notice the output:
 Changes to the file are marked with a `+` and are indicated in green.
 
 **IMPORTANT**: press `q` on your keyboard to exit diff mode.
+
+
+<aside class="notes">
+</aside>
