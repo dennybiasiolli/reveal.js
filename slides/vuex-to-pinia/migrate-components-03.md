@@ -21,3 +21,7 @@
 +  ...mapActions(useStore, ['increment', 'incrementAsync']),
  },
 ```
+
+
+<aside class="notes">
+</aside>

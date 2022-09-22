@@ -9,3 +9,7 @@
 - Packaging the app
 
 - Yay! \o/
+
+
+<aside class="notes">
+</aside>

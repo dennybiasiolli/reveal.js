@@ -11,3 +11,7 @@ Esempi di app web
 - ...
 
 Cosa hanno in comune?
+
+
+<aside class="notes">
+</aside>

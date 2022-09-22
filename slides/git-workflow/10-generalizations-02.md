@@ -9,3 +9,7 @@
 - `git add` adds files from the working directory to the staging area
 
 - `git diff` shows the difference between the working directory and the staging area
+
+
+<aside class="notes">
+</aside>

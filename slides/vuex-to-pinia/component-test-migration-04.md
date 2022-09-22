@@ -13,3 +13,7 @@
 -localVue.use(Vuex)
 +localVue.use(PiniaVuePlugin)
 ```
+
+
+<aside class="notes">
+</aside>
