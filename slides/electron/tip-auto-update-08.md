@@ -18,3 +18,7 @@ autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Update downloaded')
 })
 ```
+
+
+<aside class="notes">
+</aside>

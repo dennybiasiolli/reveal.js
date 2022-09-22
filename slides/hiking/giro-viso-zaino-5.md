@@ -14,3 +14,7 @@
         Power bank per caricare orologio/cellulare?
     </li>
 </ul>
+
+
+<aside class="notes">
+</aside>

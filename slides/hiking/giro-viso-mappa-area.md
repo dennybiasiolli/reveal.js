@@ -8,3 +8,7 @@
 Google Earth
 </a>
 </small>
+
+
+<aside class="notes">
+</aside>

@@ -11,6 +11,7 @@ How to migrate an existing app from Vuex to Pinia?
 
 <small>- Denny Biasiolli -</small>
 
+
 <aside class="notes">
 Are you losing your mind trying to convert your Vuex store to Pinia?
 

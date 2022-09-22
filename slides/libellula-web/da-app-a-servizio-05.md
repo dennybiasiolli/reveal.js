@@ -7,3 +7,7 @@ Obiettivo finale
         Credits
     </a>
 </small>
+
+
+<aside class="notes">
+</aside>

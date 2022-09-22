@@ -6,3 +6,7 @@
 
 You can focus on __**what**__ your app should do,<br>Electron manages the
 __**how**__ for you.
+
+
+<aside class="notes">
+</aside>

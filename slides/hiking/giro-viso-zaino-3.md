@@ -18,3 +18,7 @@
 </ul>
 
 # Per 2 giorni!
+
+
+<aside class="notes">
+</aside>
