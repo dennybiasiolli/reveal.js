@@ -21,3 +21,7 @@
 -const incrementAsync = () => store.dispatch('incrementAsync')
 +const { increment, incrementAsync } = store
 ```
+
+
+<aside class="notes">
+</aside>
