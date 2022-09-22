@@ -18,3 +18,7 @@
         Piccola farmacia personale
     </li>
 </ul>
+
+
+<aside class="notes">
+</aside>

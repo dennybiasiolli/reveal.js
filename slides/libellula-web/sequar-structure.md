@@ -9,3 +9,7 @@
     - Chiosco check-in
 
     - Time detection produzione
+
+
+<aside class="notes">
+</aside>
