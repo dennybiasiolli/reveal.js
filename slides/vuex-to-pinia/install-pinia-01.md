@@ -19,5 +19,6 @@ npm install -S pinia
 
 <small>https://pinia.vuejs.org/getting-started.html#installation</small>
 
+
 <aside class="notes">
 </aside>

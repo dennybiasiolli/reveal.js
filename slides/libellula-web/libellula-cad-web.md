@@ -9,3 +9,7 @@ Come suddividere i vari componenti?
 - Funzioni di disegno/renderizzazione
 
 - Autenticazione, gestione utenti
+
+
+<aside class="notes">
+</aside>

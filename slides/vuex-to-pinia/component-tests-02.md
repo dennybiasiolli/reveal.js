@@ -7,3 +7,7 @@
 - allows you to overwrite getter values in tests
 
     not working with Vue 2 and Jest
+
+
+<aside class="notes">
+</aside>

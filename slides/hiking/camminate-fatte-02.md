@@ -11,3 +11,7 @@
 - 20/02 Ballatori - Colle di Melle
 
 - 27/02 Costigliole, Monte Pagliano, Cave di alabastro
+
+
+<aside class="notes">
+</aside>

@@ -7,3 +7,7 @@ Struttura di una App Web
         Credits
     </a>
 </small>
+
+
+<aside class="notes">
+</aside>

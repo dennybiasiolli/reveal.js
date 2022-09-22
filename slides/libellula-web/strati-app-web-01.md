@@ -11,3 +11,7 @@ I vari strati di un'applicazione web
     - MVC
 
 - Database
+
+
+<aside class="notes">
+</aside>

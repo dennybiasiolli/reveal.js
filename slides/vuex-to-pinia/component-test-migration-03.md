@@ -16,3 +16,7 @@
 +  expect(store.incrementAsync).toHaveBeenCalled()
  })
 ```
+
+
+<aside class="notes">
+</aside>

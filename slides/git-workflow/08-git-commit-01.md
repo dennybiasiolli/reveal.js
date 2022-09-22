@@ -9,3 +9,7 @@ A commit permanently stores changes from the staging area inside the repository.
 ```sh
 git commit -m "complete first lines of file"
 ```
+
+
+<aside class="notes">
+</aside>

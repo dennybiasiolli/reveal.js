@@ -19,3 +19,7 @@ bagni in comune, docce con acqua calda.
 No riscaldamento
 
 </small>
+
+
+<aside class="notes">
+</aside>

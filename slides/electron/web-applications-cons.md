@@ -15,3 +15,7 @@
 - Performances based on network connection
 
 Can be more painful than writing code for different operating systems
+
+
+<aside class="notes">
+</aside>

@@ -14,3 +14,7 @@
 <small>
   <a href="https://connect.garmin.com/modern/course/94929854" target="_blank">Traccia Garmin</a>
 </small>
+
+
+<aside class="notes">
+</aside>

@@ -26,6 +26,7 @@ import { useStore } from '@/stores/main'
 }),
 ```
 
+
 <aside class="notes">
 https://pinia.vuejs.org/core-concepts/#using-the-store
 </aside>

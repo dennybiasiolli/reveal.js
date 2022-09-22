@@ -37,6 +37,7 @@
 </table>
 </small>
 
+
 <aside class="notes">
 I hope you enjoyed this talk, here's a bunch of links to the official Vuex
 and vue test utils documentation.

@@ -7,3 +7,7 @@ Struttura di una App Web con API
         Credits
     </a>
 </small>
+
+
+<aside class="notes">
+</aside>

@@ -7,3 +7,7 @@ Commits are stored chronologically in the repository and can be viewed with:
 ```sh
 git log
 ```
+
+
+<aside class="notes">
+</aside>

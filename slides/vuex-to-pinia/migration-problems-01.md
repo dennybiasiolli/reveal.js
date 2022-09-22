@@ -17,3 +17,7 @@ const myStore = useMyStore()
 myStore.propertyName
 myStore.getterName
 ```
+
+
+<aside class="notes">
+</aside>

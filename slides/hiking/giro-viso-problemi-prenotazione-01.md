@@ -11,3 +11,7 @@ Certezza di trovare posto in rifugio, però...
 
 - possibilità di annullamento<br>
     mancanza acqua, frane, ecc...
+
+
+<aside class="notes">
+</aside>

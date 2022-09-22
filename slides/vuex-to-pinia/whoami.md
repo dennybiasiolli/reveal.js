@@ -44,6 +44,7 @@ Italy, Savigliano (CN)
 </table>
 </small>
 
+
 <aside class="notes">
 But first a few words about me:
 

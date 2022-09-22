@@ -9,3 +9,7 @@ Calcolo approssimativo del tempo di **camminata**
 senza pause
 
 A questo calcolo vanno aggiunte le pause per bere, mangiare, foto, pranzo, riposo, ecc...
+
+
+<aside class="notes">
+</aside>

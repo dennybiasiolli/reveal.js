@@ -9,3 +9,7 @@ Imagine that we type another line in `file1.txt`.
 ```text
 Second line of my first git file
 ```
+
+
+<aside class="notes">
+</aside>
