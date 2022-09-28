@@ -3,9 +3,7 @@
 
 - Pinia works with Vue 2 and Vue 3
 
-- Mutations no longer exist
-
-    Often perceived as extremely verbose.
+- Simpler API than Vuex<br>Mutations no longer exist, often perceived as extremely verbose.
 
 - No need to create custom complex wrappers to support TypeScript
 
