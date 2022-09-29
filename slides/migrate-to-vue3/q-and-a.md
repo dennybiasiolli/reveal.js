@@ -6,7 +6,8 @@
 - [vuex.vuejs.org](https://vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html)
 - [router.vuejs.org](https://router.vuejs.org/guide/migration/index.html)
 - [test-utils.vuejs.org](https://test-utils.vuejs.org/migration/)
-- [github.com/dennybiasiolli/vue-migration-2-to-3](https://github.com/dennybiasiolli/vue-migration-2-to-3)
+- [github.com/dennybiasiolli/vue-migration-2-to-3](https://github.com/dennybiasiolli/vue-migration-2-to-3)<br>
+    `migrate-to-vue3` branch
 
 <br>
 <br>
