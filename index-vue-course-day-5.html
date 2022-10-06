@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Corso Vue.js - Lezione 5</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown="slides/vue-course/day5-index.md"></section>
+				<section>
+					<section data-markdown="slides/vue-course/day5-api-access-01.md"></section>
+					<section data-markdown="slides/vue-course/day5-api-access-02.md"></section>
+					<section data-markdown="slides/vue-course/day5-api-access-03.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day5-tests-mocking-calls-01.md"></section>
+					<section data-markdown="slides/vue-course/day5-tests-mocking-calls-02.md"></section>
+					<section data-markdown="slides/vue-course/day5-tests-mocking-calls-03.md"></section>
+					<section data-markdown="slides/vue-course/day5-tests-mocking-calls-04.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day5-project-structure-01.md"></section>
+					<section data-markdown="slides/vue-course/day5-project-structure-02.md"></section>
+					<section data-markdown="slides/vue-course/day5-project-structure-03.md"></section>
+					<section data-markdown="slides/vue-course/day5-project-structure-04.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day5-route-checks.md"></section>
+					<section data-markdown="slides/vue-course/day5-axios-interceptors.md"></section>
+				</section>
+				<section data-markdown="slides/vue-course/day5-q-and-a.md"></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
+				keyboard: {
+					38: 'prev',
+					40: 'next',
+				},
+				slideNumber: 'c/t',
+			});
+		</script>
+	</body>
+</html>
