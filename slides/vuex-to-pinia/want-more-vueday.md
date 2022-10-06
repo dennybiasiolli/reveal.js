@@ -1,8 +1,10 @@
-#### Want more?
+#### https://2022.vueday.it/
 
 <img src="slides/vuex-to-pinia/images/vueday-2022.jpg" /><br>
 
-https://2022.vueday.it/
+
+10% discount code<br>
+`speaker_10OFF`
 
 
 <aside class="notes">
