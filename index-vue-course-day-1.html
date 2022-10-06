@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Corso Vue.js - Lezione 1</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown="slides/vue-course/day1-index.md"></section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-vue-intro.md"></section>
+					<section data-markdown="slides/vue-course/day1-vue-intro-example.md"></section>
+					<section data-markdown="slides/vue-course/day1-vue-intro-example-explain.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-vue-angular-react-01.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-use-cases-01.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-vue-development-01-webpack-vue-cli.md"></section>
+					<section data-markdown="slides/vue-course/day1-vue-development-02-nuxt-vite.md"></section>
+				</section>
+				<section data-markdown="slides/vue-course/day1-vue-devtools.md"></section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-vite-project-01.md"></section>
+					<section data-markdown="slides/vue-course/day1-vite-project-02.md"></section>
+					<section data-markdown="slides/vue-course/day1-vite-project-03.md"></section>
+					<section data-markdown="slides/vue-course/day1-vite-project-04.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-project-structure-01.md"></section>
+					<section data-markdown="slides/vue-course/day1-project-structure-02.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-options-api-example.md"></section>
+					<section data-markdown="slides/vue-course/day1-composition-api-example.md"></section>
+					<section data-markdown="slides/vue-course/day1-registering-components-global.md"></section>
+					<section data-markdown="slides/vue-course/day1-registering-components-local.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-components-play-01.md"></section>
+					<section data-markdown="slides/vue-course/day1-components-play-02.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/vue-course/day1-test-01.md"></section>
+					<section data-markdown="slides/vue-course/day1-test-02.md"></section>
+					<section data-markdown="slides/vue-course/day1-test-03.md"></section>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
+				keyboard: {
+					38: 'prev',
+					40: 'next',
+				},
+				slideNumber: 'c/t',
+			});
+		</script>
+	</body>
+</html>
