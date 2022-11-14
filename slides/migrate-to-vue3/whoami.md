@@ -1,10 +1,11 @@
 #### Who am I
 
-<div class="r-stack">
+<!-- <div class="r-stack">
   <img class="fragment fade-out" data-fragment-index="0" src="slides/migrate-to-vue3/images/profile-01.jpg" width="150" height="150">
   <img class="fragment current-visible"  data-fragment-index="0" src="slides/migrate-to-vue3/images/profile-02.jpg" width="150" height="150">
   <img class="fragment" src="slides/migrate-to-vue3/images/profile-03.jpg" width="150" height="150">
-</div>
+</div> -->
+<img src="slides/migrate-to-vue3/images/profile-01.jpg" width="150" height="150">
 
 Denny Biasiolli
 
