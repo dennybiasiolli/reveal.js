@@ -1,4 +1,4 @@
-#### Links
+#### Thank you!
 
 - [blog.vuejs.org](https://blog.vuejs.org/) | [vuejs.org](https://vuejs.org/)
 - [v3-migration.vuejs.org](https://v3-migration.vuejs.org/)
