@@ -11,8 +11,8 @@ import store from '@/store';
 
 store.state.propertyName
 store.state.moduleName.propertyName
-store.state.getters.getterName
-store.state.getters['moduleName/getterName']
+store.getters.getterName
+store.getters['moduleName/getterName']
 store.commit(/*  */)
 store.dispatch(/*  */)
 ```
