@@ -1,4 +1,4 @@
-#### Composition API + script setup (Vue 3)
+#### Composition API + script setup<br>(Vue 3 or 2.7)
 
 
 ```html

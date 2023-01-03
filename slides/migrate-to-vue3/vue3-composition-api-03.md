@@ -1,5 +1,5 @@
 #### Composition API in `setup()`
-(Vue 2 + @vue/composition-api)
+(Vue 2.6 + @vue/composition-api)
 
 
 ```js
