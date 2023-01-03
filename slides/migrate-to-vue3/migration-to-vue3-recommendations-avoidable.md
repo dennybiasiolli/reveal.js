@@ -1,5 +1,7 @@
 #### avoidable migrations
 
+(for now)
+
 - Vue CLI -> Vite
 - Jest -> Vitest
 
