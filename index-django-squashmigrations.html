@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Django `squashmigrations` command can be your enemy</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown="slides/django-squashmigrations/index.md"></section>
+				<section data-markdown="slides/django-squashmigrations/whoami.md"></section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/migrations.md"></section>
+					<section data-markdown="slides/django-squashmigrations/migration-commands.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/makemigrations-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/makemigrations-example-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/makemigrations-example-02.md"></section>
+					<section data-markdown="slides/django-squashmigrations/makemigrations-example-03.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/migrate-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/migrate-example-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/migrate-example-02.md"></section>
+					<section data-markdown="slides/django-squashmigrations/migrate-example-03.md"></section>
+					<section data-markdown="slides/django-squashmigrations/migrate-example-04.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/migrate-under-the-hood-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/migrate-under-the-hood-02.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/showmigrations-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/showmigrations-example-01.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/sqlmigrate-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/sqlmigrate-example-01.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/changing-models-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/changing-models-02.md"></section>
+					<section data-markdown="slides/django-squashmigrations/changing-models-03.md"></section>
+					<section data-markdown="slides/django-squashmigrations/changing-models-04.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/other-model-changes-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/other-model-changes-02.md"></section>
+					<section data-markdown="slides/django-squashmigrations/other-model-changes-03.md"></section>
+					<section data-markdown="slides/django-squashmigrations/other-model-changes-04.md"></section>
+					<section data-markdown="slides/django-squashmigrations/other-model-changes-05.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/meme-migrations.md"></section>
+					<section data-markdown="slides/django-squashmigrations/test-timing-before-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/test-timing-before-02.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-example-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-example-02.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-example-03.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-example-04.md"></section>
+				</section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/test-timing-after-squash-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/meme-what.md"></section>
+				</section>
+				<section data-markdown="slides/django-squashmigrations/squashmigrations-the-point-01.md"></section>
+				<section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-suggestions-01.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-suggestions-02.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-suggestions-03.md"></section>
+					<section data-markdown="slides/django-squashmigrations/squashmigrations-suggestions-04.md"></section>
+				</section>
+				<section data-markdown="slides/django-squashmigrations/q-and-a.md"></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
+				keyboard: {
+					38: 'prev',
+					40: 'next',
+				},
+				slideNumber: 'c/t',
+			});
+		</script>
+	</body>
+</html>
