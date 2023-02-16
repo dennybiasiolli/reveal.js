@@ -4,7 +4,7 @@
 - index.html
 - public/
 - src/main.js
-- src/App.js
+- src/App.vue
 
 
 <aside class="notes">

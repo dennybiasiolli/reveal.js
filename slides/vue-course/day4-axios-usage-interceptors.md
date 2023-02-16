@@ -18,10 +18,10 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   async (response) => response,
 
-  async (error) => {
+  async (err) => {
     // if (!err.response) { /* Server connection lost */ }
     // if (err.response.status === 401) { /* Unauthorized */ }
-    throw error
+    throw err
   }
 )
 ```
