@@ -10,7 +10,7 @@ watch(description, (newValue, oldValue) => {
   // do something here
 })
 
-watch(description, (newValue, oldValue) => {
+watch(obj, (newValue, oldValue) => {
   // do something here
 }, { deep: true })
 ```
