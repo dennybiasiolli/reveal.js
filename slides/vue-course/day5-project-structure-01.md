@@ -3,7 +3,7 @@
 ```
 - src/
   - main.js
-  - App.js
+  - App.vue
   - components/
     - orders/
       - Orders.vue

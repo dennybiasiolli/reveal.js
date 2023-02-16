@@ -3,7 +3,7 @@
 Handling errors in service
 
 ```js
-// services/orders.py
+// services/orders.js
 export async function getOrders(params) {
   try {
     const { data } = await axios.get('orders/', params)
@@ -15,7 +15,7 @@ export async function getOrders(params) {
 ```
 
 ```js
-// stores/orders.py
+// stores/orders.js
 async getOrders(params) {
   this.ordersLoading = true
   this.orders = await getOrders(params)
