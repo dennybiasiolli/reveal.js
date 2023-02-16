@@ -1,7 +1,7 @@
 #### API access from store
 
 ```js
-// stores/orders.py
+// stores/orders.js
 async getOrders(params) {
   this.ordersLoading = true
   try {

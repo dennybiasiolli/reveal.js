@@ -8,8 +8,10 @@ function handleSubmit(e) {
   const isValid = !!(
     username.value.trim() && password.value.trim()
   )
+  console.log('Form is valid?', isValid)
   if (!isValid) {
-    e.preventDefault()
+    // e.preventDefault()
+    // do your thing
   }
 }
 ```
