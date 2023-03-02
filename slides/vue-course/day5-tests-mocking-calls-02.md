@@ -13,7 +13,7 @@ it('getOrders failure', async () => {
   axios.get.mockRejectedValue()
   const params = { foo: 'bar' }
   const retVal = await getOrders(params)
-  expect(axios.get).toHaveBeenCalledWith('orders/', parmas)
+  expect(axios.get).toHaveBeenCalledWith('orders/', params)
   expect(retVal).toEqual([])
 })
 ```
