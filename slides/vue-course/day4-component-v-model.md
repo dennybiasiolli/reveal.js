@@ -10,6 +10,6 @@
 
 <aside class="notes">
 
-https://vuejs.org/guide/components/events.html#usage-with-v-model
+https://vuejs.org/guide/components/v-model.html
 
 </aside>

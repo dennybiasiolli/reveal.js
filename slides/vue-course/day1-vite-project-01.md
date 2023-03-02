@@ -3,7 +3,7 @@
 #### Prerequisites
 
 - familiarity with command line
-- up-to-date Node.js version (16.0 or higher)
+- up-to-date Node.js version (18.x or higher)
 
 ```bash
 npm init vue@latest
