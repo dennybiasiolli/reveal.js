@@ -1,4 +1,6 @@
-#### Changing models
+#### 🔧 Changing models
+
+Show SQL statement
 
 ```sh
 $ manage.py sqlmigrate main 0002

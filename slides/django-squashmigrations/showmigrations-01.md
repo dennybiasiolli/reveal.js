@@ -1,4 +1,4 @@
-#### `manage.py showmigrations`
+#### 🕵 `showmigrations`
 
 Shows all available migrations for the current project
 

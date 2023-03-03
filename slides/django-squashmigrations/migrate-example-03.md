@@ -1,4 +1,6 @@
-#### `manage.py migrate`
+#### 🧑‍💻 `migrate`
+
+Move to a specific migration
 
 ```sh
 # manage.py migrate admin 0002_logentry_remove_auto_add

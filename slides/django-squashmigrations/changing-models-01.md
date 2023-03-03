@@ -1,4 +1,6 @@
-#### Changing models
+#### 🔧 Changing models
+
+Edit model
 
 ```diff
 +++ main/models.py
@@ -8,6 +10,8 @@
 -    text = models.CharField(max_length=140)
 +    text = models.CharField(max_length=250)
 ```
+
+Create migration
 
 ```text
 $ manage.py makemigrations main

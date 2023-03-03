@@ -1,10 +1,10 @@
-#### Further changes?
+#### 🤔 Further changes?
 
 <small>
 <ul>
   <li class="fragment">
     enabling tweet likes<br>
-    (`Like` model)
+    (adding `Like` model)
   </li>
   <li class="fragment">
     enabling retweets<br>
