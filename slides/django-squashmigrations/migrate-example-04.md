@@ -1,4 +1,6 @@
-#### `manage.py migrate`
+#### 🧑‍💻 `migrate`
+
+Applying missing migrations
 
 ```sh
 $ manage.py migrate admin

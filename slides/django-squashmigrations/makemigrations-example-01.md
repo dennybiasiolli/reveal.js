@@ -1,4 +1,6 @@
-#### `manage.py makemigrations`
+#### 🧑‍🔧 `makemigrations`
+
+Add/edit models
 
 ```py
 # main/models.py

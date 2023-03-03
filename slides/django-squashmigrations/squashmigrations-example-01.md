@@ -1,4 +1,6 @@
-#### `manage.py squashmigrations`
+#### 🙃 `squashmigrations`
+
+Applied to `shop` app
 
 ```sh
 $ python manage.py squashmigrations shop 0026
