@@ -1,4 +1,4 @@
-#### Test performances
+#### ⏱ Test performances
 
 20 x apps like `shop`
 
@@ -10,7 +10,7 @@ Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
 ...............................................
 -----------------------------------------------
-Ran 152 tests in 0.924s
+Ran 152 tests in 0.924s 😀
 
 OK
 Destroying test database for alias 'default'...

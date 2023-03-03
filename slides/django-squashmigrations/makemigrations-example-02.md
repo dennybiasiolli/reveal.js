@@ -1,4 +1,6 @@
-#### `manage.py makemigrations`
+#### 🧑‍🔧 `makemigrations`
+
+Create migrations
 
 ```text
 $ manage.py makemigrations
