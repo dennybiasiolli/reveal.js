@@ -1,4 +1,4 @@
-#### Test performances
+#### ⏱ Test performances
 
 ```text
 $ time manage.py test
@@ -11,7 +11,7 @@ Ran 152 tests in 0.845s
 
 | Command | Execution time |
 |-|-|
-| Creating test database | ~20s |
+| Creating test database | ~20s 🤨 |
 | Running tests | ~0.9s |
 
 </small>

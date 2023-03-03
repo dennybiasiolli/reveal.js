@@ -1,4 +1,4 @@
-#### Add `shop` app
+#### 🛒🛍 Add `shop` app
 
 <small>
 <ul>
