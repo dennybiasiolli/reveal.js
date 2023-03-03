@@ -1,12 +1,12 @@
 #### Migration commands
 
-- makemigrations
+- 🧑‍🔧 makemigrations
 
-- migrate
+- 🧑‍💻 migrate
 
-- showmigrations
+- 🕵 showmigrations
 
-- sqlmigrate
+- 🧑‍🔬 sqlmigrate
 
 <small>
 

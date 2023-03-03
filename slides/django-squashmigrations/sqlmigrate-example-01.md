@@ -1,4 +1,4 @@
-#### `manage.py sqlmigrate`
+#### 🧑‍🔬 `sqlmigrate`
 
 ```sh
 $ manage.py sqlmigrate main 0001

@@ -9,10 +9,10 @@ Ran 152 tests in 0.948s
 
 <small>
 
-| Command | Execution time (before) | Execution time (after) |
+| | Creating test DB | Running tests |
 |-|-|-|
-| Creating test database | ~20s | ~20s |
-| Running tests | ~0.9s | ~0.9s |
+| Before | ~20s | ~0.9s |
+| After squashing | ~20s 😑 | ~0.9s |
 
 </small>
 

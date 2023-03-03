@@ -1,6 +1,8 @@
-#### What's the point?
+#### 🤌 What's the point?
 
-Move back from having several hundred migrations to just a few
+Move back<br>
+from having several hundred migrations<br>
+to just a few
 
 
 <aside class="notes">

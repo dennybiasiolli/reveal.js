@@ -1,4 +1,4 @@
-#### `manage.py squashmigrations`
+#### 🙃 `squashmigrations`
 
 ```text
 Optimizing...

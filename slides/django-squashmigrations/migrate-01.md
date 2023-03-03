@@ -1,4 +1,4 @@
-#### `manage.py migrate`
+#### 🧑‍💻 `migrate`
 
 Updates database schema.
 

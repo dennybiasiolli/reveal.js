@@ -1,4 +1,4 @@
-#### `manage.py makemigrations`
+#### 🧑‍🔧 `makemigrations`
 
 Creates new migration(s) for apps.
 

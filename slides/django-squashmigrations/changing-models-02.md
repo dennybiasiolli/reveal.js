@@ -1,4 +1,6 @@
-#### Changing models
+#### 🔧 Changing models
+
+Inspect migration
 
 ```py
 # main/migrations/0002_alter_tweet_text.py

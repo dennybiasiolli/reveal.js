@@ -1,4 +1,4 @@
-#### `manage.py showmigrations`
+#### 🕵 `showmigrations`
 
 ```sh
 $ manage.py showmigrations main

@@ -1,4 +1,6 @@
-#### `manage.py migrate`
+#### 🧑‍💻 `migrate`
+
+First migration
 
 ```sh
 $ manage.py migrate

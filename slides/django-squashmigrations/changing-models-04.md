@@ -1,4 +1,6 @@
-#### Changing models
+#### 🔧 Changing models
+
+Apply migration
 
 ```sh
 $ manage.py migrate main
