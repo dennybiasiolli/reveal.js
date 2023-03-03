@@ -1,4 +1,6 @@
-#### `manage.py migrate`
+#### 🧑‍💻 `migrate`
+
+Rollback migrations
 
 ```sh
 $ manage.py migrate admin zero

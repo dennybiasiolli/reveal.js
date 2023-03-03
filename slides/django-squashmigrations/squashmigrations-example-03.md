@@ -1,4 +1,6 @@
-#### `manage.py squashmigrations`
+#### 🙃 `squashmigrations`
+
+Inspecting migration file
 
 ```py
 # 0001_squashed_0026_product.py

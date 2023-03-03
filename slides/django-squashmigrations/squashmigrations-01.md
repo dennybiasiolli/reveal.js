@@ -1,4 +1,4 @@
-#### `manage.py squashmigrations`
+#### 🙃 `squashmigrations`
 
 ```sh
 manage.py squashmigrations \
@@ -12,7 +12,8 @@ into a single new one.
 <small>
 
 - `--no-optimize`<br>
-    disable merge of `AddField` commands<br>
+    disable the optimizer when generating a squashed migration.<br>
+    Example: disable merge of `AddField` commands<br>
     placed right after a `CreateModel` for the same table
 
 </small>
