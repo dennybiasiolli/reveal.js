@@ -1,4 +1,4 @@
-#### Further changes?
+#### Show migrations
 
 ```sh
 $ manage.py showmigrations main

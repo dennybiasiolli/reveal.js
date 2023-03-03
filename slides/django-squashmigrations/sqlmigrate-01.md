@@ -1,4 +1,4 @@
-#### `manage.py sqlmigrate`
+#### 🧑‍🔬 `sqlmigrate`
 
 Prints the SQL statements for the named migration.
 
