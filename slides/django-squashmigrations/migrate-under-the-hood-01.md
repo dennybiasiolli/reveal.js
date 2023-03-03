@@ -1,4 +1,4 @@
-#### Migrations, under the hood
+#### 👷 Migrations, under the hood
 
 ```text
 mydatabase# \d django_migrations

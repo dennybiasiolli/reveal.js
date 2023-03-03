@@ -1,4 +1,6 @@
-#### `manage.py squashmigrations`
+#### 🙃 `squashmigrations`
+
+Inspecting migration file
 
 ```py
 class Migration(migrations.Migration):
