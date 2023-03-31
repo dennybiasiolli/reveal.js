@@ -1,7 +1,4 @@
-#### Migration  ~problems~ notes
-
-
-How to test a real store?
+#### How to test a real store?
 
 ```js
 import { setActivePinia, createPinia } from 'pinia'
