@@ -1,4 +1,4 @@
-#### Component migration (Vue 3)
+#### Component migration (Vue 3, storeToRefs)
 
 ```diff
 -import { computed } from 'vue'
