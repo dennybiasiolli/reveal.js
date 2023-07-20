@@ -10,7 +10,7 @@
 
 <small>
 
-https://docs.djangoproject.com/en/4.1/topics/migrations/#the-commands
+https://docs.djangoproject.com/en/4.2/topics/migrations/#the-commands
 
 </small>
 

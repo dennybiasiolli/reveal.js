@@ -1,11 +1,4 @@
-#### Test performances after squashing
-
-```text
-$ time manage.py test
-
-Ran 152 tests in 0.948s
-20.47s user 0.35s system 99% cpu 21.001 total
-```
+#### ⏱ Performances
 
 <small>
 
@@ -14,7 +7,6 @@ Ran 152 tests in 0.948s
 | Before | ~20s | ~1s |
 | --keepdb | ~0s 🥳 | ~1s |
 | MIGRATE = True | ~25s 😑 | ~1s |
-| After squashing | ~20s 😑 | ~1s |
 
 </small>
 
