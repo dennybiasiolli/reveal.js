@@ -1,6 +1,6 @@
 `--keepdb` pros and cons
 
-- 🎉 Saves ~20s for each test run (locally)
+- 🎉 Saves ~20s for each test run after the first one
 
 - 😥 Not easy to configure in CI/CD
 
