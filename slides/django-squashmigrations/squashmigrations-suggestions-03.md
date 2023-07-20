@@ -1,8 +1,14 @@
-👮
+<small>
+New in Django 4.1.
+</small>
 
-Once you’ve squashed a migration,
-you should not then re-squash that squashed migration
-until you have fully transitioned it to a normal migration.
+#### Pruning references to deleted migrations
+
+If it is likely that you may reuse the name of a deleted migration in the future, you should remove references to it from Django’s migrations table with
+
+```sh
+manage.py migrate --prune
+```
 
 
 <aside class="notes">

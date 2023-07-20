@@ -20,7 +20,7 @@ into a single new one.
 
 <small>
 
-https://docs.djangoproject.com/en/4.1/ref/django-admin/#django-admin-squashmigrations
+https://docs.djangoproject.com/en/4.2/ref/django-admin/#django-admin-squashmigrations
 
 </small>
 

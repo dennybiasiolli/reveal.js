@@ -1,12 +1,11 @@
-![Django logo](slides/django-squashmigrations/images/logo-django.svg)
-
-migrations, friend or foe?
+Django migrations<br>
+friend or foe?
 
 &nbsp;
 
 <small>
 
-#### 2023
+#### DjangoCon US 2023
 
 </small>
 

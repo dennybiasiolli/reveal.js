@@ -8,7 +8,7 @@ manage.py showmigrations [app_label]
 
 <small>
 
-https://docs.djangoproject.com/en/4.1/ref/django-admin/#django-admin-showmigrations
+https://docs.djangoproject.com/en/4.2/ref/django-admin/#django-admin-showmigrations
 
 </small>
 
