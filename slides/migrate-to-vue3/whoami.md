@@ -16,7 +16,7 @@ Denny Biasiolli
 
 Full Stack Developer<br>(JavaScript, Python, Go)
 
-Front End Developer UX/ UI<br>Fingerprint Supervision Ltd
+Front End Developer UX/ UI<br>Fingerprint Compliance Services Ltd.
 
 Italy, Savigliano (CN)
 
