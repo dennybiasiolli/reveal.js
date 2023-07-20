@@ -9,7 +9,7 @@ Denny Biasiolli
 
 Freelance Full Stack Developer
 
-Front End Developer UX/ UI<br>Fingerprint Supervision Ltd
+Front End Developer UX/ UI<br>Fingerprint Compliance Services Ltd.
 
 Savigliano (CN) - Italy
 
@@ -53,7 +53,7 @@ Volunteer in a retirement home,<br>performing recreational activities
 <aside class="notes">
 But first a few words about me:
 
-I am Denny and I'm a freelance full stack developer, working full-time for a company based in UK: Fingerprint Supervision as Front End Developer.
+I am Denny and I'm a freelance full stack developer, working full-time for a company based in UK: Fingerprint Compliance Services Ltd. as Front End Developer.
 
 I'm from Italy, and as you can hear, my english is not so perfect...I am sorry for this.
 

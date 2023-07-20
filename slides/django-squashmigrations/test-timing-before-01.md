@@ -1,6 +1,6 @@
 #### ⏱ Test performances
 
-20 x apps like `shop`
+20x apps like `shop`
 
 ```text
 $ manage.py test
