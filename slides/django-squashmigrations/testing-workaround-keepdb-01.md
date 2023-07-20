@@ -1,4 +1,4 @@
-#### 🧐 Possible workaround
+#### 🧐 A possible workaround
 
 ```sh
 $ manage.py test --keepdb

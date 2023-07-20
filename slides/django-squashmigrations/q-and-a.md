@@ -1,11 +1,14 @@
 #### Thank you!
 
-- [blog.vuejs.org](https://blog.vuejs.org/) | [vuejs.org](https://vuejs.org/)
-- [v3-migration.vuejs.org](https://v3-migration.vuejs.org/)
-- [vuex.vuejs.org](https://vuex.vuejs.org/guide/migrating-to-4-0-from-3-x.html) | [router.vuejs.org](https://router.vuejs.org/guide/migration/index.html)
-- [test-utils.vuejs.org](https://test-utils.vuejs.org/migration/)
-- [github.com/dennybiasiolli/vue-migration-2-to-3](https://github.com/dennybiasiolli/vue-migration-2-to-3)<br>
-    `migrate-to-vue3` branch
+<small>
+
+- [github.com/dennybiasiolli/django-squashmigrations-example](https://github.com/dennybiasiolli/django-squashmigrations-example)
+
+    - `django-settings-migrate` branch ([PR #4](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/4))
+    - `squashing-migrations` branch ([PR #2](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/2))
+    - `recreating-migrations` branch ([PR #3](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/3))
+
+</small>
 
 <br>
 <br>
