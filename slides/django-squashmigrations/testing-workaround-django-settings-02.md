@@ -1,4 +1,4 @@
-`MIGRATE = True` pros and cons
+`MIGRATE = False` pros and cons
 
 - 🎉 Single line change in your codebase
 

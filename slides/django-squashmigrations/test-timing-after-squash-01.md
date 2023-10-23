@@ -13,7 +13,7 @@ Ran 152 tests in 0.948s
 |-|-|-|
 | Before | ~20s | ~1s |
 | --keepdb | ~0s 🥳 | ~1s |
-| MIGRATE = True | ~25s 😑 | ~1s |
+| MIGRATE = False | ~25s 😑 | ~1s |
 | After squashing | ~20s 😑 | ~1s |
 
 </small>

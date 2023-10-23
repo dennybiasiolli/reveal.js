@@ -6,7 +6,7 @@
 |-|-|-|
 | Before | ~20s | ~1s |
 | --keepdb | ~0s 🥳 | ~1s |
-| MIGRATE = True | ~25s 😑 | ~1s |
+| MIGRATE = False | ~25s 😑 | ~1s |
 
 </small>
 
