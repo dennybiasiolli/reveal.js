@@ -1,17 +1,11 @@
-#### Thank you!
+#### Who am I
 
-<small>
+<img src="slides/informatica-e-futuro/images/profile-01.jpg" width="150" height="150">
 
-- [github.com/dennybiasiolli/django-squashmigrations-example](https://github.com/dennybiasiolli/django-squashmigrations-example)
+Denny Biasiolli
 
-    - `django-settings-migrate` branch ([PR #4](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/4))
-    - `squashing-migrations` branch ([PR #2](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/2))
-    - `recreating-migrations` branch ([PR #3](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/3))
-
-</small>
-
-<br>
-<br>
+Remote Full Stack Web Developer<br>
+Speaker for hobby
 
 <small>
 <table>
@@ -40,10 +34,7 @@
 <br>
 <a href="https://www.dennybiasiolli.com" target="_blank">www.dennybiasiolli.com</a>
 
-</td>
-</tr>
-</table>
-</small>
+
 
 
 <aside class="notes">
