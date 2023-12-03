@@ -6,6 +6,7 @@
 
     - cache/artifacts in GitHub workflows
     - external test DB
+    - <a href=https://github.com/businho/django-migrations-ci>django-migrations-ci</a> (thanks @rmistaken)
 
 
 <aside class="notes">

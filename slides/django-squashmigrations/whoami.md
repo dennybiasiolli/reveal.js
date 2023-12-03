@@ -42,8 +42,11 @@ Italy, Savigliano (CN)
 <a href="https://www.instagram.com/dennybiasiolli/" target="_blank">
     <img src="slides/images/instagram.png" title="Instagram" />
 </a>
+<a href="https://www.threads.net/@dennybiasiolli" target="_blank">
+    <img src="slides/images/threads.png" title="Threads" />
+</a>
 <a href="https://twitter.com/DennyBiasiolli" target="_blank">
-    <img src="slides/images/twitter.png" title="Twitter" />
+    <img src="slides/images/twitter-x.png" title="Twitter/X" />
 </a>
 
 </td>
