@@ -7,8 +7,6 @@ env:
 on:
   push:
     branches: [ "denny" ]
-  pull_request:
-    branches: [ "denny" ]
 
 jobs:
   build-and-deploy:
