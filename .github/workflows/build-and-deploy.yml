@@ -28,7 +28,7 @@ jobs:
         mkdir -p ~/.ssh
         ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null
         ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-        ssh-keyscan -H -p ${{ secrets.DEPLOY_SSH_PORT }} ${{ secrets.DEPLOY_HOST }} >> $HOME/.ssh/known_hosts
+        ssh-keyscan -H -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> $HOME/.ssh/known_hosts
 
     - name: Build
       run: |
@@ -38,7 +38,7 @@ jobs:
 
     - name: Deploy
       run: |
-        rsync -vau --del -e 'ssh -p ${{ secrets.DEPLOY_SSH_PORT }}' --progress ./reveal-js-presentation/ ${{ secrets.DEPLOY_HOST }}:git/slides
+        rsync -vau --del -e 'ssh -p ${{ secrets.SSH_PORT }}' --progress ./reveal-js-presentation/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:git/slides
 
     - name: Clean up
       run: |
