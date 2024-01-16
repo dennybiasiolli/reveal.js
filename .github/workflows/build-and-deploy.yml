@@ -1,4 +1,4 @@
-name: NodeJS with Gulp
+name: Build and Deploy
 
 env:
   NODE_VERSION: 20.x
@@ -24,7 +24,7 @@ jobs:
 
     - name: Add SSH key
       run: |
-        ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null	
+        ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null
         ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
 
     - name: Build
@@ -35,7 +35,7 @@ jobs:
 
     - name: Deploy
       run: |
-        rsync -vau --del ./reveal-js-presentation/ ${{ secrets.DEPLOY_HOST }}:git/slides
+        rsync -vau --del -e 'ssh -p ${{ secrets.DEPLOY_SSH_PORT }}' --progress ./reveal-js-presentation/ ${{ secrets.DEPLOY_HOST }}:git/slides
 
     - name: Clean up
       run: |
