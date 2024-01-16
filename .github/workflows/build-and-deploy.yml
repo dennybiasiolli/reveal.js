@@ -1,0 +1,42 @@
+name: NodeJS with Gulp
+
+env:
+  NODE_VERSION: 20.x
+  SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+on:
+  push:
+    branches: [ "denny" ]
+  pull_request:
+    branches: [ "denny" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Add SSH key
+      run: |
+        ssh-agent -a ${{ env.SSH_AUTH_SOCK }} > /dev/null	
+        ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+
+    - name: Build
+      run: |
+        npm ci
+        gulp package
+        unzip reveal-js-presentation.zip -d reveal-js-presentation
+
+    - name: Deploy
+      run: |
+        rsync -vau --del ./reveal-js-presentation/ ${{ secrets.DEPLOY_HOST }}:git/slides
+
+    - name: Clean up
+      run: |
+        rm -rf reveal-js-presentation*
