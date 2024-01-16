@@ -4,15 +4,12 @@
   "description": "The HTML Presentation Framework",
   "homepage": "https://revealjs.com",
   "subdomain": "revealjs",
-  "main": "js/electron.js",
+  "main": "dist/reveal.js",
   "module": "dist/reveal.esm.js",
   "license": "MIT",
   "scripts": {
-    "dist": "electron-builder -mwl",
-    "pack": "electron-builder -mwl --dir",
     "test": "gulp test",
     "start": "gulp serve",
-    "start-electron": "electron .",
     "build": "gulp build"
   },
   "author": {
@@ -44,8 +41,6 @@
     "colors": "^1.4.0",
     "core-js": "^3.33.1",
     "fitty": "^2.3.7",
-    "electron": "*",
-    "electron-builder": "*",
     "glob": "^10.3.10",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
