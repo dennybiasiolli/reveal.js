@@ -1,6 +1,6 @@
 #### 🤯 Recreate migrations
 
-5. write the "`replace`" list in the new migration
+5. write the "`replaces`" list in the new migration
 
 ```diff
   class Migration(migrations.Migration):
