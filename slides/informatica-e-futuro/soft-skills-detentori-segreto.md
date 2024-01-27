@@ -1,4 +1,4 @@
-<img src="slides/informatica-e-futuro/images/detentori-santo-segreto.jpeg" height="500">
+<img src="slides/informatica-e-futuro/images/detentori-santo-segreto.jpeg" height="400">
 
 Detentori del santo segreto<br>
     (sanno tutto, ma non lo condividono)

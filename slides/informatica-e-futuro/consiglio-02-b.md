@@ -7,7 +7,7 @@ Ma soprattutto
 
 <div class="fragment">
 
-Non abbate mai paura<br>
+Non stancatevi mai<br>
 di imparare cose nuove
 
 </div>

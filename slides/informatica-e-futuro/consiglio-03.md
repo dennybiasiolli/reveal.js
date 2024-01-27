@@ -7,7 +7,7 @@ Soprattutto per i primi lavori
 
 <div class="fragment">
 
-Cercate un'azienda dove avete qualcosa da imparare
+Cercate un'azienda in cui avere qualcosa da imparare
 
 </div>
 
