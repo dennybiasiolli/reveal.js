@@ -2,18 +2,18 @@
 
 <small>
 <ul>
-  <li class="fragment">
+  <li>
     enabling tweet likes<br>
     (adding `Like` model)
   </li>
-  <li class="fragment">
+  <li>
     enabling retweets<br>
     (nullable `text` field and `related_tweet` field)
   </li>
-  <li class="fragment">
+  <li>
     forgot the `related_name` for `Like.tweet` field
   </li>
-  <li class="fragment">
+  <li>
     enabling followers<br>
     (`Follow` model)
   </li>
