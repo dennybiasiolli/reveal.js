@@ -2,43 +2,44 @@
 
 <small>
 <ul>
-  <li class="fragment">
+  <li>
     increasing length of `ShippingAddress` fields
   </li>
-  <li class="fragment">
+  <li>
     adding `Order` model
   </li>
-  <li class="fragment">
+  <li>
     adding `created_at` field to `Order` model
   </li>
-  <li class="fragment">
+  <li>
     adding `OrderLine` model and manager
   </li>
-  <!-- <li class="fragment">
+  <!-- <li>
     changing related name to customer user field
   </li> -->
-  <li class="fragment">
+  <li>
     adding `customer_type` choice field<br>
     ("Free" and "Premium")
   </li>
-  <li class="fragment">
+  <li>
     <u>adding `customer_type` migration from `is_premium`</u>
   </li>
-  <li class="fragment">
+  <li>
     removing is_premium field
   </li>
-  <li class="fragment">
+  <li>
     adding more customer types<br>
     ("Bronze", "Silver", "Gold", "Platinum")
   </li>
-  <li class="fragment">
-    renaming `product_quantity` to `quantity`
+  <li>
+    <u>renaming `product_quantity` to `quantity`</u>
   </li>
-  <li class="fragment">
+  <li>
     adding Product model
   </li>
 </ul>
 </small>
+
 
 <aside class="notes">
 </aside>

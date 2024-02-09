@@ -6,7 +6,7 @@
 > 
 > If you’re unsure, see how makemigrations deals with the problem when asked to create brand new migrations from your models. In a future release of Django, squashmigrations will be updated to attempt to resolve these errors itself.
 
-https://docs.djangoproject.com/en/4.2/topics/migrations/#squashing-migrations
+https://docs.djangoproject.com/en/5.0/topics/migrations/#squashing-migrations
 
 </small>
 

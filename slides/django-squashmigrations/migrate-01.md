@@ -13,7 +13,7 @@ manage.py migrate [app_label] [migration_name]
 
 <small>
 
-https://docs.djangoproject.com/en/4.2/ref/django-admin/#django-admin-migrate
+https://docs.djangoproject.com/en/5.0/ref/django-admin/#django-admin-migrate
 
 </small>
 
