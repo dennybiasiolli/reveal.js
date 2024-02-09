@@ -7,6 +7,7 @@
     - `django-settings-migrate` branch ([PR #4](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/4))
     - `squashing-migrations` branch ([PR #2](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/2))
     - `recreating-migrations` branch ([PR #3](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/3))
+    - `seed-db` branch ([PR #5](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/5))
 
 </small>
 

@@ -1,4 +1,4 @@
-#### ⏱ Test performances
+#### ⏱ Test performances (local)
 
 ```text
 $ time manage.py test
