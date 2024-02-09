@@ -5,16 +5,16 @@
   <li>
     `Customer` model and shipping details
   </li>
-  <li class="fragment">
+  <li>
     adding `is_premium` field to `Customer` model
   </li>
-  <li class="fragment">
+  <li>
     creating dedicated `ShippingAddress` model
   </li>
-  <li class="fragment">
+  <li>
     <u>migrating data to new shipping addresses</u>
   </li>
-  <li class="fragment">
+  <li>
     removing Customer shipping fields<br>
     (one migration per field: state, province, city, zip code, address, name)
   </li>
