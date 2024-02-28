@@ -22,7 +22,7 @@ https://www.djangoproject.com/
 
 - designed to help developers take applications from concept to completion as quickly as possible
 
-- elps developers avoid many common security mistakes
+- helps developers avoid many common security mistakes
 
 - Some of the busiest sites on the web leverage Django’s ability to quickly and flexibly scale.
 
