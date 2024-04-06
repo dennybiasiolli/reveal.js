@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Rocket, il Framework Web di Rust</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown="slides/rust-rocket/index-commit.md"></section>
+				<section data-markdown="slides/rust-rocket/whoami.md"></section>
+				<section>
+					<section data-markdown="slides/rust-rocket/intro-01.md"></section>
+					<section data-markdown="slides/rust-rocket/intro-02.md"></section>
+				</section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/disclaimer-01.md"></section>
+					<section data-markdown="slides/rust-rocket/disclaimer-02.md"></section>
+				</section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/core-philosophies-01.md"></section>
+					<section data-markdown="slides/rust-rocket/core-philosophies-02.md"></section>
+					<section data-markdown="slides/rust-rocket/core-philosophies-03.md"></section>
+				</section>
+
+				<section data-markdown="slides/rust-rocket/quickstart-examples.md"></section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/install-01.md"></section>
+					<section data-markdown="slides/rust-rocket/install-02.md"></section>
+				</section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/hello-world-01.md"></section>
+					<section data-markdown="slides/rust-rocket/hello-world-02.md"></section>
+				</section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/custom-config-01-intro-error.md"></section>
+					<section data-markdown="slides/rust-rocket/custom-config-02.md"></section>
+					<section data-markdown="slides/rust-rocket/custom-config-03.md"></section>
+					<section data-markdown="slides/rust-rocket/custom-config-04-env.md"></section>
+				</section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/lifecycle-01-intro.md"></section>
+					<section data-markdown="slides/rust-rocket/lifecycle-02-routing.md"></section>
+					<section data-markdown="slides/rust-rocket/lifecycle-03-validation.md"></section>
+					<section data-markdown="slides/rust-rocket/lifecycle-04-processing.md"></section>
+					<section data-markdown="slides/rust-rocket/lifecycle-05-response.md"></section>
+				</section>
+
+				<section>
+					<section data-markdown="slides/rust-rocket/launching-01.md"></section>
+					<section data-markdown="slides/rust-rocket/launching-02.md"></section>
+				</section>
+
+				<section data-markdown="slides/rust-rocket/async.md"></section>
+
+				<section data-markdown="slides/rust-rocket/q-and-a.md"></section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ],
+				keyboard: {
+					38: 'prev',
+					40: 'next',
+				},
+				slideNumber: 'c/t',
+			});
+		</script>
+	</body>
+</html>
