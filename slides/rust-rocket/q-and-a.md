@@ -1,15 +1,10 @@
-#### Thank you!
+#### Much, much more!
 
-<small>
+- [rocket.rs/guide/v0.5/](https://rocket.rs/guide/v0.5/)
 
-- [github.com/dennybiasiolli/django-squashmigrations-example](https://github.com/dennybiasiolli/django-squashmigrations-example)
+- [doc.rust-lang.org/book/](https://doc.rust-lang.org/book/)
 
-    - `django-settings-migrate` branch ([PR #4](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/4))
-    - `squashing-migrations` branch ([PR #2](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/2))
-    - `recreating-migrations` branch ([PR #3](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/3))
-    - `seed-db` branch ([PR #5](https://github.com/dennybiasiolli/django-squashmigrations-example/pull/5))
-
-</small>
+- [github.com/rwf2/Rocket](https://github.com/rwf2/Rocket)
 
 <br>
 <br>
