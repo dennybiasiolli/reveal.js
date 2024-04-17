@@ -7,15 +7,15 @@
     rocket = { version = "0.5.0", features = ["secrets"] }
     ```
 
-2. use get_private, add_private, and remove_private
+2. add "_private" to "add", "get" and "remove"
 
     ```rust
-    cookies.get_private("message")
-    cookies.add_private(("message", message.to_string()));
-    cookies.remove_private("message");
+    cookies.get_private
+    cookies.add_private
+    cookies.remove_private
     ```
 
-Private cookies are encrypted using the 256-bit key specified in the secret_key configuration parameter.
+Encrypted using the 256-bit key specified in the secret_key configuration parameter.
 
 
 <aside class="notes">
