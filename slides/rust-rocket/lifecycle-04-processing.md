@@ -4,7 +4,7 @@
 
 ```rust
 #[get("/hello/<name>")]
-fn hello(name: &str, age: u8) -> String { // <-- validation
+fn hello(name: &str, age: u8) -> String {
     /**
      * Processing
      * i.e, checking the age range, etc.
