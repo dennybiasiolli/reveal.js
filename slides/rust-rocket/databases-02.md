@@ -5,7 +5,9 @@ Configure at least a URL for the database under databases.$name (in Rocket.toml)
 ```toml
 [default.databases.custom_name]
 url = "database.sqlite"
-# url = "postgresql://[user[:password]@][host][:port][/dbname][?param1=value1&...]"
+
+[default.databases.custom_name_postgres]
+url = "postgresql://[user[:password]@][host][:port][/dbname]"
 ```
 
 
