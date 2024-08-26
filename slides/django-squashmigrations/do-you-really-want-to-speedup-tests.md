@@ -7,9 +7,8 @@ Do you really want to speed up database creation in tests?
 />
 
 <small>
-
-Re-creating migrations from scratch and doing a lot of manual tasks?
-
+Re-creating migrations from scratch<br>
+with the risk of having to do a lot of manual tasks?
 </small>
 
 

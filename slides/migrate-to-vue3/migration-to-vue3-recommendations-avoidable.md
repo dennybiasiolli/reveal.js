@@ -1,4 +1,4 @@
-#### avoidable migrations
+#### Avoidable migrations
 
 (for now)
 
