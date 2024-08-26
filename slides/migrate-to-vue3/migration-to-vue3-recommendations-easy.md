@@ -1,4 +1,4 @@
-#### easy migrations
+#### Easy migrations
 
 - Devtools
 - IDE Support: Vetur -> Volar
