@@ -1,4 +1,4 @@
-#### mandatory migrations
+#### Mandatory migrations
 
 - Vue Router
 - Vuex
