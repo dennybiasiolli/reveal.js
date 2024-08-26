@@ -3,8 +3,8 @@
 ```diff
 "dependencies": {
 -  "vue": "~2.7",
-+  "vue": "^3.2.39",
-+  "@vue/compat": "^3.2.39"
++  "vue": "^3.4.38",
++  "@vue/compat": "^3.4.38"
    ...
 },
 "devDependencies": {
@@ -13,7 +13,7 @@
 ```
 
 ```bash
-npm i -S vue@^3.2 @vue/compat@^3.2 --force
+npm i -S vue@^3.4 @vue/compat@^3.4 --force
 npm uninstall vue-template-compiler --force
 ```
 

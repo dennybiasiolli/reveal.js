@@ -1,4 +1,4 @@
-#### Upgrade Workflow
+#### Vue Upgrade Workflow
 
 1. upgrade tooling if applicable
 
