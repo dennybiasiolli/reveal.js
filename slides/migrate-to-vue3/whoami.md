@@ -14,7 +14,7 @@ Denny Biasiolli
 <tr>
 <td style="text-align:center;">
 
-Full Stack Developer<br>(JavaScript, Python, Go)
+Full Stack Developer<br>(JavaScript, Python, Rust, Go)
 
 Front End Developer UX/ UI<br>Fingerprint Compliance Services Ltd.
 
