@@ -7,8 +7,11 @@ Edit model
  class Pizza(models.Model):
      created_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
      created_at = models.DateTimeField(auto_now_add=True)
--    text = models.CharField(max_length=140)
-+    text = models.CharField(max_length=250)
+      text = models.CharField(
+-       max_length=140,
++       max_length=250,
+        validators=[validate_without_pineapple],
+      )
 ```
 
 Create migration
