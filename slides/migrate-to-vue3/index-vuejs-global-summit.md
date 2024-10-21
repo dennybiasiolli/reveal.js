@@ -16,4 +16,7 @@ October 16th, 2024
 
 
 <aside class="notes">
+
+https://v2.vuejs.org/lts/
+
 </aside>
