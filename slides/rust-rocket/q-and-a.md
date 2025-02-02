@@ -24,15 +24,6 @@
 <a href="https://t.me/dennybiasiolli" target="_blank">
     <img src="slides/images/telegram.png" title="Telegram" />
 </a>
-<a href="https://www.instagram.com/dennybiasiolli/" target="_blank">
-    <img src="slides/images/instagram.png" title="Instagram" />
-</a>
-<a href="https://www.threads.net/@dennybiasiolli" target="_blank">
-    <img src="slides/images/threads.png" title="Threads" />
-</a>
-<a href="https://twitter.com/DennyBiasiolli" target="_blank">
-    <img src="slides/images/twitter-x.png" title="Twitter/X" />
-</a>
 <br>
 <a href="https://www.dennybiasiolli.com" target="_blank">www.dennybiasiolli.com</a>
 
