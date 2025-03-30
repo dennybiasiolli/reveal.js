@@ -12,6 +12,8 @@ async fn files(file: PathBuf) -> Option<NamedFile> {
 }
 ```
 
+Any type, as long as the type implements the `FromSegments` trait.<br>
+A segments guard must be the final component of a path.
 
 <aside class="notes">
 </aside>

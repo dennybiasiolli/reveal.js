@@ -1,4 +1,4 @@
-#### Serve static files
+#### Serving static files
 
 The easy way
 

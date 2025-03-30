@@ -3,17 +3,24 @@
 1. Routing
 
 ```rust
-#[get("/bar")]                       // <-- route attribute
-fn bar() -> &'static str {
-    "This is the /foo/bar route!"
+#[get("/world")]             // <- route attribute
+fn world() -> &'static str { // <- request handler
+    "Hello, world!"
 }
 
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/foo", routes![bar]) // <-- route mounting
+        .mount("/hello", routes![world]) // <- route mounting
+        .mount("/hi", routes![world]);   // <- route mounting
 }
 ```
+
+<small>
+
+Requests to "/hello/world" and "/hi/world" will be directed to the world function.
+
+</small>
 
 
 <aside class="notes">
