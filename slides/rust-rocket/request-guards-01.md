@@ -12,6 +12,8 @@
 
 <small>
 
+https://rocket.rs/guide/v0.5/requests/#request-guards
+
 https://api.rocket.rs/v0.5/rocket/request/trait.FromRequest
 
 </small>

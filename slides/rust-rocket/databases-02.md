@@ -1,6 +1,7 @@
 #### Databases
 
-Configure at least a URL for the database under databases.$name (in Rocket.toml), where $name is your choice of database name:
+Configure at least a URL for the database under `databases.$name` (in Rocket.toml),<br>
+where `$name` is your choice of database name:
 
 ```toml
 [default.databases.custom_name]

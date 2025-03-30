@@ -4,7 +4,7 @@
 
     ```toml
     ## in Cargo.toml
-    rocket = { version = "0.5.0", features = ["secrets"] }
+    rocket = { version = "0.5.1", features = ["secrets"] }
     ```
 
 2. add "_private" to "add", "get" and "remove"
