@@ -5,8 +5,8 @@
 ```rust
 #[get("/")]
 fn index() -> &'static str {
-    // return "Hello, world!"; // <-- response
-    "Hello, world!"            // <-- response
+    // return "Hello, world!"; // <-- response (verbose)
+    "Hello, world!"            // <-- response (sugary)
 }
 ```
 
