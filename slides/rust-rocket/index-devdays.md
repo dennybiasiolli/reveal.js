@@ -2,7 +2,7 @@
 
 ### Rocket
 
-#### A Deep Dive into Rust's Web Framework
+#### A Deep Dive into Rust Web Framework
 
 &nbsp;
 
