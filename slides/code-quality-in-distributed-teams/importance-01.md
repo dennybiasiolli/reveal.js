@@ -6,6 +6,10 @@
 
 - **Debugging**: Faster issue resolution
 
+- **Agility**: Easier to add new features
+
+- **Onboarding**: Faster onboarding
+
 - **Stability**: Fewer bugs and reduced technical debt
 
 
