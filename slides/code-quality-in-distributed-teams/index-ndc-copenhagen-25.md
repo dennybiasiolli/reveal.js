@@ -4,6 +4,8 @@ in Distributed Teams
 
 <small>
 A guide to best practices for distributed development
+
+Denny Biasiolli
 </small>
 
 &nbsp;
@@ -17,7 +19,4 @@ September, 2025
 
 
 <aside class="notes">
-
-https://www.eventbrite.pt/e/leaders-in-tech-meetup-tickets-1049778494737
-
 </aside>
