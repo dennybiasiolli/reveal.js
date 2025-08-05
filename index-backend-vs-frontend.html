@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>WIP Debugging Olympics</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- Title Slide -->
+			<section>
+				<h1>WIP Debugging Olympics</h1>
+				<h3>Funny Bugs and How We Fixed Them</h3>
+				<p>Python (Django) &amp; JavaScript (Vue.js)</p>
+				<aside class="notes">
+					Welcome everyone! Today, we'll take you through the “Debugging Olympics”—a fun, story-driven journey
+					through real (and exaggerated) bugs at the backend/frontend interface.
+				</aside>
+			</section>
+
+			<!-- Introduction -->
+			<section>
+				<h2>Introduction</h2>
+				<ul>
+					<li>Why backend/frontend collaboration matters</li>
+					<li>What are the Debugging Olympics?</li>
+					<li>Get ready for fun, learning, and audience participation!</li>
+				</ul>
+				<aside class="notes">
+					We'll show how teamwork, communication, and humor can turn debugging into a learning opportunity.
+					Feel free to participate—there will be polls and a challenge round!
+				</aside>
+			</section>
+
+			<!-- Setting the Stage -->
+			<section>
+				<h2>Setting the Stage</h2>
+				<ul>
+					<li>Each round = a real-world bug</li>
+					<li>Scripts, banter, and lessons</li>
+					<li>Audience: help us debug!</li>
+				</ul>
+				<aside class="notes">
+					Each round is a real bug we've encountered. We'll act out the debugging process, share lessons, and
+					invite you to join in.
+				</aside>
+			</section>
+
+			<!-- Round 1 -->
+			<section>
+				<h2>Round 1: The Mysterious 500 Error</h2>
+				<ul>
+					<li>Frontend gets a 500 error</li>
+					<li>Backend logs are clean</li>
+					<li>What's going on?</li>
+				</ul>
+				<aside class="notes">
+					A: “Hey, why is your frontend throwing a 500 error? My Django logs are clean as a whistle!”
+					B: “Don't look at me! I'm just calling <code>/api/dataz</code> like you said.”
+					A: “Wait… <code>/api/dataz</code>? It's <code>/api/data</code>! You added a ‘z'!”
+					B: “Oops. So the real bug was… a typo?”
+					A: “And the real lesson: Always double-check your endpoints—and maybe add some error handling!”
+				</aside>
+			</section>
+
+			<!-- Round 2 -->
+			<section>
+				<h2>Round 2: The Disappearing Data</h2>
+				<ul>
+					<li>Data saved, but not showing up</li>
+					<li>Backend returns snake_case, frontend expects camelCase</li>
+				</ul>
+				<aside class="notes">
+					B: “I just saved a new user, but nothing shows up in the list!”
+					A: “The backend's returning the data. See? <code>user_name</code> and <code>user_email</code>.”
+					B: “But my Vue app expects <code>userName</code> and <code>userEmail</code>! Snake_case vs.
+					camelCase strikes again.”
+					A: “Let's add a serializer to match the frontend's format.”
+					B: “Lesson learned: Consistent data formats save headaches!”
+				</aside>
+			</section>
+
+			<!-- Round 3 -->
+			<section>
+				<h2>Round 3: The Infinite Spinner</h2>
+				<ul>
+					<li>Loading spinner never stops</li>
+					<li>Backend response missing a field</li>
+				</ul>
+				<aside class="notes">
+					B: “Why is my loading spinner spinning forever?”
+					A: “Let's check the network tab… Oh, the backend forgot to include the <code>status</code> field in
+					the response.”
+					B: “My code waits for <code>status</code> before hiding the spinner!”
+					A: “Fixing the response now. Spinner, be gone!”
+					B: “Lesson: Always agree on API contracts!”
+				</aside>
+			</section>
+
+			<!-- Round 4 -->
+			<section>
+				<h2>Round 4: The Time Traveler's Bug</h2>
+				<ul>
+					<li>Frontend displays wrong time</li>
+					<li>UTC vs. local time confusion</li>
+				</ul>
+				<aside class="notes">
+					B: “Why does my app say the meeting is at 3am?”
+					A: “Django stores times in UTC. Did you convert to local time in Vue?”
+					B: “Nope. Let's use date-fns to fix that.”
+					A: “Timezones: the real final boss of programming.”
+				</aside>
+			</section>
+
+			<!-- Round 5 -->
+			<section>
+				<h2>Round 5: The Phantom CORS Error</h2>
+				<ul>
+					<li>Frontend can't fetch data</li>
+					<li>CORS misconfiguration</li>
+				</ul>
+				<aside class="notes">
+					B: “I can’t fetch anything—CORS error!”
+					A: “Let me check my Django CORS settings… Oops, forgot to add your frontend’s URL.”
+					B: “Try now… It works! CORS: Can’t Operate, Requests Stopped.”
+					A: “Lesson: Don’t forget your CORS headers!”
+				</aside>
+			</section>
+
+			<!-- Round 6 -->
+			<section>
+				<h2>Round 6: The Vanishing Session</h2>
+				<ul>
+					<li>Users logged out unexpectedly</li>
+					<li>Session/cookie mismatch</li>
+				</ul>
+				<aside class="notes">
+					B: “Why am I logged out every time I refresh?”
+					A: “Session cookie settings—looks like the domain or secure flag is off.”
+					B: “Let’s align our settings. Now it works!”
+					A: “Authentication: fragile, but fixable.”
+				</aside>
+			</section>
+
+			<!-- Round 7 -->
+			<section>
+				<h2>Round 7: The Language Barrier</h2>
+				<ul>
+					<li>Error message format mismatch</li>
+					<li>Frontend expects <code>{ error: 'message' }</code>, backend sends
+						<code>{ detail: 'message' }</code></li>
+				</ul>
+				<aside class="notes">
+					B: “My error handler expects <code>{ error: 'message' }</code>, but I get
+					<code>{ detail: 'message' }</code> from Django.”
+					A: “Let’s standardize our error responses.”
+					B: “Now my UI can actually show helpful messages!”
+					A: “Lesson: Consistent error formats = happy users.”
+				</aside>
+			</section>
+
+			<!-- Round 8 -->
+			<section>
+				<h2>Round 8: The Overzealous Linter</h2>
+				<ul>
+					<li>Frontend build fails due to linter</li>
+					<li>Backend-generated code doesn’t comply</li>
+				</ul>
+				<aside class="notes">
+					B: “My build fails—Prettier hates your JSON output!”
+					A: “Let's tweak the backend output or relax the linter rule.”
+					B: “Now everyone's happy—including the linter.”
+					A: “Lesson: Tooling should help, not hinder.”
+				</aside>
+			</section>
+
+			<!-- Audience Challenge -->
+			<section>
+				<h2>Audience Challenge Round</h2>
+				<ul>
+					<li>Suggest a bug or vote for a round</li>
+					<li>We improvise a debugging session</li>
+					<li>Medal for best audience bug!</li>
+				</ul>
+				<aside class="notes">
+					Now it's your turn! Suggest a bug or vote for your favorite round. We'll improvise a debugging
+					session and award a medal for the best audience bug or fix.
+				</aside>
+			</section>
+
+			<!-- Closing -->
+			<section>
+				<h2>Closing Ceremony</h2>
+				<ul>
+					<li>Recap funniest moments and key lessons</li>
+					<li>Teamwork, communication, and humor matter</li>
+					<li>Embrace bugs as learning opportunities</li>
+				</ul>
+				<aside class="notes">
+					Thanks for joining us! Remember: teamwork, communication, and humor make debugging not just
+					bearable, but fun. Embrace bugs—they're opportunities to learn and grow.
+				</aside>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			keyboard: {
+				38: 'prev',
+				40: 'next',
+			},
+		});
+	</script>
+</body>
+
+</html>
