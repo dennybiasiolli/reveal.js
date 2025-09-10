@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>How to Explain Technical Debt to Your Boss in Business Terms</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<h3>How to Explain Technical Debt</h3>
+				<h3>To Your Boss</h3>
+				<h3>In Business Terms</h3>
+				<p><small>Jenitha Martis, Denny Biasiolli</small></p>
+				<p>&nbsp;</p>
+				<small>
+					<h4>DevDays Europe 2026, Vilnius</h4>
+					<p>May 20-22, 2026</p>
+				</small>
+				<aside class="notes">Use a relatable metaphor to quickly align the audience's understanding of what
+					"technical debt" might feel like.</aside>
+			</section>
+
+			<section>
+				<h4>Characters</h4>
+				<ul>
+					<li>Speaker A<br>
+						The technical deep-dive voice</li>
+					<li>Speaker B<br>
+						The business translator and guide</li>
+				</ul>
+			</section>
+
+			<section>
+				<h4>What Is Technical Debt?</h4>
+				<p>The accumulated cost of shortcuts in code, architecture, or decisions made to move
+					faster now, with a trade-off later.</p>
+				<aside class="notes">Think of it like financial debt: you borrow time now to ship faster, but you'll pay
+					interest—every time you touch that messy part of the code again.</aside>
+			</section>
+
+			<section>
+				<h4>Why This Matters</h4>
+				<section>
+					<p>The classic problem</p>
+					<p>Managers hear “refactor”<br>
+						and think “lost time”</p>
+					<aside class="notes">(Opening) "We've all been here: you're in a planning meeting, you say the word
+						"refactor" and the manager looks at you like you just asked for three weeks off.”</aside>
+				</section>
+				<section>
+					<p>Developers often lack the right vocabulary<br>
+						to make the business case.</p>
+					<aside class="notes">Exactly. To them, it sounds like you're pausing progress. To us, it's obvious
+						we're preventing a slowdown. But if we can't explain it in their language, we lose.</aside>
+				</section>
+				<section>
+					<p>Goal of this session</p>
+					<p>Give you language + examples<br>
+						you can use directly with stakeholders.</p>
+					<aside class="notes">That's why this talk exists: to give you the words, the metaphors, and even
+						some charts to explain tech debt so your boss actually listens.</aside>
+				</section>
+			</section>
+
+			<section>
+				<h4>Rethinking Technical Debt<br>
+					in Business Language</h4>
+				<section>
+					<p>When we say: "messy code"</p>
+					<p>They hear: "developer preferences"</p>
+					<p>Not compelling</p>
+				</section>
+				<section>
+					<p>But if we say: "hidden costs that increase over time, like interest piling up"</p>
+					<p>Suddenly it sounds familiar to them</p>
+				</section>
+				<section>
+					<table>
+						<thead>
+							<tr>
+								<th>Developer</th>
+								<th>Business</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>"slows us down"</td>
+								<td>"reduces output capacity"</td>
+							</tr>
+							<tr>
+								<td>"ugly code"</td>
+								<td>"operational risk"</td>
+							</tr>
+							<tr>
+								<td>"quick fixes"</td>
+								<td>"short-term gains with long-term costs"</td>
+							</tr>
+							<tr>
+								<td>"tech debt"</td>
+								<td>"future blockers"</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<p>Our job is to reframe problems in terms of impact on money, time, and risk.</p>
+					<p>Those are languages every boss speaks.</p>
+				</section>
+			</section>
+
+			<section>
+				<h4>Technical Debt In Real Life</h4>
+
+				<section>
+					<p>🧹 The Messy Room</p>
+					<p>It's like shoving stuff under your bed<br>
+						when you're cleaning your room.</p>
+					<p><small>It becomes harder to find things or clean properly.</small></p>
+					<aside class="notes">
+						You get the job done faster, and it looks clean, but the mess is still there. Eventually, it
+						becomes harder to find things or clean properly, and you'll have to spend more time cleaning
+						it up later than if you'd just done it right the first time.
+					</aside>
+				</section>
+
+				<section>
+					<p>🏗️ The Construction Shortcut</p>
+					<p>It's like building a house with cheap materials<br>
+						to meet a deadline.</p>
+					<p><small>Soon the walls start cracking, plumbing fails, and you have to spend more time and money
+							fixing things</small></p>
+					<aside class="notes">
+						You meet your timeline and move in faster, but soon the walls start cracking, plumbing fails,
+						and you have to spend more time and money fixing things than if you'd built it properly in the
+						first place.
+					</aside>
+				</section>
+
+				<section>
+					<p>🛠️ The Car Maintenance</p>
+					<p>Skipping car maintenance to save time.</p>
+					<p><small>You pay more in repairs than if you'd just done the oil change or tire
+							replacements.</small></p>
+					<aside class="notes">
+						You delay oil changes or tire replacements to keep driving, but eventually, the car breaks down
+						at the worst moment—costing more time and money to repair.
+					</aside>
+				</section>
+
+				<section>
+					<p>🍝 The Spaghetti Dinner</p>
+					<p>You make dinner quickly<br>
+						by throwing everything in a pot.</p>
+					<p><small>You get a meal fast, but the meal isn't as enjoyable.</small></p>
+					<aside class="notes">
+						You get a meal fast, but cleaning up the sticky mess takes longer than if you'd just cooked
+						each ingredient properly. Plus, the meal isn't as enjoyable.
+					</aside>
+				</section>
+
+				<section>
+					<p>🗂️ The Filing Cabinet</p>
+					<p>Tossing papers into a drawer<br>
+						without organizing them.</p>
+					<p><small>You save time now, but when you need a document later,<br>you waste hours digging through
+							chaos.</small></p>
+					<aside class="notes">
+						You save time now, but when you need a document later, you waste hours digging through chaos.
+						If you'd filed them properly, you'd have saved time overall.
+					</aside>
+				</section>
+
+				<section>
+					<p>🏃‍♂️ The Marathon Training</p>
+					<p>Skipping early training to save time.</p>
+					<p><small>Means you'll hit a wall on race day.</small></p>
+					<aside class="notes">
+						Cutting corners in preparation makes you faster in the short term, but the pain hits later, when
+						it's harder (and more expensive) to recover.
+					</aside>
+				</section>
+
+				<section>
+					<p>💳 The Credit Card</p>
+					<p>Using a credit card to buy time.</p>
+					<p><small>You get what you need faster now, but interest accumulates.<br>
+							If you don't pay it off, the debt snowballs,<br>
+							and you end up paying much more down the road.</small></p>
+					<aside class="notes">
+						You get what you need faster now, but interest accumulates. If you don't pay it off, the debt
+						snowballs, and you end up paying much more down the road.
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<h4>Types of technical debt</h4>
+				<ul>
+					<li>Intentional (MVP hacks)</li>
+					<li>Accidental (quick fixes, poor onboarding)</li>
+					<li>Environmental (outdated tools, legacy code)</li>
+				</ul>
+				<p class="fragment">Have you ever delayed a feature<br>because of legacy code?</p>
+			</section>
+
+			<section>
+				<h4>How Technical Debt Happens</h4>
+				<section>
+					<ul>
+						<li>Rushed timelines</li>
+						<li>Changing requirements with no time to refactor</li>
+						<li>Copy-paste or "just get it working" solutions<br>
+							<small>AI/Vibe Coding, anyone?</small>
+						</li>
+						</li>
+						<li>Growth without process adaptation</li>
+						<li>Lack of documentation or knowledge sharing</li>
+					</ul>
+					<aside class="notes">Call out that this isn't always due to “bad” developers. it's often
+						business-driven decisions.</aside>
+				</section>
+
+				<section>
+					<p>
+						When your business scales fast,<br>
+						but the code doesn't get a chance to catch up,<br>
+						this debt snowballs.
+					</p>
+					<aside class="notes">Call out that this isn't always due to “bad” developers. it's often
+						business-driven decisions.</aside>
+				</section>
+			</section>
+
+			<section>
+				<h4>The Costs of Technical Debt</h4>
+
+				<section>
+					<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+					<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+					<style>
+						canvas.chart1 {
+							background: white;
+							border: 1px solid #ccc;
+							padding: 10px;
+						}
+					</style>
+					<div style="display: flex; justify-content: center;">
+						<canvas class="chart1" id="techDebtChart1" width="800" height="500"></canvas>
+					</div>
+					<script>
+						(function drawChart1() {
+							const months = Array.from({ length: 25 }, (_, i) => i);
+
+							// Generate sample data
+							const withDebt = months.map(m => 100 - Math.pow(m, 1.5));
+							const managedDebt = months.map(m => 100 - Math.pow(m, 1.2));
+							const lowDebt = months.map(m => 100 - (m * 0.5));
+
+							const ctx = document.getElementById("techDebtChart1").getContext("2d");
+							new Chart(ctx, {
+								type: "line",
+								data: {
+									labels: months,
+									datasets: [
+										{
+											label: "Low Debt",
+											data: lowDebt,
+											borderColor: "#5cb85c",
+											backgroundColor: "#5cb85c33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+										{
+											label: "Managed Debt (regular refactor)",
+											data: managedDebt,
+											borderColor: "#f0ad4e",
+											backgroundColor: "#f0ad4e33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+										{
+											label: "Growing Technical Debt",
+											data: withDebt,
+											borderColor: "#d9534f",
+											backgroundColor: "#d9534f33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+									]
+								},
+								options: {
+									responsive: false,
+									devicePixelRatio: 2,
+									plugins: {
+										title: {
+											display: true,
+											text: "Impact of Technical Debt on Productivity Over Time",
+											font: { size: 18 },
+										},
+										tooltip: { enabled: false },
+										legend: { position: "chartArea", align: "end" },
+									},
+									interaction: { mode: "nearest", axis: "x", intersect: false },
+									scales: {
+										x: {
+											title: { display: true, text: "Time" },
+											ticks: { display: false }, // Hide x axis values
+										},
+										y: {
+											title: { display: true, text: "Relative Productivity" },
+											ticks: { display: false }, // Hide y axis values
+										},
+									},
+								},
+							});
+						})();
+					</script>
+				</section>
+
+				<section>
+					<ul>
+						<li>Adding a new feature requires rewriting old code</li>
+						<li>One bug fix breaks three other things</li>
+						<li>New hires need weeks to understand the system</li>
+					</ul>
+					<aside class="notes">Use examples from real experience if possible. Emphasize long-term business
+						drag.
+					</aside>
+				</section>
+
+				<section>
+					<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+					<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+					<style>
+						canvas.chart2 {
+							background: white;
+							border: 1px solid #ccc;
+							padding: 10px;
+						}
+					</style>
+					<div style="display: flex; justify-content: center;">
+						<canvas class="chart2" id="techDebtChart2" width="800" height="500"></canvas>
+					</div>
+					<script>
+						(function drawChart2() {
+							const months = Array.from({ length: 25 }, (_, i) => i);
+
+							// Generate sample data
+							const highDebtCost = months.map(m => Math.pow(m, 1.5));    // steep growth
+							const managedDebtCost = months.map(m => Math.pow(m, 1.2)); // slower growth
+							const lowDebtCost = months.map(m => m * 0.5);              // almost flat
+
+							const ctx = document.getElementById("techDebtChart2").getContext("2d");
+							new Chart(ctx, {
+								type: "line",
+								data: {
+									labels: months,
+									datasets: [
+										{
+											label: "Early Investment (low ongoing costs)",
+											data: lowDebtCost,
+											borderColor: "#5cb85c",
+											backgroundColor: "#5cb85c33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+										{
+											label: "Regular Maintenance (moderate costs)",
+											data: managedDebtCost,
+											borderColor: "#f0ad4e",
+											backgroundColor: "#f0ad4e33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+										{
+											label: "No Early Investment (cost spikes later)",
+											data: highDebtCost,
+											borderColor: "#d9534f",
+											backgroundColor: "#d9534f33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+									]
+								},
+								options: {
+									responsive: false,
+									devicePixelRatio: 2,
+									plugins: {
+										title: {
+											display: true,
+											text: "Cost of Refactoring Over Time",
+											font: { size: 18 },
+										},
+										tooltip: { enabled: false },
+										legend: { position: "chartArea", align: "middle" },
+									},
+									interaction: { mode: "nearest", axis: "x", intersect: false },
+									scales: {
+										x: {
+											title: { display: true, text: "Time" },
+											ticks: { display: false }, // Hide x axis values
+										},
+										y: {
+											title: { display: true, text: "Relative Cost" },
+											ticks: { display: false }, // Hide y axis values
+										},
+									},
+								},
+							});
+						})();
+					</script>
+				</section>
+
+				<section>
+					<h4>Business Impacts</h4>
+					<ul>
+						<li>Slower time to market</li>
+						<li>Reduced developer productivity</li>
+						<li>Increased churn in tech teams</li>
+						<li>Increased bugs = user dissatisfaction</li>
+					</ul>
+					<aside class="notes">Use examples from real experience if possible. Emphasize long-term business
+						drag.
+					</aside>
+				</section>
+
+				<section>
+					<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+					<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+					<style>
+						canvas.chart3 {
+							background: white;
+							border: 1px solid #ccc;
+							padding: 10px;
+						}
+					</style>
+					<div style="display: flex; justify-content: center;">
+						<canvas class="chart3" id="techDebtChart3" width="800" height="500"></canvas>
+					</div>
+					<script>
+						(function drawChart3() {
+							const sprints = Array.from({ length: 50 }, (_, i) => i);
+
+							// Generate sample data
+							const slowConstant = sprints.map(m => m * 3); // steady rate: 3 features/month
+							const fastStartSlowDown = sprints.map(m => Math.round(20 * Math.log(m + 1)));
+
+
+							const ctx = document.getElementById("techDebtChart3").getContext("2d");
+							new Chart(ctx, {
+								type: "line",
+								data: {
+									labels: sprints,
+									datasets: [
+										{
+											label: "Slow but Constant",
+											data: slowConstant,
+											borderColor: "#5cb85c",
+											backgroundColor: "#5cb85c33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+										{
+											label: "Fast Start, Then Slowdown",
+											data: fastStartSlowDown,
+											borderColor: "#d9534f",
+											backgroundColor: "#d9534f33",
+											borderWidth: 2,
+											pointRadius: 0, // Hide dots
+										},
+									]
+								},
+								options: {
+									responsive: false,
+									devicePixelRatio: 2,
+									plugins: {
+										title: {
+											display: true,
+											text: "Features Delivered Over Time",
+											font: { size: 18 },
+										},
+										tooltip: { enabled: false },
+										legend: { position: "top" },
+									},
+									interaction: { mode: "nearest", axis: "x", intersect: false },
+									scales: {
+										x: {
+											title: { display: true, text: "Time" },
+											ticks: { display: false }, // Hide x axis values
+										},
+										y: {
+											title: { display: true, text: "Cumulative Features Delivered" },
+											ticks: { display: false }, // Hide y axis values
+										},
+									},
+								},
+							});
+						})();
+					</script>
+				</section>
+			</section>
+
+			<section>
+				<h4>Real-World Case Study #1</h4>
+
+				<section>
+					<ul>
+						<li>Business needed a reporting feature<br>
+							to sell the product to a new customer</li>
+						<li>The task was given to a newcomer<br>
+							without proper onboarding</li>
+						<li>After a few months the feature was done<br>
+							but the code was a mess,<br>
+							and without documentation</li>
+						<li>The developer left the company</li>
+						<li>The team became afraid to touch it<br>
+							and the customer was unhappy</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+				<section>
+					<ul>
+						<li>We tried to fix and improve the code<br>
+							for over a year</li>
+						<li>We had to rewrite it from scratch</li>
+						<li>We lost a lot of time and money</li>
+						<li>We learned the hard way that<br>
+							proper onboarding and documentation<br>
+							are crucial</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+			</section>
+
+			<section>
+				<h4>Real-World Case Study #2</h4>
+
+				<section>
+					<ul>
+						<li>Our product was built on a legacy framework<br>
+							that was no longer actively maintained</li>
+						<li>We chose to stick with the legacy version<br>
+							to accelerate feature delivery in the short term</li>
+						<li>As time passed, many dependencies stopped supporting the legacy version we relied on</li>
+						<li>We spent more time resolving compatibility issues<br>
+							than developing new features</li>
+						<li>Over time, the code became harder to maintain</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+				<section>
+					<ul>
+						<li>We eventually migrated to a modern framework<br>
+							that was actively maintained</li>
+						<li>This reduced our dependency issues significantly</li>
+						<li>We were able to focus on delivering new features<br>
+							instead of fixing old problems</li>
+						<li>The codebase became much easier to work with</li>
+						<li>We learned the importance of keeping our dependencies up to date</li>
+					</ul>
+					<aside class="notes"></aside>
+				</section>
+			</section>
+
+			<section>
+				<img src="slides/technical-debt-in-business-terms/img/rocket-and-chains.png" width="25%">
+				<p>Rocket fuel gives you a fast launch,<br>
+					but too much weight (debt)<br>
+					keeps you from reaching orbit.</p>
+			</section>
+
+			<section>
+				<h4>How to Manage Technical Debt</h4>
+				<section>
+					<p>Debt isn't always bad.<br>
+						Sometimes it's strategic.</p>
+					<p>Just like financial debt:<br>
+						manage it intentionally.
+					<aside class="notes">Stress that some debt is okay, what matters is visibility and intent.</aside>
+				</section>
+				<section>
+					<p>Include time for</p>
+					<ul>
+						<li>Refactoring</li>
+						<li>Updating dependencies</li>
+						<li>Unit/integration tests</li>
+						<li>Documentation</li>
+						<li>Knowledge sharing</li>
+					</ul>
+				</section>
+				<section>
+					<p>What managers can do</p>
+					<ul>
+						<li>Don't rush devs every time</li>
+						<li>Protect refactoring time</li>
+						<li>Ask: “Is tech debt slowing you down?”</li>
+						<li>Encourage open discussions about tech debt</li>
+						<li>Foster a culture of continuous improvement</li>
+					</ul>
+				</section>
+				<section>
+					<p>Healthy Habits</p>
+					<ul>
+						<li>20% of sprint budget for maintenance</li>
+						<li>Tech-debt backlog (ranked by impact)</li>
+						<li>Regular “debt review” with product team</li>
+						<li>Encourage team to share tech debt insights</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h4>Wrap-Up</h4>
+
+				<section>
+					<h4>Short-Term Speed<br>
+						vs<br>
+						Long-Term Sustainability</h4>
+					<p>&nbsp;</p>
+					<p>You can go fast today,<br>
+						or sustainably fast forever.</p>
+					<p>The trick is knowing when to invest.</p>
+					<aside class="notes">
+						Reiterate main takeaway: intentional investment keeps teams fast and stable.
+					</aside>
+				</section>
+				<section>
+					<p>If your codebase feels heavy,<br>
+						it's time to start paying down your technical debt.</p>
+					<aside class="notes">
+						Reiterate main takeaway: intentional investment keeps teams fast and stable.
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<h4>Your Takeaways</h4>
+				<ul>
+					<li>Not all shortcuts are bad,<br>
+						just be aware of the trade-offs</li>
+					<li>Tech debt has a real, measurable business cost</li>
+					<li>Empower devs to balance delivery with quality</li>
+				</ul>
+			</section>
+
+			<section>
+				<h4>Q&amp;A</h4>
+				<ul>
+					<li>What's a red flag of too much tech debt?</li>
+					<li>How do you measure it?</li>
+					<li>How to explain this to execs?</li>
+				</ul>
+				<aside class="notes">Invite dialogue. Ask them to share examples they've encountered.</aside>
+			</section>
+
+			<section>
+				<h4>Bonus</h4>
+				<section>
+					<h4>5 Questions to Ask Your Dev Team</h4>
+					<ol>
+						<li>Where does tech debt slow us down the most?</li>
+						<li>Which areas of the codebase are hardest to maintain?</li>
+						<li>What shortcuts have we taken recently?</li>
+						<li>How do we track and prioritize tech debt?</li>
+						<li>What would help us pay down tech debt faster?</li>
+					</ol>
+					<aside class="notes">
+						Use these questions to spark team discussions and uncover hidden blockers.
+					</aside>
+				</section>
+				<section>
+					<h4>How to Budget Time for Refactoring in Your Roadmap</h4>
+					<ol>
+						<li>Set clear goals for refactoring efforts</li>
+						<li>Allocate dedicated time in each sprint</li>
+						<li>Prioritize high-impact areas of the codebase</li>
+						<li>Involve the whole team<br>
+							in identifying refactoring opportunities</li>
+						<li>Track progress and adjust the roadmap as needed</li>
+					</ol>
+				</section>
+			</section>
+
+			<section>
+				<h4>Thank You!</h4>
+				<div style="display: flex; justify-content: center; gap: 60px;">
+					<div style="text-align: left;">
+						<h4>Jenitha Martis</h4>
+						<p>Contact 1</p>
+						<p>Contact 2</p>
+					</div>
+					<div style="text-align: left;">
+						<h4>Denny Biasiolli</h4>
+						<p>Contact 1</p>
+						<p>Contact 2</p>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			keyboard: {
+				38: 'prev',
+				40: 'next',
+			},
+		});
+	</script>
+</body>
+
+</html>
