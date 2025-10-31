@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<title>The Time Paradox: Building Timezone-Safe Python/Django Applications</title>
+
+	<link rel="stylesheet" href="dist/reset.css" />
+	<link rel="stylesheet" href="dist/reveal.css" />
+	<link rel="stylesheet" href="dist/theme/black.css" />
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css" />
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h3>The Time Paradox<br>Building Timezone-Safe Python/Django Applications</h3>
+				<p><em>- or -<br>How your code can be wrong<br>without changing a single line</em></p>
+				<p><small>Denny Biasiolli</small></p>
+				<p>&nbsp;</p>
+				<small>
+					<h4>DEVWorld Amsterdam</h4>
+					<p>May 7-8, 2026</p>
+				</small>
+
+				<aside class="notes">
+					<pre>
+Handling time in software seems simple, until it isn't. From daylight savings quirks to database inconsistencies and user-local conversions, timezones can quietly turn into one of your biggest sources of bugs.
+In this talk, we'll unravel the paradox of time in Python and Django: how something so universal can be so tricky to get right. You'll learn how Django handles datetime objects, the difference between naive and aware datetimes, common pitfalls when working with ORM and serializers, and best practices for ensuring your applications stay consistent across users, systems, and regions.
+By the end, you'll be equipped with practical techniques and mental models to make your Django apps truly timezone-safe, and your logs, reports, and users finally in sync.
+					</pre>
+				</aside>
+			</section>
+
+			<section>
+				<h4>What is a timestamp?</h4>
+				<!-- appear after click -->
+				<div class="fragment">
+					<blockquote>
+						A record in printed or digital form that shows the time at which
+						something happened or was done.
+					</blockquote>
+					<small>
+						<a href="https://dictionary.cambridge.org/dictionary/english/timestamp" target="_blank">
+							Cambridge Dictionary
+						</a>
+					</small>
+				</div>
+			</section>
+
+			<section>
+				<section>
+					<h4>ISO 8601</h4>
+					<p>
+						An international standard covering the exchange of date and time-related data.
+					</p>
+					<small>
+						<a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">
+							Wikipedia
+						</a>
+					</small>
+				</section>
+				<section>
+					<h4>ISO 8601 Principles</h4>
+					<ul>
+						<li>Values are ordered from the largest to the smallest unit of time (YYYY-MM-DDTHH:MM:SS)</li>
+						<li>Each component is zero-padded to a fixed length</li>
+						<li>For reduced precision, components can be omitted from the end (YYYY-MM, YYYY-MM-DD)</li>
+					</ul>
+				</section>
+				<section>
+					<h4>ISO 8601 Representations</h4>
+					<small>
+						<table>
+							<thead>
+								<tr>
+									<th>Representation</th>
+									<th>Example</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Date in UTC</td>
+									<td><code>2026-02-10</code></td>
+								</tr>
+								<tr>
+									<td>Time in UTC</td>
+									<td>
+										<code>08:36:13Z</code>
+									</td>
+								</tr>
+								<tr>
+									<td>Date and time in UTC</td>
+									<td>
+										<code>2026-02-10T08:36:13Z</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Date and time<br>
+										with the offset
+									</td>
+									<td>
+										<code>2026-02-09T20:36:13-12:00</code><br>
+										<code>2026-02-10T08:36:13+00:00</code><br>
+										<code>2026-02-10T20:36:13+12:00</code>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Date and time<br>
+										with timezone name<br>
+										(RFC 9557)
+									</td>
+									<td><code>2026-02-10T09:36:13+01:00[Europe/Rome]</code></td>
+								</tr>
+								<tr>
+									<td>Week</td>
+									<td><code>2026-W06</code></td>
+								</tr>
+								<tr>
+									<td>Week with weekday</td>
+									<td><code>2026-W06-3</code></td>
+								</tr>
+								<tr>
+									<td>Ordinal date</td>
+									<td><code>2026-037</code></td>
+								</tr>
+							</tbody>
+						</table>
+					</small>
+				</section>
+			</section>
+
+			<section>
+				<h4>Timestamp in the technical world</h4>
+				<p>
+					The most common format is the Unix timestamp, which is a way to
+					track time as a running total of seconds.
+				</p>
+				<p>
+					This count starts at the Unix Epoch on<br>
+					<strong>January 1st, 1970 at UTC.</strong>
+				</p>
+			</section>
+
+			<section>
+				<h4>Timestamp in Programming languages</h4>
+
+				<section>
+					<h4>Python</h4>
+					<ul>
+						<li>Floating-point number</li>
+						<li>
+							Seconds (and fractions of a second)<br />since the Unix Epoch
+						</li>
+					</ul>
+					<pre><code class="language-py">import time
+
+time.time() # 1761338139.821862
+
+# 2025-10-24T20:35:39.821862Z
+# Fri Oct 24 2025 20:35:39 (UTC)
+</code></pre>
+				</section>
+
+				<section>
+					<h4>JavaScript</h4>
+					<ul>
+						<li>Integer number</li>
+						<li>Milliseconds since the Unix Epoch</li>
+					</ul>
+					<pre><code class="language-js">Date.now() // 1761338240866
+
+// 2025-10-24T20:37:20.866Z
+// Fri Oct 24 2025 20:37:20 (UTC)</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>A timestamp has no timezone</h4>
+				<p class="fragment"><code>1761338139</code></p>
+				<p class="fragment">It's the same number everywhere on Earth, right now.</p>
+				<p class="fragment">Timezone only matters when you <em>display</em> it to a human.</p>
+			</section>
+			<section>
+				<h4>What is a timezone?</h4>
+				<blockquote>
+					A region that observes a uniform standard time for legal,
+					commercial, and social purposes.
+				</blockquote>
+				<small>
+					<a href="https://en.wikipedia.org/wiki/Time_zone" target="_blank">
+						Wikipedia
+					</a>
+				</small>
+			</section>
+
+			<section>
+				<section>
+					<h4>Timezones in the Real World</h4>
+					<img src="./slides/timestamps-and-timezones/img/Time_zones_of_the_world-UTC.png"
+						alt="World Timezones Map" style="width: 100%; height: auto; border: 1px solid #ccc" />
+					<small>Date: 2021, Source: <a
+							href="https://upload.wikimedia.org/wikipedia/commons/c/c1/Time_zones_of_the_world-UTC.svg"
+							target="_blank">Wikimedia Commons</a></small>
+				</section>
+
+				<section>
+					<h4>Timezones in the Real World</h4>
+					<blockquote>
+						Timezones tend to follow the boundaries between countries and their subdivisions instead of
+						strictly following longitude, because it is convenient for areas in frequent communication to keep
+						the same time.
+					</blockquote>
+					<small>
+						<a href="https://en.wikipedia.org/wiki/Time_zone" target="_blank">
+							Wikipedia
+						</a>
+					</small>
+				</section>
+
+				<section>
+					<h4>Timezones timeline</h4>
+					<img src="./slides/timestamps-and-timezones/img/timeline.jpg" alt="Timezone Timeline"
+						style="width: 100%; height: auto; border: 1px solid #ccc" />
+					<small>Created with <a href="https://everytimezone.com/" target="_blank">everytimezone.com</a></small>
+				</section>
+			</section>
+
+			<section>
+				<h4>A bug with no code changes</h4>
+				<p>A user in New York sets a daily reminder at <strong>9:00 AM</strong>.</p>
+				<p class="fragment">Works perfectly for months.</p>
+				<p class="fragment">One morning in March, it arrives at <strong>10:00 AM</strong>.</p>
+				<p class="fragment">Nothing in your code changed.<br>No config. No deployment.</p>
+				<p class="fragment">The only thing that changed was the time in New York.</p>
+				<aside class="notes">
+					DST — Daylight Saving Time. The clock moved forward, but the stored UTC value didn't adapt.
+					This is the core difference between recording the past and scheduling the future.
+					Hints: https://www.youtube.com/watch?v=rPHZwB9rLYM
+				</aside>
+			</section>
+
+			<section>
+				<h4>Two problems that look the same</h4>
+				<ol>
+					<li class="fragment">
+						<strong>Recording</strong> when something happened<br>
+						<small>order created, log entry, error occurred</small>
+					</li>
+					<li class="fragment">
+						<strong>Scheduling</strong> when something should happen<br>
+						<small>reminder, report generation, recurring task</small>
+					</li>
+				</ol>
+				<p class="fragment">They look similar, but they need <em>different</em> solutions.</p>
+			</section>
+
+			<section>
+				<h4>Solution 1: Record in UTC</h4>
+				<p>UTC is the universal reference time — it never shifts for daylight saving.</p>
+				<ul>
+					<li class="fragment">Unambiguous, always the same reference point</li>
+					<li class="fragment">Convertible to any local timezone</li>
+					<li class="fragment">The right choice for anything that <em>already happened</em></li>
+				</ul>
+			</section>
+
+			<section>
+				<h4>Solution 2: Store the intent</h4>
+				<p>The user doesn't want <strong>14:00 UTC</strong>.</p>
+				<p class="fragment">They want <strong>9:00 AM in their day</strong> — every day, regardless of UTC offset.</p>
+				<div class="fragment">
+					<p>If you store <code>14:00 UTC</code> at creation time and DST changes, that becomes <strong>10:00 AM local</strong>.</p>
+				</div>
+				<div class="fragment">
+					<p>Instead, store <code>09:00 + America/New_York</code><br>and recalculate UTC whenever you schedule.</p>
+					<blockquote>The intent stays constant. The UTC output adapts.</blockquote>
+				</div>
+			</section>
+
+			<section>
+				<h4>UTC-5 &ne; America/New_York</h4>
+				<small>
+					<table>
+						<thead>
+							<tr>
+								<th>UTC-5 (fixed offset)</th>
+								<th>America/New_York (timezone)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="fragment">
+								<td>The offset at one specific instant</td>
+								<td>A set of rules that change over time</td>
+							</tr>
+							<tr class="fragment">
+								<td>Always UTC-5, forever</td>
+								<td>UTC-5 Nov–Mar, UTC-4 Mar–Nov</td>
+							</tr>
+							<tr class="fragment">
+								<td colspan="2" style="text-align:center">
+									→ Use timezone identifiers, not fixed offsets
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</small>
+				<aside class="notes">
+					These rules live in the IANA Time Zone Database (TZDB), the standard used by every OS and language.
+				</aside>
+			</section>
+
+			<section>
+				<h4>IANA Time Zone Database</h4>
+				<p>The standard behind every OS and programming language.</p>
+				<p class="fragment">
+					It defines the rules for every timezone:<br>
+					when DST starts and ends, what offsets apply, historical changes.
+				</p>
+				<p class="fragment">
+					When you use <code>"America/New_York"</code>, your runtime looks up the rules automatically.
+				</p>
+				<p class="fragment">
+					This is why <code>"America/New_York"</code> stays correct for dates in 1970, today, or 2040.
+				</p>
+			</section>
+
+			<section>
+				<section>
+					<h4>DST creates two tricky edge cases</h4>
+					<ol>
+						<li class="fragment">
+							<strong>Spring forward</strong> — the clock skips an hour.<br>
+							<small>A point in time that never existed.</small>
+						</li>
+						<li class="fragment">
+							<strong>Fall back</strong> — the clock repeats an hour.<br>
+							<small>A point in time that happened twice.</small>
+						</li>
+					</ol>
+				</section>
+
+				<section>
+					<h4>Spring Forward: the phantom hour</h4>
+					<p>In New York, DST starts on <strong>March 9, 2025 at 2:00 AM</strong>.</p>
+					<p class="fragment">The clock jumps: <code>1:59:59 AM → 3:00:00 AM</code></p>
+					<p class="fragment"><strong>2:30 AM on March 9, 2025 never happened in New York.</strong></p>
+					<div class="fragment">
+						<p>If a user schedules something at 2:30 AM that day:</p>
+						<ul>
+							<li>Some libraries throw an exception</li>
+							<li>Others silently move to 3:30 AM</li>
+						</ul>
+						<p>Know what yours does. Warn the user.</p>
+					</div>
+				</section>
+
+				<section>
+					<h4>Fall Back: the duplicate hour</h4>
+					<p>In New York, DST ends on <strong>November 2, 2025 at 2:00 AM</strong>.</p>
+					<p class="fragment">The clock jumps back: <code>1:59:59 AM → 1:00:00 AM</code></p>
+					<p class="fragment"><strong>1:30 AM on November 2, 2025 happens twice in New York.</strong></p>
+					<div class="fragment">
+						<p>Which one did the user mean? This is ambiguous.</p>
+						<ul>
+							<li>Pick a default (first or second occurrence)</li>
+							<li>Or ask the user to clarify</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<h4>Days aren't always 24 hours</h4>
+					<ul>
+						<li class="fragment">March 9, 2025 in New York: <strong>23 hours</strong> long</li>
+						<li class="fragment">November 2, 2025 in New York: <strong>25 hours</strong> long</li>
+					</ul>
+					<div class="fragment">
+						<p>This matters when scheduling the next run:</p>
+						<pre><code class="language-py"># skips/repeats the DST hour
+next_run = now + timedelta(hours=24)
+
+# respects the local calendar day
+next_run = now + timedelta(days=1)</code></pre>
+					</div>
+				</section>
+			</section>
+
+			<section>
+				<h4>Timezone concepts: recap</h4>
+				<ul>
+					<li class="fragment">Past events → store in UTC</li>
+					<li class="fragment">Future scheduling → store local time + timezone identifier, recalculate UTC when needed</li>
+					<li class="fragment">A fixed offset is a snapshot; a timezone identifier carries the rules</li>
+					<li class="fragment">Test DST edge cases — if your code handles those, it handles everything</li>
+				</ul>
+			</section>
+
+			<section>
+				<h4>Timezone in Python</h4>
+
+				<section>
+					<h4><code>datetime</code> object</h4>
+					<ul>
+						<li>
+							<strong>naive</strong>, no timezone information<br>
+							using the system's local timezone<br>
+							to interpret the time
+						</li>
+						<li>
+							<strong>aware</strong>, with timezone information<br>
+							using the specified timezone<br>
+							to interpret the time
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Example</h4>
+					<pre><code class="language-py">from datetime import datetime
+from zoneinfo import ZoneInfo # Python 3.9+
+
+# 09:00 local timezone
+datetime(2025, 10, 26, 9, 0)
+
+# 09:00 in New York
+datetime(2025, 10, 26, 9, 0,
+         tzinfo=ZoneInfo("America/New_York"))
+</code></pre>
+				</section>
+				<section>
+					<h4>Current timezone</h4>
+					<p>
+						In Python it's tricky to get the system's local timezone in a cross-platform way.
+					</p>
+					<p>
+						You can use third-party libraries like <code>tzlocal</code>
+					</p>
+					<pre><code class="language-py">import tzlocal
+
+tzlocal.get_localzone()</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>Timezone in JavaScript</h4>
+				<section>
+					<h4><code>Date</code> object</h4>
+					<p>
+						Tracks time in UTC internally, but typically accepts input and produces
+						output in the local time of the computer/browser it's running on.
+					</p>
+					<p>
+						It has very few facilities for working with time in other time zones.
+					</p>
+				</section>
+				<section>
+					<h4>Example</h4>
+					<pre><code class="language-js">new Date() // current date and time in local timezone
+
+new Date(2025, 9, 26, 9, 00) // local timezone
+new Date("2025-10-26T08:00:00.000Z") // UTC</code></pre>
+					<small>Note: months are 0-indexed (January is 0, December is 11)</small>
+				</section>
+				<section>
+					<h4>Current timezone</h4>
+					<pre><code class="language-js">Intl.DateTimeFormat().resolvedOptions().timeZone</code></pre>
+				</section>
+				<section>
+					<h4>Working with other timezones</h4>
+					<p>
+						You can use third-party libraries like <code>luxon</code> or <code>Day.js</code> to handle timezones more effectively.
+					</p>
+					<pre><code class="language-js">// import { DateTime } from "luxon";
+const { DateTime } = require("luxon");
+
+DateTime.now().setZone("America/New_York");
+DateTime.fromObject(
+  { year: 2025, month: 10, day: 26, hour: 9, minute: 0 },
+  { zone: 'America/New_York' });
+</code></pre>
+					<small>Note: in Luxon, months are 1-indexed (January is 1, December is 12)</small>
+				</section>
+			</section>
+
+			<section>
+				<h4>Timezone in PostgreSQL</h4>
+				<section>
+					<h4><code>timestamptz</code> column</h4>
+					<p>
+						You can handle timestamps with timezone with the<br>
+						<code>timestamp with time zone</code><br>
+						(aka <code>timestamptz</code>) type.
+					</p>
+				</section>
+				<section>
+					<h4><code>timestamptz</code> column</h4>
+					<p>
+						It doesn't store the timezone itself,<br>
+						but it normalizes the timestamp to UTC upon storage<br>
+						and converts it back to the client's timezone upon retrieval.
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4>PostgreSQL example</h4>
+				<section>
+					<p>
+						Let's say we have people working remotely<br>
+						from different timezones,<br>
+						spread from Los Angeles to Sydney.
+					</p>
+					<p>
+						Everyone stores and retrieves records<br>
+						using a <code>timestamptz</code> column.
+					</p>
+					<pre><code class="language-sql">insert into test_timezone (value_dt, comment) values
+('2025-01-01T00:00:00-05:00', 'start of Q1 2025 in NY'),
+('2025-03-31T23:59:59.999999-04:00', 'end of Q1 2025 in NY'),
+-- ...
+-- you can even use the timezone name directly
+-- '2025-01-01 00:00:00 America/New_York'
+</code></pre>
+					<aside class="notes">
+						<ul>
+							<li>scripts/01-create-sql-table.sql</li>
+							<li>scripts/02-get-py-date-ranges.py</li>
+							<li>scripts/02-get-js-date-ranges.js</li>
+							<li>scripts/03-insert-db-values.sql</li>
+							<li><code>select * from test_timezone order by value_dt;</code></li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<p>
+						If we query the table, PostgreSQL will convert the `timestamptz` value to the local timezone
+						of the database (Europe/Rome in my case).
+					</p>
+					<pre><code class="language-sql">select * from test_timezone order by value_dt;
+--            value_dt            |           comment
+-- -------------------------------+------------------------
+--  2025-01-01 06:00:00+01        | start of Q1 2025 in NY
+--  2025-04-01 05:59:59.999999+02 | end of Q1 2025 in NY
+-- ...
+
+-- check the current timezone with
+show timezone;
+--   TimeZone
+-- -------------
+--  Europe/Rome</code></pre>
+				</section>
+				<section>
+					<p>
+						Where is the timezone of the database configured?
+					</p>
+					<ol>
+						<li>Server level in the <code>postgresql.conf</code> file<br>
+							<small>
+								<code>timezone = '&lt;tz&gt;'</code>
+							</small>
+						</li>
+						<li>Connection string<br>
+							<small>
+								<code>?options=-c%20TimeZone=&lt;tz&gt;</code>
+								<pre><code>psql "postgresql://user@host/database?options=-c%20TimeZone=America/New_York"</code></pre>
+							</small>
+						</li>
+						<li>Database level<br>
+							<small>
+								<code>ALTER DATABASE &lt;db_name&gt; SET TIMEZONE TO &lt;tz&gt;</code>
+							</small>
+						</li>
+						<li>User level<br>
+							<small>
+								<code>ALTER ROLE &lt;user_name&gt; SET TIMEZONE TO &lt;tz&gt;</code>
+							</small>
+						</li>
+						<!-- <li>For a single session with<br>
+							<code>SET TIMEZONE TO &lt;tz&gt;</code>
+						</li>
+						<li>For a single transaction with<br>
+							<code>SET LOCAL TIMEZONE TO &lt;tz&gt;</code>
+						</li>
+						<li>Or it defaults to the system's local timezone</li> -->
+					</ol>
+				</section>
+				<section>
+					<p>
+						A Django app typically shares one database connection pool.<br>
+						You can't set a different timezone per user at the connection level.
+					</p>
+					<p class="fragment">
+						Spoiler alert!<br>
+						You can set it <em>per transaction</em> &mdash; and that's exactly what Django does under the hood.
+					</p>
+				</section>
+				<section>
+					<p>
+						How can we get all records<br>
+						related to a specific day/month/quarter<br>
+						in a specific timezone?
+					</p>
+					<pre><code class="language-sql">select * from test_timezone
+where value_dt >= '2025-01-01' and value_dt < '2025-04-01'
+order by value_dt;</code></pre>
+					<pre><code class="language-sql">-- returns all records in Q1 2025 in server timezone
+--            value_dt            |          comment
+-- -------------------------------+----------------------------
+--  2025-01-01 00:00:00+01        | start of Q1 2025 in Rome
+--  2025-01-01 01:00:00+01        | start of Q1 2025 in London
+--  2025-01-01 06:00:00+01        | start of Q1 2025 in NY
+--  2025-01-01 09:00:00+01        | start of Q1 2025 in LA
+--  2025-03-31 14:59:59.999999+02 | end of Q1 2025 in Sydney
+--  2025-03-31 16:59:59.999999+02 | end of Q1 2025 in Tokyo
+--  2025-03-31 23:59:59.999999+02 | end of Q1 2025 in Rome</code></pre>
+				</section>
+				<section>
+					<p>
+						One solution is to filter using a time range that includes the timezone offset.
+					</p>
+					<pre><code class="language-sql">-- select records in Q1 2025 in New York
+select * from test_timezone
+where value_dt
+  between '2025-01-01T00:00:00-05:00'
+  and '2025-03-31T23:59:59.999999-04:00'
+order by value_dt;</code></pre>
+					<pre><code class="language-sql">--            value_dt            |         comment
+-- -------------------------------+--------------------------
+--  2025-01-01 06:00:00+01        | start of Q1 2025 in NY
+--  2025-01-01 09:00:00+01        | start of Q1 2025 in LA
+--  2025-03-31 14:59:59.999999+02 | end of Q1 2025 in Sydney
+--  2025-03-31 16:59:59.999999+02 | end of Q1 2025 in Tokyo
+--  2025-03-31 23:59:59.999999+02 | end of Q1 2025 in Rome
+--  2025-04-01 00:59:59.999999+02 | end of Q1 2025 in London
+--  2025-04-01 05:59:59.999999+02 | end of Q1 2025 in NY</code></pre>
+				</section>
+				<section>
+					<p>
+						But this doesn't scale well if you need<br>
+						to filter or group by day/month/quarter.
+					</p>
+					<pre><code class="language-sql">select to_char(value_dt, 'YYYY-"Q"Q') as quarter, *
+from test_timezone
+order by value_dt;</code></pre>
+				</section>
+				<section>
+					<pre><code class="language-sql">--  quarter |           value_dt            |    comment
+-- ---------+-------------------------------+-----------------
+--  2024-Q4 | 2024-12-31 14:00:00+01        | start Q1 Sydney
+--  2024-Q4 | 2024-12-31 16:00:00+01        | start Q1 Tokyo
+--  2025-Q1 | 2025-01-01 00:00:00+01        | start Q1 Rome
+--  2025-Q1 | 2025-01-01 01:00:00+01        | start Q1 London
+--  2025-Q1 | 2025-01-01 06:00:00+01        | start Q1 NY
+--  2025-Q1 | 2025-01-01 09:00:00+01        | start Q1 LA
+--  2025-Q1 | 2025-03-31 14:59:59.999999+02 | end Q1 Sydney
+--  2025-Q1 | 2025-03-31 16:59:59.999999+02 | end Q1 Tokyo
+--  2025-Q1 | 2025-03-31 23:59:59.999999+02 | end Q1 Rome
+--  2025-Q2 | 2025-04-01 00:59:59.999999+02 | end Q1 London
+--  2025-Q2 | 2025-04-01 05:59:59.999999+02 | end Q1 NY
+--  2025-Q2 | 2025-04-01 08:59:59.999999+02 | end Q1 LA</code></pre>
+				</section>
+				<section>
+					<p>
+						So how can we do this more easily?<br>
+						Setting the timezone for the session or transaction!
+					</p>
+					<ol>
+						<li>For a single session<br>
+							<small>
+								<code>SET TIMEZONE TO &lt;tz&gt;</code>
+							</small>
+						</li>
+						<li>For a single transaction<br>
+							<small>
+								<code>SET LOCAL TIMEZONE TO &lt;tz&gt;</code>
+							</small>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<p>
+						This way you can get results in your desired timezone without changing the timezone permanently.
+					</p>
+					<pre><code class="language-sql">begin transaction;
+SET LOCAL TIMEZONE TO 'America/New_York';
+select to_char(value_dt, 'YYYY-"Q"Q') as quarter, *
+from test_timezone
+order by value_dt;
+end;</code></pre>
+				</section>
+				<section>
+					<pre><code class="language-sql">--  quarter |           value_dt            |    comment
+-- ---------+-------------------------------+-----------------
+--  2024-Q4 | 2024-12-31 08:00:00-05        | start Q1 Sydney
+--  2024-Q4 | 2024-12-31 10:00:00-05        | start Q1 Tokyo
+--  2024-Q4 | 2024-12-31 18:00:00-05        | start Q1 Rome
+--  2024-Q4 | 2024-12-31 19:00:00-05        | start Q1 London
+--  2025-Q1 | 2025-01-01 00:00:00-05        | start Q1 NY
+--  2025-Q1 | 2025-01-01 03:00:00-05        | start Q1 LA
+--  2025-Q1 | 2025-03-31 08:59:59.999999-04 | end Q1 Sydney
+--  2025-Q1 | 2025-03-31 10:59:59.999999-04 | end Q1 Tokyo
+--  2025-Q1 | 2025-03-31 17:59:59.999999-04 | end Q1 Rome
+--  2025-Q1 | 2025-03-31 18:59:59.999999-04 | end Q1 London
+--  2025-Q1 | 2025-03-31 23:59:59.999999-04 | end Q1 NY
+--  2025-Q2 | 2025-04-01 02:59:59.999999-04 | end Q1 LA</code></pre>
+				</section>
+
+			</section>
+
+			<section>
+				<h4>PostgreSQL + Django</h4>
+				<p>
+					When <code>USE_TZ = True</code>, Django wraps each query in a transaction
+					that sets <code>SET LOCAL TIMEZONE</code> to the currently active timezone.
+				</p>
+				<p class="fragment">
+					This is what makes per-user timezone possible with a middleware approach.
+				</p>
+			</section>
+
+			<!-- <section>
+				<h4>Do you have hints about<br>MySQL/MariaDB or MSSQL?</h4>
+				<p>Come talk to me!</p>
+			</section> -->
+
+			<section>
+				<section>
+					<h4>Django</h4>
+					<p>
+						Django has built-in support for timezones.<br>
+						You can enable it in your settings with<br>
+						<code>USE_TZ = True</code>
+					</p>
+					<p>
+						Django will store all datetime values in UTC in the database
+						and will automatically convert them to the desired timezone
+						when retrieving them.
+					</p>
+				</section>
+				<section>
+					<h4>Django Timezone setting</h4>
+					<p>
+						You can set the default timezone for your Django application
+						using the <code>TIME_ZONE</code> setting in your settings.py file.
+					</p>
+					<p>
+						By default, it's set to 'UTC', but you can change it to any valid timezone string.
+					</p>
+				</section>
+				<section>
+					<h4>Django models</h4>
+					<p>
+						You can use the <code>DateTimeField</code> in your models to store datetime values.
+					</p>
+					<p>
+						When <code>USE_TZ</code> is enabled, Django will automatically handle the conversion to and from
+						UTC for you.
+					</p>
+				</section>
+			</section>
+			<section>
+				<h4>Django hands-on</h4>
+				<section>
+					<p>
+						Let's create a simple Django model<br>
+						to test timestamps and timezones.
+					</p>
+					<pre><code class="language-py"># models.py
+from django.db import models
+
+class TimezoneTest(models.Model):
+    value_str = models.CharField(max_length=50)
+    value_dt = models.DateTimeField()
+    comment = models.CharField(max_length=100)</code></pre>
+				</section>
+				<section>
+					<p>
+						We can insert the same values we used in the PostgreSQL demo.
+					</p>
+					<pre><code class="language-py">from timezone_test_app.models import TimezoneTest
+
+TimezoneTest(
+    value_str="2025-01-01T00:00:00-05:00",
+    value_dt="2025-01-01T00:00:00-05:00",
+    comment="start of Q1 2025 in NY",
+)
+# ...</code></pre>
+				</section>
+				<section>
+					<p>
+						And we can query the records as well,
+						to get all records related to Q1 2025 in New York.
+					</p>
+					<pre><code class="language-py">from timezone_test_app.models import TimezoneTest
+
+TimezoneTest.objects.filter(
+    value_dt__range=[
+        "2025-01-01T00:00:00-05:00",
+        "2025-03-31T23:59:59.999999-04:00"
+    ]
+).order_by("value_dt")</code></pre>
+				</section>
+				<section>
+					<ul>
+						<li>
+							<span aria-label="crying face" role="img">😢</span>
+							We have to specify the timezone offsets manually<br>
+							or we will get a warning about naive datetimes.
+						</li>
+						<li>
+							<span aria-label="crying face" role="img">😭</span>
+							We can't filter or group easily based on a specific timezone.
+						</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h4>Django Middleware solution</h4>
+				<section>
+					<p>
+						You can create a custom middleware to set the timezone
+						based on the user's preference or location.
+					</p>
+					<pre><code class="language-py">import zoneinfo
+from django.utils import timezone
+
+# read the timezone name from a custom header (API requests)
+tzname = request.headers.get("X-Timezone")
+if not tzname:
+    # fallback to cookie (web requests)
+    tzname = request.COOKIES.get("django_timezone")
+
+if tzname:
+    timezone.activate(zoneinfo.ZoneInfo(tzname))</code></pre>
+				</section>
+				<section>
+					<p>
+						In the frontend (JavaScript), you can set the timezone
+						in a cookie or a custom header when making requests.
+					</p>
+					<pre><code class="language-js">// get the user's timezone
+const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;</code></pre>
+					<pre><code class="language-js">// set timezone in a cookie
+document.cookie = "django_timezone=" + tz;</code></pre>
+					<pre><code class="language-js">// set timezone in a custom header (for API requests)
+fetch("/api/some-endpoint", {
+  headers: {
+    "X-Timezone": tz,
+  },
+});</code></pre>
+				</section>
+				<section>
+					<p>
+						This way, Django will automatically convert the timestamps
+						to the user's timezone when retrieving records.
+					</p>
+					<p>
+						Try navigating/filtering the admin interface
+						while changing your browser's timezone settings.
+					</p>
+					<pre><code class="language-js">document.cookie = "django_timezone=Europe/Rome";</code></pre>
+				</section>
+				<section>
+					<p>
+						Try API filtering while changing the timezone header.
+					</p>
+					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/\
+?value_dt__gte=2025-01-01\
+&value_dt__lt=2025-04-01\
+&ordering=value_dt" \
+    -H "X-Timezone: Europe/Rome"</code></pre>
+					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/group_by_year_and_quarter/" \
+    -H "X-Timezone: Europe/Rome"</code></pre>
+					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/group_by_year_and_quarter/" \
+    --cookie "django_timezone=Europe/Rome"</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h4>What if I'm using fastapi?</h4>
+					<p>
+						FastAPI doesn't have built-in timezone support like Django,
+						but you can implement a similar middleware approach
+						to set the timezone based on user preferences.
+					</p>
+				</section>
+				<section>
+					<h4>FastAPI Middleware solution</h4>
+					<pre><code class="language-py">import zoneinfo
+
+# read the timezone name from a custom header (API requests)
+tzname = request.headers.get("X-Timezone")
+if not tzname:
+    # fallback to cookie (web requests)
+    tzname = request.cookies.get("fastapi_timezone")
+
+if tzname:
+    request.state.tz = zoneinfo.ZoneInfo(tzname)</code></pre>
+				</section>
+				<section>
+					<h4>FastAPI Middleware solution</h4>
+					<pre><code class="language-py">@app.get("/api/timezone-tests/")
+async def read_timezones(
+    request: Request,
+    value_dt__gte: Annotated[datetime | None] = None,
+    value_dt__lt: Annotated[datetime | None] = None,
+):
+    tz = request.state.tz
+    # ...</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h4>Three rules to live by</h4>
+				<section>
+					<p><strong>1. Store in UTC, display in local time.</strong></p>
+					<p class="fragment">A timestamp is a moment in time, not a timezone-aware value.<br>
+						Convert to local only at the last moment, for human eyes.</p>
+				</section>
+				<section>
+					<p><strong>2. For scheduling, store the intent.</strong></p>
+					<p class="fragment">Save local time + timezone identifier.<br>
+						Recalculate UTC when the job runs, not when it was created.</p>
+				</section>
+				<section>
+					<p><strong>3. Use timezone identifiers, not fixed offsets.</strong></p>
+					<p class="fragment"><code>America/New_York</code> knows the rules.<br>
+						<code>UTC-5</code> is just a number.</p>
+				</section>
+				<section>
+					<p><strong>Bonus: test your DST edge cases.</strong></p>
+					<p class="fragment">Spring forward (the phantom hour) and fall back (the duplicate hour)<br>
+						are where timezone bugs hide. Write tests for both.</p>
+					<p class="fragment"><em>If your code handles DST transitions, it handles everything.</em></p>
+				</section>
+			</section>
+			<section>
+				<h3>Thank you!</h3>
+				<p>
+					<small>
+						Denny Biasiolli<br>
+						<a href="https://www.dennybiasiolli.com/" target="_blank">dennybiasiolli.com</a>
+					</small>
+				</p>
+				<div style="display: flex; justify-content: center; gap: 4rem; margin-top: 2rem;">
+					<div style="text-align: center;">
+						<a href="https://github.com/dennybiasiolli/drf-timezone-test" target="_blank">
+							<img src="./slides/timestamps-and-timezones/img/qr-repo-git.png"
+								alt="QR code for repository" style="width: 220px; height: 220px;" />
+						</a>
+						<div><small><a href="https://github.com/dennybiasiolli/drf-timezone-test" target="_blank">Repository</a></small></div>
+					</div>
+					<div style="text-align: center;">
+						<a href="https://slides.dennybiasiolli.com/index-timestamps-and-timezones-devworld-2026.html" target="_blank">
+							<img src="./slides/timestamps-and-timezones/img/qr-slides.png"
+								alt="QR code for slides" style="width: 220px; height: 220px;" />
+						</a>
+						<div><small><a href="https://slides.dennybiasiolli.com/index-timestamps-and-timezones-devworld-2026.html" target="_blank">Slides</a></small></div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			keyboard: {
+				38: "prev",
+				40: "next",
+			},
+			slideNumber: 'c/t',
+		});
+	</script>
+</body>
+
+</html>
