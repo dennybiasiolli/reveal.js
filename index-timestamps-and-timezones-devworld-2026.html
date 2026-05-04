@@ -37,12 +37,104 @@ By the end, you'll be equipped with practical techniques and mental models to ma
 				</aside>
 			</section>
 
+			<!-- HORROR STORY OPENER: The Quarter That Leaked -->
+			<section>
+				<h3>A Story from the Finance Team</h3>
+				<p><strong>April 3, 2025, 4:52 PM CET</strong></p>
+				<p>The Head of Finance in New York<br>joins the Q1 close call</p>
+				<p>
+				<blockquote>Why is our US East Coast revenue<br>$2.3 million lower than last quarter?</blockquote>
+				</p>
+				<p>
+					<small>47 large March 31 payments never made it into Q1</small>
+				</p>
+			</section>
+
+			<section>
+				<h3>The query Finance trusted</h3>
+				<pre><code class="language-py"># Quarter Revenue &amp; Cash Report (board + tax + commissions)
+
+# received as parameters
+quarter_start = "2025-01-01"
+quarter_end   = "2025-04-01"
+
+qs = (Payment.objects
+    .filter(paid_at__gte=quarter_start,
+            paid_at__lt=quarter_end)
+    .annotate(quarter=TruncQuarter("paid_at"))
+    .values("quarter")
+    .annotate(total=Sum("amount"))
+)</code></pre>
+				<p>
+					<small>
+						Simple. Correct. Obviously right.<br>
+						Trusted by the CFO, controllers, and the entire finance team.
+					</small>
+				</p>
+			</section>
+
+			<section>
+				<h3>and the raw SQL version</h3>
+				<pre><code class="language-sql">SELECT date_trunc('quarter', paid_at) AS quarter,
+       sum(amount) AS total
+FROM payment
+WHERE paid_at &gt;= '2025-01-01'
+  AND paid_at &lt;  '2025-04-01'
+GROUP BY quarter
+ORDER BY quarter;</code></pre>
+				<p>
+					<small>
+						Runs the official quarter revenue recognition.<br>
+						Runs cash reporting and tax.<br>
+						Never questioned.
+					</small>
+				</p>
+			</section>
+
+			<section>
+				<h3>Example of a payment<br>that leaked into Q2</h3>
+				<p>
+					A customer in New York pays $340k<br>
+					on <strong>March 31 at 19:17 PM local time</strong>
+				</p>
+				<p class="fragment">
+					Recorded correctly as<br>
+					<small>
+						<code>paid_at 2025-03-31 19:17:00-05:00</code><br>
+						<code>(== 2025-04-01 00:17:00+00)</code>
+					</small>
+				</p>
+				<p class="fragment">
+					All the queries on the server run in UTC<br>
+					and classify the payment as 2025-Q2
+				</p>
+			</section>
+
+			<section>
+				<h3>$2.3M just disappeared from Q1</h3>
+				<ul style="margin-top: 0.6em; font-size: 0.95em;">
+					<li class="fragment">March payments (and sales commissions) booked in April</li>
+					<li class="fragment">US East Coast cash &amp; revenue looks weak in Q1</li>
+					<li class="fragment">Wrong tax provisions and revenue recognition</li>
+					<li class="fragment">Board deck and auditors start asking hard questions</li>
+				</ul>
+				<aside class="notes">
+					<pre>The root cause: `paid_at` is the correct business timestamp — the exact moment the money was received or the transaction was confirmed. Finance uses it for revenue recognition, cash reporting, tax periods, and commission calculations.
+
+But `TruncQuarter()` / `date_trunc('quarter')` and Django's Trunc* functions are timezone-sensitive. They use the *current session/database timezone*, not the timezone in which the payment actually happened.
+
+A March 31 11:17 PM payment in New York becomes April 1 in UTC/Europe → leaks into the next quarter in every grouped report.
+
+This is why "just store everything as timestamptz" is not enough when finance needs calendar-based grouped reports.</pre>
+				</aside>
+			</section>
+
 			<section>
 				<h4>How many of you have been personally victimized by a timezone bug?</h4>
 				<div class="fragment">
-					<p>Welcome, this is timezone therapy</p>
+					<p>Welcome to timezone therapy</p>
 					<p>I used to think: <em>"It's just a number, how hard can it be?"</em></p>
-					<p><strong>I was wrong, so very, very wrong</strong></p>
+					<p><strong>I was wrong. So very, very wrong</strong></p>
 				</div>
 			</section>
 
@@ -250,7 +342,7 @@ time.time()
 							target="_blank">Wikimedia Commons</a></small>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h4>Timezones in the Real World</h4>
 					<blockquote>
 						Timezones tend to follow the boundaries between countries and their subdivisions instead of
@@ -262,25 +354,29 @@ time.time()
 							Wikipedia
 						</a>
 					</small>
-				</section>
+				</section> -->
 
 				<section>
 					<h4>Timezones timeline</h4>
 					<img src="./slides/timestamps-and-timezones/img/timeline.jpg" alt="Timezone Timeline"
 						style="width: 100%; height: auto; border: 1px solid #ccc" />
 					<small>Created with <a href="https://everytimezone.com/"
-							target="_blank">everytimezone.com</a></small>
-					<p><small>This will live in your nightmarish timezone memories</small></p>
+							target="_blank">everytimezone.com</a></small><br>
 				</section>
 			</section>
 
 			<section>
-				<h4>A bug with no code changes</h4>
-				<p>A user in New York sets a daily reminder at <strong>9:00 AM</strong></p>
-				<p class="fragment">Works perfectly for months</p>
-				<p class="fragment">One morning in March, it arrives at <strong>10:00 AM</strong></p>
-				<p class="fragment">Nothing in your code changed<br>No config. No deployment</p>
-				<p class="fragment">What happened?</p>
+				<h3>A bug with no code changes</h3>
+				<p>
+					<strong>January 2025, fintech with customers in New York</strong>
+					<em>"Send monthly statements on the 1st at 9:00 AM"</em>
+				</p>
+				<p class="fragment">The job had run correctly for months.</p>
+				<p class="fragment">One morning in March, every statement for New York customers is generated at
+					<strong>10:00 AM</strong>.
+				</p>
+				<p class="fragment"><small>Engineering (in Europe) are completely confused.<br>Their own DST won't
+						begin for another three weeks.</small></p>
 				<aside class="notes">
 					DST — Daylight Saving Time. The clock moved forward, but the stored UTC value didn't adapt.
 					This is the core difference between recording the past and scheduling the future.
@@ -290,7 +386,7 @@ time.time()
 
 			<section>
 				<h4>The debugging session</h4>
-				<p class="fragment">Check the logs. <em>Everything looks normal</em></p>
+				<p>Check the logs. <em>Everything looks normal</em></p>
 				<p class="fragment">Check the deployments. <em>Nothing changed</em></p>
 				<p class="fragment">Check the code. <em>Nothing changed</em></p>
 				<p class="fragment">Check yourself. <em>Have I changed?</em></p>
@@ -305,18 +401,18 @@ time.time()
 			</section>
 
 			<section>
-				<h4>Two problems that look the same</h4>
+				<h3>The Two Faces of Time</h3>
+				<p>(that look identical until they aren't)</p>
 				<ol>
-					<li class="fragment">
-						<strong>Recording</strong> when something happened<br>
+					<li>
+						<strong>Recording the past (or present)</strong><br>
 						<small>order created, log entry, error occurred</small>
 					</li>
-					<li class="fragment">
-						<strong>Scheduling</strong> when something should happen<br>
-						<small>reminder, report generation, recurring task</small>
+					<li>
+						<strong>Scheduling the future</strong><br>
+						<small>reminder, report, recurring task</small>
 					</li>
 				</ol>
-				<p class="fragment">They look similar, but they need <em>different</em> solutions</p>
 			</section>
 
 			<section>
@@ -334,24 +430,24 @@ time.time()
 
 			<section>
 				<h4>Scheduling when something should happen:<br>Store the intent</h4>
-				<p>Users don't want <strong>14:00 UTC</strong></p>
-				<p>
-					They want <strong>9:00 AM in their day</strong>,<br>
-					every day, regardless of UTC offset
-				</p>
-				<div>
+				<section>
+					<p>Finance doesn't want the daily report at <strong>14:00 UTC</strong></p>
 					<p>
-						If you store <strong>14:00 UTC</strong> at creation time and DST changes, that becomes
-						<strong>10:00 AM local</strong>
+						They want it <strong>at 9:00 AM in their day</strong>,<br>
+						every single day, regardless of UTC offset
 					</p>
-				</div>
-				<div>
+				</section>
+				<section>
+					<p>
+						If you store a fixed UTC time and DST changes,
+						the report suddenly runs at the wrong local time
+					</p>
 					<p>
 						Instead, store <strong>09:00 America/New_York</strong><br>
-						and recalculate UTC whenever you schedule
+						and recalculate the actual UTC execution time
 					</p>
-					<p>The intent stays constant<br>The UTC output adapts</p>
-				</div>
+					<p>The intent stays constant<br>The UTC execution time adapts</p>
+				</section>
 			</section>
 
 			<section>
@@ -963,13 +1059,6 @@ TimezoneTest.objects.filter(
 
 			<section>
 				<h4>Fiscal reports, calendar periods</h4>
-				<p>
-					This becomes a problem when you need to generate reports based on fiscal periods
-					(e.g., quarters) that depend on the user's timezone
-				</p>
-			</section>
-			<section>
-				<h4>Fiscal reports, calendar periods</h4>
 				<pre><code class="language-py">from django.db.models import Sum
 from django.db.models.functions import TruncQuarter
 
@@ -981,11 +1070,6 @@ qs = (
     .annotate(total=Sum("amount"))
     .order_by("quarter")
 )</code></pre>
-				<pre><code class="language-py">for record in qs:
-    year = record["quarter"].year
-    quarter = (record["quarter"].month - 1) // 3 + 1
-    total = record["total"]
-				</code></pre>
 			</section>
 
 			<section>
