@@ -29,11 +29,21 @@
 				</small>
 
 				<aside class="notes">
-					<pre>
-Handling time in software seems simple, until it isn't. From daylight savings quirks to database inconsistencies and user-local conversions, timezones can quietly turn into one of your biggest sources of bugs.
-In this talk, we'll unravel the paradox of time in Python and Django: how something so universal can be so tricky to get right. You'll learn how Django handles datetime objects, the difference between naive and aware datetimes, common pitfalls when working with ORM and serializers, and best practices for ensuring your applications stay consistent across users, systems, and regions.
-By the end, you'll be equipped with practical techniques and mental models to make your Django apps truly timezone-safe, and your logs, reports, and users finally in sync.
-					</pre>
+					<h3>
+						1 PM, Amsterdam time is<br>
+						6 AM in New York<br>
+						8 PM in Tokyo<br>
+						on May 7th, 2026
+					</h3>
+					Handling time in software seems simple, until it isn't. From daylight savings quirks to database
+					inconsistencies and user-local conversions, timezones can quietly turn into one of your biggest
+					sources of bugs.
+					In this talk, we'll unravel the paradox of time in Python and Django: how something so universal can
+					be so tricky to get right. You'll learn how Django handles datetime objects, the difference between
+					naive and aware datetimes, common pitfalls when working with ORM and serializers, and best practices
+					for ensuring your applications stay consistent across users, systems, and regions.
+					By the end, you'll be equipped with practical techniques and mental models to make your Django apps
+					truly timezone-safe, and your logs, reports, and users finally in sync.
 				</aside>
 			</section>
 
@@ -112,11 +122,11 @@ ORDER BY quarter;</code></pre>
 
 			<section>
 				<h3>$2.3M just disappeared from Q1</h3>
-				<ul style="margin-top: 0.6em; font-size: 0.95em;">
-					<li class="fragment">March payments (and sales commissions) booked in April</li>
-					<li class="fragment">US East Coast cash &amp; revenue looks weak in Q1</li>
-					<li class="fragment">Wrong tax provisions and revenue recognition</li>
-					<li class="fragment">Board deck and auditors start asking hard questions</li>
+				<ul>
+					<li>Wrong tax provisions and revenue recognition</li>
+					<li>Payments (and sales commissions) booked in Q2</li>
+					<li>Financial statements don't match the Q1</li>
+					<li>Board deck and auditors start asking hard questions</li>
 				</ul>
 				<aside class="notes">
 					<pre>The root cause: `paid_at` is the correct business timestamp — the exact moment the money was received or the transaction was confirmed. Finance uses it for revenue recognition, cash reporting, tax periods, and commission calculations.
@@ -131,7 +141,7 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 
 			<section>
 				<h4>How many of you have been personally victimized by a timezone bug?</h4>
-				<div class="fragment">
+				<div>
 					<p>Welcome to timezone therapy</p>
 					<p>I used to think: <em>"It's just a number, how hard can it be?"</em></p>
 					<p><strong>I was wrong. So very, very wrong</strong></p>
@@ -140,8 +150,7 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 
 			<section>
 				<h4>What is a timestamp?</h4>
-				<!-- appear after click -->
-				<div class="fragment">
+				<div>
 					<blockquote>
 						A record in printed or digital form that shows the time at which something happened or was done
 					</blockquote>
@@ -151,7 +160,7 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 						</a>
 					</small>
 				</div>
-				<p class="fragment">
+				<p>
 					<em>Simple, right?</em><br>
 					That's what I thought too<br>
 					Then I became a developer
@@ -293,7 +302,7 @@ time.time()
 				</table>
 
 				<small><code>2026-03-27T09:35:39.821862Z</code></small>
-				<p class="fragment">
+				<p>
 					<small>
 						Copy-paste a timestamp between them and your date is suddenly<br>
 						either in the year 55,000 or 1970, depending on who you ask
@@ -316,7 +325,7 @@ time.time()
 
 			<section>
 				<h4>What is a timezone?</h4>
-				<div class="fragment">
+				<div>
 					<blockquote>
 						A region that observes a <strong>uniform</strong> standard time for legal,
 						commercial, and social purposes
@@ -327,7 +336,7 @@ time.time()
 						</a>
 					</small>
 				</div>
-				<p class="fragment">India: UTC+5:30 &nbsp;&nbsp; Nepal: UTC+5:45<br>
+				<p>India: UTC+5:30 &nbsp;&nbsp; Nepal: UTC+5:45<br>
 					<small>Half-hours. Quarter-hours. Because why not?!</small>
 				</p>
 			</section>
@@ -369,7 +378,7 @@ time.time()
 				<h3>A bug with no code changes</h3>
 				<p>
 					<strong>January 2025, fintech with customers in New York</strong>
-					<em>"Send monthly statements on the 1st at 9:00 AM"</em>
+					<em>"Send daily statements at 9:00 AM"</em>
 				</p>
 				<p class="fragment">The job had run correctly for months.</p>
 				<p class="fragment">One morning in March, every statement for New York customers is generated at
@@ -596,7 +605,7 @@ next_run = now + timedelta(days=1)</code></pre>
 							to interpret the time
 						</li>
 					</ul>
-					<p class="fragment">
+					<p>
 						<small>
 							A <em>naive</em> datetime assumes everyone works in the same timezone,<br>
 							like people who think it's always sunny everywhere<br>
@@ -1053,23 +1062,21 @@ TimezoneTest.objects.filter(
 					their location
 				</p>
 				<p>
+					<small>
+						And that timezone will be used to query the database too
+					</small>
+				</p>
+				<p>
 					<span aria-label="sad face" role="img">😞</span>
 				</p>
 			</section>
 
 			<section>
-				<h4>Fiscal reports, calendar periods</h4>
-				<pre><code class="language-py">from django.db.models import Sum
-from django.db.models.functions import TruncQuarter
+				<h4>Activate a different timezone in Django</h4>
+				<pre><code class="language-py">import zoneinfo
+from django.utils import timezone
 
-# extract sum of all 2025 invoices, grouped by quarter
-qs = (
-    Invoice.objects.filter(value_dt__year=2025)
-    .annotate(quarter=TruncQuarter("value_dt"))
-    .values("quarter")
-    .annotate(total=Sum("amount"))
-    .order_by("quarter")
-)</code></pre>
+timezone.activate(zoneinfo.ZoneInfo("America/New_York"))</code></pre>
 			</section>
 
 			<section>
@@ -1117,7 +1124,7 @@ qs = (
 				<ul>
 					<li>👍 All timestamps in user's timezone</li>
 					<li>👍 No need to specify the timezone every time</li>
-					<li>👍 Can run reports for different timezones</li>
+					<li>👎 Can't run reports for different timezones</li>
 					<li>👎 Have to implement user settings for timezone</li>
 				</ul>
 			</section>
