@@ -24,8 +24,8 @@
 				<p><small>Denny Biasiolli</small></p>
 				<p>&nbsp;</p>
 				<small>
-					<h4>DEVWorld Amsterdam</h4>
-					<p>May 7-8, 2026</p>
+					<h4>Django Day Copenhagen</h4>
+					<p>Oct 2026</p>
 				</small>
 
 				<aside class="notes">
@@ -50,7 +50,7 @@
 			<!-- HORROR STORY OPENER: The Quarter That Leaked -->
 			<section>
 				<h3>A Story from the Finance Team</h3>
-				<p><strong>April 3, 2025, 4:52 PM CET</strong></p>
+				<p><strong>April 3, 2026, 4:52 PM CET</strong></p>
 				<p>The Head of Finance in New York<br>joins the Q1 close call</p>
 				<p>
 				<blockquote>Why is our US East Coast revenue<br>$2.3 million lower than last quarter?</blockquote>
@@ -65,8 +65,8 @@
 				<pre><code class="language-py"># Quarter Revenue &amp; Cash Report (board + tax + commissions)
 
 # received as parameters
-quarter_start = "2025-01-01"
-quarter_end   = "2025-04-01"
+quarter_start = "2026-01-01"
+quarter_end   = "2026-04-01"
 
 qs = (Payment.objects
     .filter(paid_at__gte=quarter_start,
@@ -88,8 +88,8 @@ qs = (Payment.objects
 				<pre><code class="language-sql">SELECT date_trunc('quarter', paid_at) AS quarter,
        sum(amount) AS total
 FROM payment
-WHERE paid_at &gt;= '2025-01-01'
-  AND paid_at &lt;  '2025-04-01'
+WHERE paid_at &gt;= '2026-01-01'
+  AND paid_at &lt;  '2026-04-01'
 GROUP BY quarter
 ORDER BY quarter;</code></pre>
 				<p>
@@ -110,13 +110,13 @@ ORDER BY quarter;</code></pre>
 				<p class="fragment">
 					Recorded correctly as<br>
 					<small>
-						<code>paid_at 2025-03-31 19:17:00-05:00</code><br>
-						<code>(== 2025-04-01 00:17:00+00)</code>
+						<code>paid_at 2026-03-31 19:17:00-05:00</code><br>
+						<code>(== 2026-04-01 00:17:00+00)</code>
 					</small>
 				</p>
 				<p class="fragment">
 					All the queries on the server run in UTC<br>
-					and classify the payment as 2025-Q2
+					and classify the payment as 2026-Q2
 				</p>
 			</section>
 
@@ -140,11 +140,15 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 			</section>
 
 			<section>
-				<h4>How many of you have been personally victimized by a timezone bug?</h4>
+				<h4>Welcome to timezone therapy</h4>
 				<div>
-					<p>Welcome to timezone therapy</p>
-					<p>I used to think: <em>"It's just a number, how hard can it be?"</em></p>
-					<p><strong>I was wrong. So very, very wrong</strong></p>
+					<p>How many of you have been personally victimized<br>by a timezone bug?</p>
+					<p>
+						<small>
+							I used to think: <em>"It's just a number, how hard can it be?"</em><br>
+							I was wrong. So very, very wrong
+						</small>
+					</p>
 				</div>
 			</section>
 
@@ -162,8 +166,10 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 				</div>
 				<p>
 					<em>Simple, right?</em><br>
-					That's what I thought too<br>
-					Then I became a developer
+					<small>
+						That's what I thought too<br>
+						Then I became a developer
+					</small>
 				</p>
 			</section>
 
@@ -178,9 +184,6 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 							Wikipedia
 						</a>
 					</small>
-				</section>
-				<section>
-					<h4>ISO 8601 Principles</h4>
 					<ul>
 						<li>Values are ordered from the largest to the smallest unit of time (YYYY-MM-DDTHH:MM:SS)</li>
 						<li>Each component is zero-padded to a fixed length</li>
@@ -291,17 +294,17 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 								<pre><code class="language-py">import time
 
 time.time()
-# 1774604139.821862</code></pre>
+# 1781255609.769635</code></pre>
 							</td>
 							<td>
 								<pre><code class="language-js">Date.now()
-// 1774604139821</code></pre>
+// 1781255610133</code></pre>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 
-				<small><code>2026-03-27T09:35:39.821862Z</code></small>
+				<small><code>~ 2026-06-12T09:13:30</code></small>
 				<p>
 					<small>
 						Copy-paste a timestamp between them and your date is suddenly<br>
@@ -312,15 +315,11 @@ time.time()
 
 			<section>
 				<h4>A timestamp has no timezone</h4>
-				<p><code>1761338139</code></p>
+				<p><code>1781255609</code></p>
 				<p>It's the same number everywhere on Earth</p>
 				<p class="fragment">
 					The timezone only matters<br>when you <em>display</em> it to a human<br>
-					<small>
-						<em>Computers don't care about timezones, we invented this pain for ourselves</em>
-					</small>
 				</p>
-				<p class="fragment"><strong>Timestamps don't lie<br>Timezones are just their interpreters</strong></p>
 			</section>
 
 			<section>
@@ -374,10 +373,11 @@ time.time()
 				</section>
 			</section>
 
+			<!--
 			<section>
 				<h3>A bug with no code changes</h3>
 				<p>
-					<strong>January 2025, fintech with customers in New York</strong>
+					<strong>January 2026, fintech with customers in New York</strong>
 					<em>"Send daily statements at 9:00 AM"</em>
 				</p>
 				<p class="fragment">The job had run correctly for months.</p>
@@ -408,6 +408,7 @@ time.time()
 					</small>
 				</p>
 			</section>
+			-->
 
 			<section>
 				<h3>The Two Faces of Time</h3>
@@ -526,9 +527,9 @@ time.time()
 
 				<section>
 					<h4>1. Spring Forward: the phantom hour</h4>
-					<p>In New York, DST starts on <strong>March 9, 2025 at 2:00 AM</strong></p>
+					<p>In New York, DST starts on <strong>March 9, 2026 at 2:00 AM</strong></p>
 					<p>The clock jumps: <strong>1:59:59 AM → 3:00:00 AM</strong></p>
-					<p><strong>2:30 AM on March 9, 2025<br>never happened in New York</strong></p>
+					<p><strong>2:30 AM on March 9, 2026<br>never happened in New York</strong></p>
 				</section>
 				<section>
 					<h4>1. Spring Forward: the phantom hour</h4>
@@ -542,9 +543,9 @@ time.time()
 
 				<section>
 					<h4>2. Fall Back: the duplicate hour</h4>
-					<p>In New York, DST ends on <strong>Nov 2, 2025 at 2:00 AM</strong></p>
+					<p>In New York, DST ends on <strong>Nov 2, 2026 at 2:00 AM</strong></p>
 					<p>The clock jumps back: <strong>1:59:59 AM → 1:00:00 AM</strong></p>
-					<p><strong>1:30 AM on Nov 2, 2025 happens twice in New York</strong></p>
+					<p><strong>1:30 AM on Nov 2, 2026 happens twice in New York</strong></p>
 				</section>
 				<section>
 					<h4>2. Fall Back: the duplicate hour</h4>
@@ -563,8 +564,8 @@ time.time()
 				<section>
 					<h4>Days aren't always 24 hours</h4>
 					<ul>
-						<li>March 9, 2025 in New York: <strong>23 hours</strong> long</li>
-						<li>November 2, 2025 in New York: <strong>25 hours</strong> long</li>
+						<li>March 9, 2026 in New York: <strong>23 hours</strong> long</li>
+						<li>November 2, 2026 in New York: <strong>25 hours</strong> long</li>
 					</ul>
 					<div>
 						<p>This matters when scheduling the next run:</p>
@@ -577,6 +578,7 @@ next_run = now + timedelta(days=1)</code></pre>
 				</section>
 			</section>
 
+			<!--
 			<section>
 				<h4>Timezone concepts: recap</h4>
 				<ul>
@@ -587,6 +589,7 @@ next_run = now + timedelta(days=1)</code></pre>
 					<li>Timezone identifier carries the rules</li>
 				</ul>
 			</section>
+			-->
 
 			<section>
 				<h4>Timezone in Python</h4>
@@ -616,11 +619,11 @@ next_run = now + timedelta(days=1)</code></pre>
 					<pre><code class="language-py">from datetime import datetime
 from zoneinfo import ZoneInfo # Python 3.9+
 
-# 09:00 local timezone
-datetime(2025, 10, 26, 9, 0)
+# Naive, 09:00 local timezone
+datetime(2026, 10, 26, 9, 0)  # try to avoid this
 
-# 09:00 in New York
-datetime(2025, 10, 26, 9, 0,
+# Aware, 09:00 in New York
+datetime(2026, 10, 26, 9, 0,
          tzinfo=ZoneInfo("America/New_York"))
 </code></pre>
 				</section>
@@ -641,6 +644,8 @@ tzlocal.get_localzone()</code></pre>
 				-->
 			</section>
 
+			<!-- Commented out for DjangoDay - JavaScript section not relevant -->
+			<!--
 			<section>
 				<h4>Timezone in JavaScript</h4>
 				<section>
@@ -664,8 +669,8 @@ tzlocal.get_localzone()</code></pre>
 					<h4>Example</h4>
 					<pre><code class="language-js">new Date() // current date and time in local timezone
 
-new Date(2025, 9, 26, 9, 00) // local timezone
-new Date("2025-10-26T08:00:00.000Z") // UTC
+new Date(2026, 9, 26, 9, 00) // local timezone
+new Date("2026-10-26T08:00:00.000Z") // UTC
 
 // how to get the current timezone of the browser?
 Intl.DateTimeFormat().resolvedOptions().timeZone</code></pre>
@@ -682,73 +687,46 @@ const { DateTime } = require("luxon");
 
 DateTime.now().setZone("America/New_York");
 DateTime.fromObject(
-  { year: 2025, month: 10, day: 26, hour: 9, minute: 0 },
+  { year: 2026, month: 10, day: 26, hour: 9, minute: 0 },
   { zone: 'America/New_York' });
 </code></pre>
 					<small>Note: in Luxon, months are 1-indexed (January is 1, December is 12)</small>
 				</section>
 			</section>
+			-->
 
 			<section>
 				<h4>Timezone in PostgreSQL</h4>
 				<section>
 					<h4><code>timestamptz</code> column</h4>
-					<p>
-						Short name for <code>timestamp with time zone</code>
-					</p>
-					<p>
-						Doesn't store the timezone itself
-					</p>
-					<p>
-						Normalizes the timestamp to UTC upon storage
-					</p>
-					<p>
-						Converts it back to the desired timezone upon retrieval
-					</p>
+					<ul>
+						<li>
+							Short name for <code>timestamp with time zone</code>
+						</li>
+						<li>
+							Doesn't store the timezone itself
+						</li>
+						<li>
+							Normalizes the timestamp to UTC upon storage
+						</li>
+						<li>
+							Converts it back to the desired timezone upon retrieval
+						</li>
+					</ul>
 				</section>
 
 				<section>
 					<p>Configuring the timezone in PostgreSQL</p>
-					<ol>
-						<li>Server level in the <code>postgresql.conf</code> file<br>
-							<small>
-								<code>timezone = '&lt;tz&gt;'</code>
-							</small>
-						</li>
-						<li>Connection string<br>
-							<small>
-								<code>?options=-c%20TimeZone=&lt;tz&gt;</code>
-								<pre><code>psql "postgresql://user@host/database?options=-c%20TimeZone=America/New_York"</code></pre>
-							</small>
-						</li>
-						<li>Database level<br>
-							<small>
-								<code>ALTER DATABASE &lt;db_name&gt; SET TIMEZONE TO &lt;tz&gt;</code>
-							</small>
-						</li>
-						<li>User level<br>
-							<small>
-								<code>ALTER ROLE &lt;user_name&gt; SET TIMEZONE TO &lt;tz&gt;</code>
-							</small>
-						</li>
-					</ol>
-				</section>
-
-				<section>
-					<p>Configuring the timezone in PostgreSQL</p>
-					<ol start="5">
-						<li>For a single session<br>
-							<small>
-								<code>SET TIMEZONE TO &lt;tz&gt;</code>
-							</small>
-						</li>
-						<li>For a single transaction<br>
-							<small>
-								<code>SET LOCAL TIMEZONE TO &lt;tz&gt;</code>
-							</small>
-						</li>
-					</ol>
-
+					<small>
+						<ol>
+							<li>Server level: <code>timezone = '&lt;tz&gt;'</code> in <code>postgresql.conf</code></li>
+							<li>Connection string: <code>?options=-c%20TimeZone=&lt;tz&gt;</code></li>
+							<li>Database level: <code>ALTER DATABASE &lt;db&gt; SET TIMEZONE TO &lt;tz&gt;</code></li>
+							<li>User level: <code>ALTER ROLE &lt;user&gt; SET TIMEZONE TO &lt;tz&gt;</code></li>
+							<li>Session: <code>SET TIMEZONE TO &lt;tz&gt;</code></li>
+							<li>Transaction: <code>SET LOCAL TIMEZONE TO &lt;tz&gt;</code></li>
+						</ol>
+					</small>
 					<p>Or it defaults to the system's local timezone</p>
 				</section>
 
@@ -769,11 +747,11 @@ DateTime.fromObject(
 						using a <code>timestamptz</code> column.
 					</p>
 					<pre><code class="language-sql">insert into test_timezone (value_dt, comment) values
-('2025-01-01T00:00:00-05:00', 'start of Q1 2025 in NY'),
-('2025-03-31T23:59:59.999999-04:00', 'end of Q1 2025 in NY'),
+('2026-01-01T00:00:00-05:00', 'start of Q1 2026 in NY'),
+('2026-03-31T23:59:59.999999-04:00', 'end of Q1 2026 in NY'),
 -- ...
 -- you can even use the timezone name directly
--- '2025-01-01 00:00:00 America/New_York'
+-- '2026-01-01 00:00:00 America/New_York'
 </code></pre>
 					<aside class="notes">
 						<ul>
@@ -793,8 +771,8 @@ DateTime.fromObject(
 					<pre><code class="language-sql">select * from test_timezone order by value_dt;
 --            value_dt            |           comment
 -- -------------------------------+------------------------
---  2025-01-01 06:00:00+01        | start of Q1 2025 in NY
---  2025-04-01 05:59:59.999999+02 | end of Q1 2025 in NY
+--  2026-01-01 06:00:00+01        | start of Q1 2026 in NY
+--  2026-04-01 05:59:59.999999+02 | end of Q1 2026 in NY
 -- ...
 
 -- check the current timezone with
@@ -848,38 +826,38 @@ show timezone;
 						in a specific timezone?
 					</p>
 					<pre><code class="language-sql">select * from test_timezone
-where value_dt &gt;= '2025-01-01' and value_dt &lt; '2025-04-01'
+where value_dt &gt;= '2026-01-01' and value_dt &lt; '2026-04-01'
 order by value_dt;</code></pre>
-					<pre><code class="language-sql">-- returns all records in Q1 2025 in server timezone
+					<pre><code class="language-sql">-- returns all records in Q1 2026 in server timezone
 --            value_dt            |          comment
 -- -------------------------------+----------------------------
---  2025-01-01 00:00:00+01        | start of Q1 2025 in Rome
---  2025-01-01 01:00:00+01        | start of Q1 2025 in London
---  2025-01-01 06:00:00+01        | start of Q1 2025 in NY
---  2025-01-01 09:00:00+01        | start of Q1 2025 in LA
---  2025-03-31 14:59:59.999999+02 | end of Q1 2025 in Sydney
---  2025-03-31 16:59:59.999999+02 | end of Q1 2025 in Tokyo
---  2025-03-31 23:59:59.999999+02 | end of Q1 2025 in Rome</code></pre>
+--  2026-01-01 00:00:00+01        | start of Q1 2026 in Rome
+--  2026-01-01 01:00:00+01        | start of Q1 2026 in London
+--  2026-01-01 06:00:00+01        | start of Q1 2026 in NY
+--  2026-01-01 09:00:00+01        | start of Q1 2026 in LA
+--  2026-03-31 14:59:59.999999+02 | end of Q1 2026 in Sydney
+--  2026-03-31 16:59:59.999999+02 | end of Q1 2026 in Tokyo
+--  2026-03-31 23:59:59.999999+02 | end of Q1 2026 in Rome</code></pre>
 				</section>
 				<section>
 					<p>
 						One solution is to filter using a time range that includes the timezone offset.
 					</p>
-					<pre><code class="language-sql">-- select records in Q1 2025 in New York
+					<pre><code class="language-sql">-- select records in Q1 2026 in New York
 select * from test_timezone
 where value_dt
-  between '2025-01-01T00:00:00-05:00'
-  and '2025-03-31T23:59:59.999999-04:00'
+  between '2026-01-01T00:00:00-05:00'
+  and '2026-03-31T23:59:59.999999-04:00'
 order by value_dt;</code></pre>
 					<pre><code class="language-sql">--            value_dt            |         comment
 -- -------------------------------+--------------------------
---  2025-01-01 06:00:00+01        | start of Q1 2025 in NY
---  2025-01-01 09:00:00+01        | start of Q1 2025 in LA
---  2025-03-31 14:59:59.999999+02 | end of Q1 2025 in Sydney
---  2025-03-31 16:59:59.999999+02 | end of Q1 2025 in Tokyo
---  2025-03-31 23:59:59.999999+02 | end of Q1 2025 in Rome
---  2025-04-01 00:59:59.999999+02 | end of Q1 2025 in London
---  2025-04-01 05:59:59.999999+02 | end of Q1 2025 in NY</code></pre>
+--  2026-01-01 06:00:00+01        | start of Q1 2026 in NY
+--  2026-01-01 09:00:00+01        | start of Q1 2026 in LA
+--  2026-03-31 14:59:59.999999+02 | end of Q1 2026 in Sydney
+--  2026-03-31 16:59:59.999999+02 | end of Q1 2026 in Tokyo
+--  2026-03-31 23:59:59.999999+02 | end of Q1 2026 in Rome
+--  2026-04-01 00:59:59.999999+02 | end of Q1 2026 in London
+--  2026-04-01 05:59:59.999999+02 | end of Q1 2026 in NY</code></pre>
 				</section>
 				<section>
 					<p>
@@ -893,18 +871,18 @@ order by value_dt;</code></pre>
 				<section>
 					<pre><code class="language-sql">--  quarter |           value_dt            |    comment
 -- ---------+-------------------------------+-----------------
---  2024-Q4 | 2024-12-31 14:00:00+01        | start Q1 Sydney
---  2024-Q4 | 2024-12-31 16:00:00+01        | start Q1 Tokyo
---  2025-Q1 | 2025-01-01 00:00:00+01        | start Q1 Rome
---  2025-Q1 | 2025-01-01 01:00:00+01        | start Q1 London
---  2025-Q1 | 2025-01-01 06:00:00+01        | start Q1 NY
---  2025-Q1 | 2025-01-01 09:00:00+01        | start Q1 LA
---  2025-Q1 | 2025-03-31 14:59:59.999999+02 | end Q1 Sydney
---  2025-Q1 | 2025-03-31 16:59:59.999999+02 | end Q1 Tokyo
---  2025-Q1 | 2025-03-31 23:59:59.999999+02 | end Q1 Rome
---  2025-Q2 | 2025-04-01 00:59:59.999999+02 | end Q1 London
---  2025-Q2 | 2025-04-01 05:59:59.999999+02 | end Q1 NY
---  2025-Q2 | 2025-04-01 08:59:59.999999+02 | end Q1 LA</code></pre>
+--  2025-Q4 | 2025-12-31 14:00:00+01        | start Q1 Sydney
+--  2025-Q4 | 2025-12-31 16:00:00+01        | start Q1 Tokyo
+--  2026-Q1 | 2026-01-01 00:00:00+01        | start Q1 Rome
+--  2026-Q1 | 2026-01-01 01:00:00+01        | start Q1 London
+--  2026-Q1 | 2026-01-01 06:00:00+01        | start Q1 NY
+--  2026-Q1 | 2026-01-01 09:00:00+01        | start Q1 LA
+--  2026-Q1 | 2026-03-31 14:59:59.999999+02 | end Q1 Sydney
+--  2026-Q1 | 2026-03-31 16:59:59.999999+02 | end Q1 Tokyo
+--  2026-Q1 | 2026-03-31 23:59:59.999999+02 | end Q1 Rome
+--  2026-Q2 | 2026-04-01 00:59:59.999999+02 | end Q1 London
+--  2026-Q2 | 2026-04-01 05:59:59.999999+02 | end Q1 NY
+--  2026-Q2 | 2026-04-01 08:59:59.999999+02 | end Q1 LA</code></pre>
 				</section>
 				<section>
 					<p>
@@ -938,18 +916,18 @@ end;</code></pre>
 				<section>
 					<pre><code class="language-sql">--  quarter |           value_dt            |    comment
 -- ---------+-------------------------------+-----------------
---  2024-Q4 | 2024-12-31 08:00:00-05        | start Q1 Sydney
---  2024-Q4 | 2024-12-31 10:00:00-05        | start Q1 Tokyo
---  2024-Q4 | 2024-12-31 18:00:00-05        | start Q1 Rome
---  2024-Q4 | 2024-12-31 19:00:00-05        | start Q1 London
---  2025-Q1 | 2025-01-01 00:00:00-05        | start Q1 NY
---  2025-Q1 | 2025-01-01 03:00:00-05        | start Q1 LA
---  2025-Q1 | 2025-03-31 08:59:59.999999-04 | end Q1 Sydney
---  2025-Q1 | 2025-03-31 10:59:59.999999-04 | end Q1 Tokyo
---  2025-Q1 | 2025-03-31 17:59:59.999999-04 | end Q1 Rome
---  2025-Q1 | 2025-03-31 18:59:59.999999-04 | end Q1 London
---  2025-Q1 | 2025-03-31 23:59:59.999999-04 | end Q1 NY
---  2025-Q2 | 2025-04-01 02:59:59.999999-04 | end Q1 LA</code></pre>
+--  2025-Q4 | 2025-12-31 08:00:00-05        | start Q1 Sydney
+--  2025-Q4 | 2025-12-31 10:00:00-05        | start Q1 Tokyo
+--  2025-Q4 | 2025-12-31 18:00:00-05        | start Q1 Rome
+--  2025-Q4 | 2025-12-31 19:00:00-05        | start Q1 London
+--  2026-Q1 | 2026-01-01 00:00:00-05        | start Q1 NY
+--  2026-Q1 | 2026-01-01 03:00:00-05        | start Q1 LA
+--  2026-Q1 | 2026-03-31 08:59:59.999999-04 | end Q1 Sydney
+--  2026-Q1 | 2026-03-31 10:59:59.999999-04 | end Q1 Tokyo
+--  2026-Q1 | 2026-03-31 17:59:59.999999-04 | end Q1 Rome
+--  2026-Q1 | 2026-03-31 18:59:59.999999-04 | end Q1 London
+--  2026-Q1 | 2026-03-31 23:59:59.999999-04 | end Q1 NY
+--  2026-Q2 | 2026-04-01 02:59:59.999999-04 | end Q1 LA</code></pre>
 				</section>
 
 			</section>
@@ -983,66 +961,6 @@ end;</code></pre>
 				</section>
 			</section>
 
-			<!-- Commented out for shorter talk - detailed Django hands-on code -->
-			<!--
-			<section>
-				<h4>Django hands-on</h4>
-				<section>
-					<p>
-						Let's create a simple Django model<br>
-						to test timestamps and timezones.
-					</p>
-					<pre><code class="language-py"># models.py
-from django.db import models
-
-class TimezoneTest(models.Model):
-    value_str = models.CharField(max_length=50)
-    value_dt = models.DateTimeField()
-    comment = models.CharField(max_length=100)</code></pre>
-				</section>
-				<section>
-					<p>
-						We can insert the same values we used in the PostgreSQL demo.
-					</p>
-					<pre><code class="language-py">from timezone_test_app.models import TimezoneTest
-
-TimezoneTest(
-    value_str="2025-01-01T00:00:00-05:00",
-    value_dt="2025-01-01T00:00:00-05:00",
-    comment="start of Q1 2025 in NY",
-)
-# ...</code></pre>
-				</section>
-				<section>
-					<p>
-						And we can query the records as well,
-						to get all records related to Q1 2025 in New York.
-					</p>
-					<pre><code class="language-py">from timezone_test_app.models import TimezoneTest
-
-TimezoneTest.objects.filter(
-    value_dt__range=[
-        "2025-01-01T00:00:00-05:00",
-        "2025-03-31T23:59:59.999999-04:00"
-    ]
-).order_by("value_dt")</code></pre>
-				</section>
-				<section>
-					<ul>
-						<li>
-							<span aria-label="crying face" role="img">😢</span>
-							We have to specify the timezone offsets manually<br>
-							or we will get a warning about naive datetimes.
-						</li>
-						<li>
-							<span aria-label="crying face" role="img">😭</span>
-							We can't filter or group easily based on a specific timezone.
-						</li>
-					</ul>
-				</section>
-			</section>
-			-->
-
 			<section>
 				<h4>PostgreSQL + Django</h4>
 				<p>
@@ -1067,6 +985,68 @@ TimezoneTest.objects.filter(
 				<p>
 					<span aria-label="sad face" role="img">😞</span>
 				</p>
+			</section>
+
+			<section>
+				<h4>Django hands-on</h4>
+				<section>
+					<p>
+						Let's create a simple Django model<br>
+						to test timestamps and timezones.
+					</p>
+					<pre><code class="language-py"># models.py
+from django.db import models
+
+class TimezoneTest(models.Model):
+    value_str = models.CharField(max_length=50)
+    value_dt = models.DateTimeField()
+    comment = models.CharField(max_length=100)</code></pre>
+				</section>
+				<section>
+					<p>
+						We can insert values this way
+					</p>
+					<pre><code class="language-py">from datetime import datetime
+from zoneinfo import ZoneInfo # Python 3.9+
+from timezone_test_app.models import TimezoneTest
+
+dt = datetime(2026, 1, 1, 0, 0,
+              tzinfo=ZoneInfo("America/New_York"))
+TimezoneTest(
+    value_str=dt.isoformat(),  # "2026-01-01T00:00:00-05:00"
+    value_dt=dt,
+    comment="start of Q1 2026 in NY",
+)
+# ...</code></pre>
+				</section>
+				<section>
+					<p>
+						And we can query the records as well,
+						to get all records related to Q1 2026 in New York.
+					</p>
+					<pre><code class="language-py">from timezone_test_app.models import TimezoneTest
+
+TimezoneTest.objects.filter(
+    value_dt__range=[
+        "2026-01-01T00:00:00-05:00",
+        "2026-03-31T23:59:59.999999-04:00"
+        # will you remember the correct DST offsets?
+    ]
+).order_by("value_dt")</code></pre>
+				</section>
+				<section>
+					<ul>
+						<li>
+							<span aria-label="crying face" role="img">😢</span>
+							We have to specify the timezone offsets manually<br>
+							or we will get a warning about naive datetimes
+						</li>
+						<li>
+							<span aria-label="crying face" role="img">😭</span>
+							We can't filter or group easily based on a specific timezone
+						</li>
+					</ul>
+				</section>
 			</section>
 
 			<section>
@@ -1172,15 +1152,13 @@ fetch("/api/some-endpoint", {
 					</p>
 					<pre><code class="language-js">document.cookie = "django_timezone=Europe/Rome";</code></pre>-->
 				</section>
-				<!-- Commented out for shorter talk -->
-				<!--
 				<section>
 					<p>
 						Try API filtering while changing the timezone header.
 					</p>
 					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/\
-?value_dt__gte=2025-01-01\
-&value_dt__lt=2025-04-01\
+?value_dt__gte=2026-01-01\
+&value_dt__lt=2026-04-01\
 &ordering=value_dt" \
     -H "X-Timezone: Europe/Rome"</code></pre>
 					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/group_by_year_and_quarter/" \
@@ -1188,7 +1166,6 @@ fetch("/api/some-endpoint", {
 					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/group_by_year_and_quarter/" \
     --cookie "django_timezone=Europe/Rome"</code></pre>
 				</section>
-				-->
 			</section>
 
 			<!-- Commented out for shorter talk - FastAPI section -->
@@ -1268,13 +1245,13 @@ async def read_timezones(
 									target="_blank">Repository</a></small></div>
 					</div>
 					<div style="text-align: center;">
-						<a href="https://slides.dennybiasiolli.com/index-timestamps-and-timezones-devworld-2026.html"
+						<a href="https://slides.dennybiasiolli.com/index-timestamps-and-timezones-djangoday-2026.html"
 							target="_blank">
-							<img src="./slides/timestamps-and-timezones/img/qr-slides-devworld.png" alt="QR code for slides"
-								style="width: 220px; height: 220px;" />
+							<img src="./slides/timestamps-and-timezones/img/qr-slides-djangoday.png"
+								alt="QR code for slides" style="width: 220px; height: 220px;" />
 						</a>
 						<div><small><a
-									href="https://slides.dennybiasiolli.com/index-timestamps-and-timezones-devworld-2026.html"
+									href="https://slides.dennybiasiolli.com/index-timestamps-and-timezones-djangoday-2026.html"
 									target="_blank">Slides</a></small></div>
 					</div>
 				</div>
