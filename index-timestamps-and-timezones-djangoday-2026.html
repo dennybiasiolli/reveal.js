@@ -140,6 +140,30 @@ This is why "just store everything as timestamptz" is not enough when finance ne
 			</section>
 
 			<section>
+				<h3>Same payment. Same database. Different quarter.</h3>
+				<pre><code class="language-sql">-- paid_at = 2026-03-31 19:17:00-05:00
+
+SET TIMEZONE TO 'UTC';
+SELECT date_trunc('quarter', paid_at);
+-- 2026-04-01   →  Q2
+
+SET TIMEZONE TO 'America/New_York';
+SELECT date_trunc('quarter', paid_at);
+-- 2026-01-01   →  Q1</code></pre>
+				<p>
+					<small>
+						<code>paid_at</code> never changed. The session timezone did.<br>
+						<code>TruncQuarter()</code> uses the session, not the payment.
+					</small>
+				</p>
+				<aside class="notes">
+					This is the database inconsistency. timestamptz stored the instant correctly.
+					date_trunc / Trunc* answer in the current session timezone.
+					Django will do SET LOCAL TIMEZONE for you later — that's the payoff.
+				</aside>
+			</section>
+
+			<section>
 				<h4>Welcome to timezone therapy</h4>
 				<div>
 					<p>How many of you have been personally victimized<br>by a timezone bug?</p>
@@ -409,6 +433,29 @@ time.time()
 				</p>
 			</section>
 			-->
+
+			<section>
+				<h3>A bug with no code changes</h3>
+				<p>
+					January: <em>"Send the daily statement at 9:00 AM New York"</em>
+				</p>
+				<p class="fragment">
+					One Monday in March, every New York statement<br>
+					goes out at <strong>10:00 AM</strong>
+				</p>
+				<p class="fragment">
+					Deploys: none. Diff: empty.<br>
+					The US sprang forward. Europe hadn't.
+				</p>
+				<p class="fragment">
+					<small>The world moved. Your UTC timestamp didn't.</small>
+				</p>
+				<aside class="notes">
+					This is the paradox on the title slide.
+					Recording the past (the $2.3M leak) and scheduling the future
+					fail in opposite ways. Next slide names those two faces.
+				</aside>
+			</section>
 
 			<section>
 				<h3>The Two Faces of Time</h3>
@@ -1217,6 +1264,26 @@ async def read_timezones(
 					<p><strong>2. Store in UTC, display in local time</strong></p>
 					<p>UTC is the reliable, unambiguous way<br>to store timestamps</p>
 					<p>Local time is what users expect to see<br>when they look at dates and times</p>
+				</section>
+				<section>
+					<p><strong>2b. Write logs in UTC, and say so</strong></p>
+					<pre><code class="language-text">[2026-03-31 19:17:00] payment received $340k</code></pre>
+					<p>
+						CET? UTC? The worker in <code>us-east-1</code>?<br>
+						The laptop you used to grep production?
+					</p>
+					<p>
+						<small>
+							If the line doesn't say <code>Z</code> or <code>+00:00</code>,<br>
+							every post-mortem becomes a timezone puzzle.
+						</small>
+					</p>
+					<aside class="notes">
+						Logs are just another recording of the past.
+						Same rule as paid_at: store the instant in UTC, convert only when a human reads it.
+						UTC in the database and the logs. Local time for users. An explicit timezone for reports.
+						Then the three of them finally agree.
+					</aside>
 				</section>
 				<section>
 					<p><strong>3. Ask for the timezone for sensitive operations<br>(like fiscal reports)</strong></p>
