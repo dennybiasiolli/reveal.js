@@ -47,17 +47,52 @@
 				</aside>
 			</section>
 
+			<section>
+				<h3>Right now, in this room</h3>
+				<p>It's afternoon in Copenhagen</p>
+				<p class="fragment">Morning in New York</p>
+				<p class="fragment">Evening in Tokyo</p>
+				<p class="fragment">
+					<small>Same instant. Three different days,<br>depending who you ask.</small>
+				</p>
+				<aside class="notes">
+					Oct 2, 2026, CEST: 1pm here is 7am in New York and 8pm in Tokyo.
+					I'm in Copenhagen talking about a New York quarter close that broke
+					because a server in Europe used UTC. If that sentence didn't scare you, it will.
+				</aside>
+			</section>
+
 			<!-- HORROR STORY OPENER: The Quarter That Leaked -->
 			<section>
 				<h3>A Story from the Finance Team</h3>
-				<p><strong>April 3, 2026, 4:52 PM CET</strong></p>
+				<p><strong>April 1, 2026, 4:52 PM CET</strong></p>
 				<p>The Head of Finance in New York<br>joins the Q1 close call</p>
 				<p>
-				<blockquote>Why is our US East Coast revenue<br>$2.3 million lower than last quarter?</blockquote>
+				<blockquote>Why is our US East Coast revenue<br>$2.3 million lower than expected?</blockquote>
 				</p>
 				<p>
-					<small>47 large March 31 payments never made it into Q1</small>
+					<small>47 large March 31 payments never made it into Q1</small><br>
+					<small>No, it's not an April Fool's joke</small>
 				</p>
+			</section>
+
+			<section>
+				<h3>$2.3M just disappeared from Q1</h3>
+				<ul>
+					<li>Wrong tax provisions and revenue recognition</li>
+					<li>Payments (and sales commissions) booked in Q2</li>
+					<li>Financial statements don't match the Q1</li>
+					<li>Board deck and auditors start asking hard questions</li>
+				</ul>
+				<aside class="notes">
+					<pre>The root cause: `paid_at` is the correct business timestamp — the exact moment the money was received or the transaction was confirmed. Finance uses it for revenue recognition, cash reporting, tax periods, and commission calculations.
+
+But `TruncQuarter()` / `date_trunc('quarter')` and Django's Trunc* functions are timezone-sensitive. They use the *current session/database timezone*, not the timezone in which the payment actually happened.
+
+A March 31 11:17 PM payment in New York becomes April 1 in UTC/Europe → leaks into the next quarter in every grouped report.
+
+This is why "just store everything as timestamptz" is not enough when finance needs calendar-based grouped reports.</pre>
+				</aside>
 			</section>
 
 			<section>
@@ -83,6 +118,7 @@ qs = (Payment.objects
 				</p>
 			</section>
 
+			<!-- Cut for pacing: raw SQL duplicate of the ORM query
 			<section>
 				<h3>and the raw SQL version</h3>
 				<pre><code class="language-sql">SELECT date_trunc('quarter', paid_at) AS quarter,
@@ -100,18 +136,19 @@ ORDER BY quarter;</code></pre>
 					</small>
 				</p>
 			</section>
+			-->
 
 			<section>
 				<h3>Example of a payment<br>that leaked into Q2</h3>
 				<p>
 					A customer in New York pays $340k<br>
-					on <strong>March 31 at 19:17 PM local time</strong>
+					on <strong>March 31 at 20:17 PM local time</strong>
 				</p>
 				<p class="fragment">
 					Recorded correctly as<br>
 					<small>
-						<code>paid_at 2026-03-31 19:17:00-05:00</code><br>
-						<code>(== 2026-04-01 00:17:00+00)</code>
+						<code>paid_at 2026-03-31 20:17:00-04:00</code><br>
+						<!-- <code>(== 2026-04-01 00:17:00+00)</code> -->
 					</small>
 				</p>
 				<p class="fragment">
@@ -121,41 +158,33 @@ ORDER BY quarter;</code></pre>
 			</section>
 
 			<section>
-				<h3>$2.3M just disappeared from Q1</h3>
-				<ul>
-					<li>Wrong tax provisions and revenue recognition</li>
-					<li>Payments (and sales commissions) booked in Q2</li>
-					<li>Financial statements don't match the Q1</li>
-					<li>Board deck and auditors start asking hard questions</li>
-				</ul>
-				<aside class="notes">
-					<pre>The root cause: `paid_at` is the correct business timestamp — the exact moment the money was received or the transaction was confirmed. Finance uses it for revenue recognition, cash reporting, tax periods, and commission calculations.
-
-But `TruncQuarter()` / `date_trunc('quarter')` and Django's Trunc* functions are timezone-sensitive. They use the *current session/database timezone*, not the timezone in which the payment actually happened.
-
-A March 31 11:17 PM payment in New York becomes April 1 in UTC/Europe → leaks into the next quarter in every grouped report.
-
-This is why "just store everything as timestamptz" is not enough when finance needs calendar-based grouped reports.</pre>
-				</aside>
-			</section>
-
-			<section>
 				<h3>Same payment. Same database. Different quarter.</h3>
-				<pre><code class="language-sql">-- paid_at = 2026-03-31 19:17:00-05:00
+				<pre><code class="language-sql">-- paid_at = 2026-03-31 20:17:00-04:00
 
-SET TIMEZONE TO 'UTC';
-SELECT date_trunc('quarter', paid_at);
--- 2026-04-01   →  Q2
-
+-- what users expect in New York
 SET TIMEZONE TO 'America/New_York';
 SELECT date_trunc('quarter', paid_at);
--- 2026-01-01   →  Q1</code></pre>
-				<p>
-					<small>
-						<code>paid_at</code> never changed. The session timezone did.<br>
-						<code>TruncQuarter()</code> uses the session, not the payment.
-					</small>
-				</p>
+-- 2026-Q1
+
+-- what the server has in UTC
+SET TIMEZONE TO 'UTC';
+SELECT to_char(paid_at, 'YYYY-"Q"Q');
+-- 2026-Q2</code></pre>
+				<small>
+					<ul>
+						<li>
+							<code>paid_at</code> never changes
+						</li>
+						<li>
+							Every single <code>paid_at</code> value we display in the frontend (API+JSON)<br>
+							is formatted by the browser using the user's local timezone
+						</li>
+						<li>
+							The dashboard summary is generated server-side<br>
+							using the server timezone
+						</li>
+					</ul>
+				</small>
 				<aside class="notes">
 					This is the database inconsistency. timestamptz stored the instant correctly.
 					date_trunc / Trunc* answer in the current session timezone.
@@ -176,6 +205,8 @@ SELECT date_trunc('quarter', paid_at);
 				</div>
 			</section>
 
+			<!-- Commented out for shorter talk -->
+			<!--
 			<section>
 				<h4>What is a timestamp?</h4>
 				<div>
@@ -214,8 +245,6 @@ SELECT date_trunc('quarter', paid_at);
 						<li>For reduced precision, components can be omitted from the end (YYYY-MM, YYYY-MM-DD)</li>
 					</ul>
 				</section>
-				<!-- Commented out for shorter talk -->
-				<!--
 				<section>
 					<h4>ISO 8601 Representations</h4>
 					<small>
@@ -278,7 +307,6 @@ SELECT date_trunc('quarter', paid_at);
 						</table>
 					</small>
 				</section>
-				-->
 			</section>
 
 			<section>
@@ -336,6 +364,7 @@ time.time()
 					</small>
 				</p>
 			</section>
+			-->
 
 			<section>
 				<h4>A timestamp has no timezone</h4>
@@ -344,21 +373,17 @@ time.time()
 				<p class="fragment">
 					The timezone only matters<br>when you <em>display</em> it to a human<br>
 				</p>
+				<p class="fragment">
+					<small>
+						Python counts this in seconds. JavaScript in milliseconds.<br>
+						Copy-paste and you're in the year 55,000.
+					</small>
+				</p>
 			</section>
 
 			<section>
 				<h4>What is a timezone?</h4>
-				<div>
-					<blockquote>
-						A region that observes a <strong>uniform</strong> standard time for legal,
-						commercial, and social purposes
-					</blockquote>
-					<small>
-						<a href="https://en.wikipedia.org/wiki/Time_zone" target="_blank">
-							Wikipedia
-						</a>
-					</small>
-				</div>
+				<p>A region that agrees to pretend it's the same time</p>
 				<p>India: UTC+5:30 &nbsp;&nbsp; Nepal: UTC+5:45<br>
 					<small>Half-hours. Quarter-hours. Because why not?!</small>
 				</p>
@@ -444,7 +469,14 @@ time.time()
 					goes out at <strong>10:00 AM</strong>
 				</p>
 				<p class="fragment">
-					Deploys: none. Diff: empty.<br>
+					<small>
+						Check the logs. <em>Everything looks normal.</em><br>
+						Check the deploys. <em>Nothing changed.</em><br>
+						Check the code. <em>Nothing changed.</em><br>
+						Check yourself. <em>Have I changed?</em>
+					</small>
+				</p>
+				<p class="fragment">
 					The US sprang forward. Europe hadn't.
 				</p>
 				<p class="fragment">
@@ -454,6 +486,9 @@ time.time()
 					This is the paradox on the title slide.
 					Recording the past (the $2.3M leak) and scheduling the future
 					fail in opposite ways. Next slide names those two faces.
+					US and Europe change clocks on different weekends,
+					so if you live in Europe and have users in the US,
+					DST won't be your first guess.
 				</aside>
 			</section>
 
@@ -576,36 +611,26 @@ time.time()
 					<h4>1. Spring Forward: the phantom hour</h4>
 					<p>In New York, DST starts on <strong>March 9, 2026 at 2:00 AM</strong></p>
 					<p>The clock jumps: <strong>1:59:59 AM → 3:00:00 AM</strong></p>
-					<p><strong>2:30 AM on March 9, 2026<br>never happened in New York</strong></p>
-				</section>
-				<section>
-					<h4>1. Spring Forward: the phantom hour</h4>
-					<p>If a user schedules something at 2:30 AM that day:</p>
-					<ul>
-						<li>Some libraries throw an exception</li>
-						<li>Others silently move to 3:30 AM</li>
-					</ul>
-					<p>Know what yours does and warn the user</p>
+					<p><strong>2:30 AM on March 9, 2026 never happened</strong></p>
+					<p>
+						<small>
+							Some libraries throw. Others silently move you to 3:30.<br>
+							Know what yours does, and warn the user.
+						</small>
+					</p>
 				</section>
 
 				<section>
 					<h4>2. Fall Back: the duplicate hour</h4>
 					<p>In New York, DST ends on <strong>Nov 2, 2026 at 2:00 AM</strong></p>
 					<p>The clock jumps back: <strong>1:59:59 AM → 1:00:00 AM</strong></p>
-					<p><strong>1:30 AM on Nov 2, 2026 happens twice in New York</strong></p>
-				</section>
-				<section>
-					<h4>2. Fall Back: the duplicate hour</h4>
-					<p>Which one did the user mean? This is ambiguous</p>
-					<ul>
-						<li>
-							Pick a default (first or second occurrence)
-							<small>
-								If it's your alarm clock, pick the second one. You deserve the extra sleep
-							</small>
-						</li>
-						<li>Or ask the user to clarify</li>
-					</ul>
+					<p><strong>1:30 AM happens twice</strong></p>
+					<p>
+						<small>
+							If it's your alarm clock, pick the second one.<br>
+							You deserve the extra sleep.
+						</small>
+					</p>
 				</section>
 
 				<section>
@@ -762,6 +787,7 @@ DateTime.fromObject(
 					</ul>
 				</section>
 
+				<!--
 				<section>
 					<p>Configuring the timezone in PostgreSQL</p>
 					<small>
@@ -775,6 +801,18 @@ DateTime.fromObject(
 						</ol>
 					</small>
 					<p>Or it defaults to the system's local timezone</p>
+				</section>
+				-->
+				<section>
+					<p>
+						Postgres can set the timezone in six different places.<br>
+						<small>Server level, connection string, database, user, session, transaction.</small><br>
+						Django uses the last one:
+					</p>
+					<pre><code class="language-sql">SET LOCAL TIMEZONE TO '&lt;SERVER_TIMEZONE_HERE&gt;';</code></pre>
+					<p>
+						<small>Per transaction. Per query. That's the lever behind the $2.3M slide.</small>
+					</p>
 				</section>
 
 			</section>
@@ -1035,184 +1073,70 @@ end;</code></pre>
 			</section>
 
 			<section>
-				<h4>Django hands-on</h4>
-				<section>
-					<p>
-						Let's create a simple Django model<br>
-						to test timestamps and timezones.
-					</p>
-					<pre><code class="language-py"># models.py
-from django.db import models
-
-class TimezoneTest(models.Model):
-    value_str = models.CharField(max_length=50)
-    value_dt = models.DateTimeField()
-    comment = models.CharField(max_length=100)</code></pre>
-				</section>
-				<section>
-					<p>
-						We can insert values this way
-					</p>
-					<pre><code class="language-py">from datetime import datetime
-from zoneinfo import ZoneInfo # Python 3.9+
-from timezone_test_app.models import TimezoneTest
-
-dt = datetime(2026, 1, 1, 0, 0,
-              tzinfo=ZoneInfo("America/New_York"))
-TimezoneTest(
-    value_str=dt.isoformat(),  # "2026-01-01T00:00:00-05:00"
-    value_dt=dt,
-    comment="start of Q1 2026 in NY",
-)
-# ...</code></pre>
-				</section>
-				<section>
-					<p>
-						And we can query the records as well,
-						to get all records related to Q1 2026 in New York.
-					</p>
-					<pre><code class="language-py">from timezone_test_app.models import TimezoneTest
-
-TimezoneTest.objects.filter(
-    value_dt__range=[
-        "2026-01-01T00:00:00-05:00",
-        "2026-03-31T23:59:59.999999-04:00"
-        # will you remember the correct DST offsets?
-    ]
-).order_by("value_dt")</code></pre>
-				</section>
-				<section>
-					<ul>
-						<li>
-							<span aria-label="crying face" role="img">😢</span>
-							We have to specify the timezone offsets manually<br>
-							or we will get a warning about naive datetimes
-						</li>
-						<li>
-							<span aria-label="crying face" role="img">😭</span>
-							We can't filter or group easily based on a specific timezone
-						</li>
-					</ul>
-				</section>
-			</section>
-
-			<section>
-				<h4>Activate a different timezone in Django</h4>
-				<pre><code class="language-py">import zoneinfo
+				<h4>Same report. New York time.</h4>
+				<pre><code class="language-py">from zoneinfo import ZoneInfo
 from django.utils import timezone
 
-timezone.activate(zoneinfo.ZoneInfo("America/New_York"))</code></pre>
+timezone.activate(ZoneInfo("America/New_York"))
+
+Payment.objects.filter(
+    paid_at__gte="2026-01-01",
+    paid_at__lt="2026-04-01",
+)
+# March 31, 20:17 in New York stays in Q1
+# Nobody memorized an offset</code></pre>
 			</section>
 
 			<section>
-				<h4>Solution #1</h4>
-				<p>Timezone as a parameter for the fiscal report</p>
-				<ul>
-					<li>👍 Fiscal report in the desired timezone</li>
-					<li>👎 Users have to specify the timezone every time they generate a report</li>
-					<li>👎 It works only with the specific report request</li>
-				</ul>
-
-			</section>
-
-			<section>
-				<h4>Solution #2</h4>
-				<p>
-					Read timezone from user's browser (JS needed)<br>
-					and set/send a cookie
-				</p>
-				<ul>
-					<li>👍 Use the user's device timezone</li>
-					<li>👍 No need to specify the timezone every time</li>
-					<li>👎 Not ideal for API clients</li>
-					<li>👎 Not ideal for third-party integrations</li>
-					<li>👎 What if users need a different timezone?</li>
-				</ul>
-			</section>
-
-			<section>
-				<h4>Solution #3</h4>
-				<p>
-					Read timezone from a custom header<br>
-					(e.g., <code>X-Timezone</code>)
-				</p>
-				<ul>
-					<li>👍 Perfect for API clients</li>
-					<li>👎 Not ideal for web users</li>
-					<li>👎 Not ideal for Django admin</li>
-				</ul>
-			</section>
-
-			<section>
-				<h4>Solution #4</h4>
-				<p>Timezone in profile settings</p>
-				<ul>
-					<li>👍 All timestamps in user's timezone</li>
-					<li>👍 No need to specify the timezone every time</li>
-					<li>👎 Can't run reports for different timezones</li>
-					<li>👎 Have to implement user settings for timezone</li>
-				</ul>
+				<h4>Where does the timezone come from?</h4>
+				<table>
+					<thead>
+						<tr>
+							<th>Who</th>
+							<th>Where the TZ comes from</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Fiscal report</td>
+							<td>they type it</td>
+						</tr>
+						<tr>
+							<td>Browser</td>
+							<td>cookie</td>
+						</tr>
+						<tr>
+							<td>API</td>
+							<td><code>X-Timezone</code></td>
+						</tr>
+						<tr>
+							<td>Logged-in human</td>
+							<td>profile</td>
+						</tr>
+					</tbody>
+				</table>
+				<p><small>Ship the combination. That's the middleware.</small></p>
 			</section>
 
 			<section>
 				<h4>Django Middleware solution</h4>
-				<section>
-					<p>Pick one, or combine them!</p>
-					<pre><code class="language-py">import zoneinfo
-from django.utils import timezone</code></pre>
-					<pre><code class="language-py"># read the timezone from user settings (if authenticated)
-if request.user.is_authenticated:
-	tzname = request.user.profile.timezone</code></pre>
-					<pre><code class="language-py"># read the timezone name from a custom header (API requests)
-tzname = request.headers.get("X-Timezone")</code></pre>
-					<pre><code class="language-py"># read the timezone name from a cookie (web requests)
-tzname = request.COOKIES.get("django_timezone")</code></pre>
+				<pre><code class="language-py">import zoneinfo
+from django.utils import timezone
 
-					<pre><code class="language-py"># finally, set the timezone for the current request
+if request.user.is_authenticated:
+    tzname = request.user.profile.timezone
+else:
+    tzname = (request.headers.get("X-Timezone")
+              or request.COOKIES.get("django_timezone"))
+
 if tzname:
     timezone.activate(zoneinfo.ZoneInfo(tzname))</code></pre>
-				</section>
-				<section>
-					<p>
-						In the frontend (JavaScript), you can set the timezone
-						in a cookie or a custom header when making requests
-					</p>
-					<pre><code class="language-js">// get the user's timezone
-const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;</code></pre>
-					<pre><code class="language-js">// set timezone in a cookie
-document.cookie = "django_timezone=" + tz;</code></pre>
-					<pre><code class="language-js">// set timezone in a custom header (for API requests)
-fetch("/api/some-endpoint", {
-  headers: {
-    "X-Timezone": tz,
-  },
-});</code></pre>
-				</section>
-				<section>
-					<p>
-						Django will automatically convert the timestamps
-						to the selected timezone when retrieving records
-					</p>
-					<!--<p>
-						Try navigating/filtering the admin interface
-						while changing your browser's timezone settings.
-					</p>
-					<pre><code class="language-js">document.cookie = "django_timezone=Europe/Rome";</code></pre>-->
-				</section>
-				<section>
-					<p>
-						Try API filtering while changing the timezone header.
-					</p>
-					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/\
-?value_dt__gte=2026-01-01\
-&value_dt__lt=2026-04-01\
-&ordering=value_dt" \
-    -H "X-Timezone: Europe/Rome"</code></pre>
-					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/group_by_year_and_quarter/" \
-    -H "X-Timezone: Europe/Rome"</code></pre>
-					<pre><code class="language-bash">curl -X GET "/api/timezone-tests/group_by_year_and_quarter/" \
-    --cookie "django_timezone=Europe/Rome"</code></pre>
-				</section>
+				<p>
+					<small>
+						Django then converts timestamps to that timezone on the way out.<br>
+						Cookie, header, and curl examples are in the repo.
+					</small>
+				</p>
 			</section>
 
 			<!-- Commented out for shorter talk - FastAPI section -->
@@ -1263,24 +1187,17 @@ async def read_timezones(
 				<section>
 					<p><strong>2. Store in UTC, display in local time</strong></p>
 					<p>UTC is the reliable, unambiguous way<br>to store timestamps</p>
-					<p>Local time is what users expect to see<br>when they look at dates and times</p>
-				</section>
-				<section>
-					<p><strong>2b. Write logs in UTC, and say so</strong></p>
-					<pre><code class="language-text">[2026-03-31 19:17:00] payment received $340k</code></pre>
-					<p>
-						CET? UTC? The worker in <code>us-east-1</code>?<br>
-						The laptop you used to grep production?
-					</p>
+					<p>Local time is what users expect to see</p>
 					<p>
 						<small>
-							If the line doesn't say <code>Z</code> or <code>+00:00</code>,<br>
-							every post-mortem becomes a timezone puzzle.
+							That includes your logs.<br>
+							<strike><code>[2026-03-31 20:17:00] payment received $340k</code></strike><br>
+							<code>[2026-04-01 00:17:00Z] payment received $340k</code><br>
+							If it doesn't say Z, every post-mortem is a timezone puzzle.
 						</small>
 					</p>
 					<aside class="notes">
 						Logs are just another recording of the past.
-						Same rule as paid_at: store the instant in UTC, convert only when a human reads it.
 						UTC in the database and the logs. Local time for users. An explicit timezone for reports.
 						Then the three of them finally agree.
 					</aside>
