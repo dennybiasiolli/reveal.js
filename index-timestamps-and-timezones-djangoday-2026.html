@@ -19,34 +19,32 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h3>The Time Paradox<br>Building Timezone-Safe Python/Django Applications</h3>
-				<p><em>- or -<br>How your code can be wrong<br>without changing a single line</em></p>
+				<h3>The Time Paradox</h3>
+				<p><em>How your code can be wrong<br>without changing a single line</em></p>
 				<p><small>Denny Biasiolli</small></p>
 				<p>&nbsp;</p>
 				<small>
 					<h4>Django Day Copenhagen</h4>
 					<p>Oct 2026</p>
 				</small>
+			</section>
 
+			<section>
+				<h3>Right now, in this room</h3>
+				<p>It's late morning in Copenhagen</p>
+				<p class="fragment">Before dawn in New York</p>
+				<p class="fragment">Evening in Tokyo</p>
+				<p class="fragment">
+					<small>Same instant. Three different days,<br>depending who you ask.</small>
+				</p>
 				<aside class="notes">
-					<h3>
-						1 PM, Amsterdam time is<br>
-						6 AM in New York<br>
-						8 PM in Tokyo<br>
-						on May 7th, 2026
-					</h3>
-					Handling time in software seems simple, until it isn't. From daylight savings quirks to database
-					inconsistencies and user-local conversions, timezones can quietly turn into one of your biggest
-					sources of bugs.
-					In this talk, we'll unravel the paradox of time in Python and Django: how something so universal can
-					be so tricky to get right. You'll learn how Django handles datetime objects, the difference between
-					naive and aware datetimes, common pitfalls when working with ORM and serializers, and best practices
-					for ensuring your applications stay consistent across users, systems, and regions.
-					By the end, you'll be equipped with practical techniques and mental models to make your Django apps
-					truly timezone-safe, and your logs, reports, and users finally in sync.
+					Oct 2, 2026, CEST: 11:30 here is 5:30am in New York and 6:30pm in Tokyo.
+					I'm in Copenhagen talking about a New York quarter close that broke
+					because a server in Europe used UTC. If that sentence didn't scare you, it will.
 				</aside>
 			</section>
 
+			<!-- Swap in if we slip past 12:15
 			<section>
 				<h3>Right now, in this room</h3>
 				<p>It's afternoon in Copenhagen</p>
@@ -56,11 +54,12 @@
 					<small>Same instant. Three different days,<br>depending who you ask.</small>
 				</p>
 				<aside class="notes">
-					Oct 2, 2026, CEST: 1pm here is 7am in New York and 8pm in Tokyo.
+					Oct 2, 2026, CEST: 12:30 here is 6:30am in New York and 7:30pm in Tokyo.
 					I'm in Copenhagen talking about a New York quarter close that broke
 					because a server in Europe used UTC. If that sentence didn't scare you, it will.
 				</aside>
 			</section>
+			-->
 
 			<!-- HORROR STORY OPENER: The Quarter That Leaked -->
 			<section>
