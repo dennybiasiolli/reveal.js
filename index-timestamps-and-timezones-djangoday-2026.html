@@ -31,11 +31,11 @@
 
 			<section>
 				<h3>Right now, in this room</h3>
-				<p>It's late morning in Copenhagen</p>
-				<p class="fragment">Before dawn in New York</p>
-				<p class="fragment">Evening in Tokyo</p>
-				<p class="fragment">
-					<small>Same instant. Three different days,<br>depending who you ask.</small>
+				<p>It's (almost) lunchtime in Copenhagen</p>
+				<p>Before breakfast in New York</p>
+				<p>Almost dinner in Tokyo</p>
+				<p>
+					<small>Same instant. Three different meals,<br>depending who you ask.</small>
 				</p>
 				<aside class="notes">
 					Oct 2, 2026, CEST: 11:30 here is 5:30am in New York and 6:30pm in Tokyo.
@@ -43,23 +43,6 @@
 					because a server in Europe used UTC. If that sentence didn't scare you, it will.
 				</aside>
 			</section>
-
-			<!-- Swap in if we slip past 12:15
-			<section>
-				<h3>Right now, in this room</h3>
-				<p>It's afternoon in Copenhagen</p>
-				<p class="fragment">Morning in New York</p>
-				<p class="fragment">Evening in Tokyo</p>
-				<p class="fragment">
-					<small>Same instant. Three different days,<br>depending who you ask.</small>
-				</p>
-				<aside class="notes">
-					Oct 2, 2026, CEST: 12:30 here is 6:30am in New York and 7:30pm in Tokyo.
-					I'm in Copenhagen talking about a New York quarter close that broke
-					because a server in Europe used UTC. If that sentence didn't scare you, it will.
-				</aside>
-			</section>
-			-->
 
 			<!-- HORROR STORY OPENER: The Quarter That Leaked -->
 			<section>
@@ -162,7 +145,7 @@ ORDER BY quarter;</code></pre>
 
 -- what users expect in New York
 SET TIMEZONE TO 'America/New_York';
-SELECT date_trunc('quarter', paid_at);
+SELECT to_char(paid_at, 'YYYY-"Q"Q');
 -- 2026-Q1
 
 -- what the server has in UTC
@@ -201,7 +184,11 @@ SELECT to_char(paid_at, 'YYYY-"Q"Q');
 							I was wrong. So very, very wrong
 						</small>
 					</p>
+					<p class="fragment">Quick one: how long is a day?</p>
 				</div>
+				<aside class="notes">
+					Let them say 24. Do not answer. We'll come back on Samoa, then pay it off after DST.
+				</aside>
 			</section>
 
 			<!-- Commented out for shorter talk -->
@@ -586,6 +573,10 @@ time.time()
 						Someone had to update this database. Imagine the commit message
 					</small>
 				</p>
+				<p class="fragment">So how long was <em>that</em> day?</p>
+				<aside class="notes">
+					Still don't answer. The payoff is the next DST block: How long is a day?
+				</aside>
 			</section>
 
 			<section>
@@ -608,9 +599,9 @@ time.time()
 
 				<section>
 					<h4>1. Spring Forward: the phantom hour</h4>
-					<p>In New York, DST starts on <strong>March 9, 2026 at 2:00 AM</strong></p>
+					<p>In New York, DST starts on <strong>March 8, 2026 at 2:00 AM</strong></p>
 					<p>The clock jumps: <strong>1:59:59 AM → 3:00:00 AM</strong></p>
-					<p><strong>2:30 AM on March 9, 2026 never happened</strong></p>
+					<p><strong>2:30 AM on March 8, 2026 never happened</strong></p>
 					<p>
 						<small>
 							Some libraries throw. Others silently move you to 3:30.<br>
@@ -621,7 +612,7 @@ time.time()
 
 				<section>
 					<h4>2. Fall Back: the duplicate hour</h4>
-					<p>In New York, DST ends on <strong>Nov 2, 2026 at 2:00 AM</strong></p>
+					<p>In New York, DST ends on <strong>Nov 1, 2026 at 2:00 AM</strong></p>
 					<p>The clock jumps back: <strong>1:59:59 AM → 1:00:00 AM</strong></p>
 					<p><strong>1:30 AM happens twice</strong></p>
 					<p>
@@ -633,18 +624,33 @@ time.time()
 				</section>
 
 				<section>
-					<h4>Days aren't always 24 hours</h4>
+					<h4>How long is a day?</h4>
 					<ul>
-						<li>March 9, 2026 in New York: <strong>23 hours</strong> long</li>
-						<li>November 2, 2026 in New York: <strong>25 hours</strong> long</li>
+						<li>March 8, 2026 in New York: <strong>23 hours</strong> long</li>
+						<li>November 1, 2026 in New York: <strong>25 hours</strong> long</li>
 					</ul>
+					<aside class="notes">
+						Payoff. They said 24 in therapy. Samoa skipped one. Now: 23, 24, or 25.
+						First line: now is UTC, +24h is elapsed time, 9am NY becomes 10am.
+						Second line only works if now is aware in America/New_York.
+						UTC-aware + timedelta(days=1) is still 24 elapsed hours — same leak.
+						If someone asks: days=1 and hours=24 are the same timedelta.
+						The receiver's timezone is what changes the result, not days vs hours.
+					</aside>
 					<div>
 						<p>This matters when scheduling the next run:</p>
-						<pre><code class="language-py"># skips/repeats the DST hour
+						<pre><code class="language-py"># UTC — 10:00 AM after spring-forward
 next_run = now + timedelta(hours=24)
 
-# respects the local calendar day
-next_run = now + timedelta(days=1)</code></pre>
+# timezone-aware in New York — still 09:00 AM
+next_run = now + timedelta(days=1)  # same as hours=24</code></pre>
+						<p>
+							<small>
+								The datetime <strong>must be timezone-aware</strong><br>
+								in the zone you're scheduling for.<br>
+								A naive <code>datetime</code> has no DST to respect.
+							</small>
+						</p>
 					</div>
 				</section>
 			</section>
@@ -1208,6 +1214,7 @@ async def read_timezones(
 			</section>
 			<section>
 				<p>
+					A day is 23, 24, or 25 hours. Test all three.<br>
 					Remember: timezone math is not real math!<br>
 					Have a good cry and then test, test, test.
 				</p>
