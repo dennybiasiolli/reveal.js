@@ -122,12 +122,35 @@ export default class ScrollView {
 		}
 
 		// Slide and slide background layout
+		const emptiedStacks = [];
+
 		horizontalSlides.forEach( ( horizontalSlide, h ) => {
 
 			if( this.Reveal.isVerticalStack( horizontalSlide ) ) {
+				// A stack can hold a shared title beside its <section> children.
+				// Copy that content onto each vertical slide. Scroll view can
+				// activate from layout() before those parents have the stack
+				// class, so this must not depend on that class.
+				const childSections = horizontalSlide.querySelectorAll( ':scope > section' );
+				const nonSectionChildren = Array.from( horizontalSlide.childNodes ).filter( child => {
+					if( child.nodeType === Node.ELEMENT_NODE && child.nodeName === 'SECTION' ) return false;
+					if( child.nodeType === Node.TEXT_NODE && !child.textContent.trim() ) return false;
+					return true;
+				} );
+
+				childSections.forEach( section => {
+					for( let i = nonSectionChildren.length - 1; i >= 0; i-- ) {
+						section.insertBefore( nonSectionChildren[i].cloneNode( true ), section.firstChild );
+					}
+				} );
+
+				nonSectionChildren.forEach( child => child.remove() );
+
 				horizontalSlide.querySelectorAll( 'section' ).forEach( ( verticalSlide, v ) => {
 					createPageElement( verticalSlide, h, v, true );
 				});
+
+				emptiedStacks.push( horizontalSlide );
 			}
 			else {
 				createPageElement( horizontalSlide, h, 0 );
@@ -137,8 +160,11 @@ export default class ScrollView {
 
 		this.createProgressBar();
 
-		// Remove leftover stacks
+		// Remove leftover stacks. Parents processed above may not have the
+		// stack class yet; drop those explicitly so their shell cannot sit
+		// on top of the scroll pages.
 		queryAll( this.Reveal.getRevealElement(), '.stack' ).forEach( stack => stack.remove() );
+		emptiedStacks.forEach( stack => stack.remove() );
 
 		// Add our newly created pages to the DOM
 		pageElements.forEach( page => pageContainer.appendChild( page ) );
