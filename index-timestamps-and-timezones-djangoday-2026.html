@@ -30,6 +30,16 @@
 			</section>
 
 			<section>
+				<h3>I know it's almost lunchtime.</h3>
+				<p class="fragment">I promise I won't be talking about food.</p>
+				<aside class="notes">
+					Last slot before lunch. Say it straight. Do not smile.
+					Then advance. The next slide breaks the promise.
+					After that, leave it alone until the 9am report.
+				</aside>
+			</section>
+
+			<section>
 				<h3>Right now, in this room</h3>
 				<p>It's (almost) lunchtime in Copenhagen</p>
 				<p>Before breakfast in New York</p>
@@ -37,10 +47,14 @@
 				<p>
 					<small>Same instant. Three different meals,<br>depending who you ask.</small>
 				</p>
+				<p class="fragment">
+					<small>Still a timezone talk.<br>The meals are just evidence.</small>
+				</p>
 				<aside class="notes">
 					Oct 2, 2026, CEST: 11:30 here is 5:30am in New York and 6:30pm in Tokyo.
-					I'm in Copenhagen talking about a New York quarter close that broke
-					because a server in Europe used UTC. If that sentence didn't scare you, it will.
+					You just broke the promise. Say the denial with a straight face.
+					Then: a New York quarter close broke because a server in Europe used UTC.
+					If that sentence didn't scare you, it will.
 				</aside>
 			</section>
 
@@ -67,7 +81,9 @@
 					<li>Board deck and auditors start asking hard questions</li>
 				</ul>
 				<aside class="notes">
-					<pre>The root cause: `paid_at` is the correct business timestamp — the exact moment the money was received or the transaction was confirmed. Finance uses it for revenue recognition, cash reporting, tax periods, and commission calculations.
+					<pre>Straight. Leave the lunch bit alone until the 9am report.
+
+The root cause: `paid_at` is the correct business timestamp — the exact moment the money was received or the transaction was confirmed. Finance uses it for revenue recognition, cash reporting, tax periods, and commission calculations.
 
 But `TruncQuarter()` / `date_trunc('quarter')` and Django's Trunc* functions are timezone-sensitive. They use the *current session/database timezone*, not the timezone in which the payment actually happened.
 
@@ -514,6 +530,13 @@ time.time()
 						They want it <strong>at 9:00 AM in their day</strong>,<br>
 						every single day, regardless of UTC offset
 					</p>
+					<p class="fragment">
+						<small>Right after they've eaten their breakfast.</small>
+					</p>
+					<aside class="notes">
+						Callback, deadpan. 9:00 AM is just after breakfast.
+						One line, then back to storing 09:00 America/New_York.
+					</aside>
 				</section>
 				<section>
 					<p>
@@ -1218,7 +1241,13 @@ async def read_timezones(
 					Remember: timezone math is not real math!<br>
 					Have a good cry and then test, test, test.
 				</p>
+				<p class="fragment">
+					<small>You may now talk about food.<br>It's lunchtime. Here.</small>
+				</p>
 				<h3>Thank you!</h3>
+				<aside class="notes">
+					Release them. Point at the door. Stop talking.
+				</aside>
 				<p>
 					<small>
 						Denny Biasiolli<br>
