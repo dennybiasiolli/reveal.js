@@ -523,8 +523,8 @@ time.time()
 			</section>
 
 			<section>
-				<h4>Scheduling when something should happen:<br>Store the intent</h4>
 				<section>
+					<h4>Scheduling when something should happen:<br>Store the intent</h4>
 					<p>Finance doesn't want the daily report at <strong>14:00 UTC</strong></p>
 					<p>
 						They want it <strong>at 9:00 AM in their day</strong>,<br>
@@ -539,6 +539,7 @@ time.time()
 					</aside>
 				</section>
 				<section>
+					<h4>Scheduling when something should happen:<br>Store the intent</h4>
 					<p>
 						If you store a fixed UTC time and DST changes,
 						the report suddenly runs at the wrong local time
@@ -692,9 +693,8 @@ next_run = now + timedelta(days=1)  # same as hours=24</code></pre>
 			-->
 
 			<section>
-				<h4>Timezone in Python</h4>
-
 				<section>
+					<h4>Timezone in Python</h4>
 					<h4><code>datetime</code> object</h4>
 					<ul>
 						<li>
@@ -715,6 +715,7 @@ next_run = now + timedelta(days=1)  # same as hours=24</code></pre>
 					</p>
 				</section>
 				<section>
+					<h4>Timezone in Python</h4>
 					<h4>Example</h4>
 					<pre><code class="language-py">from datetime import datetime
 from zoneinfo import ZoneInfo # Python 3.9+
@@ -796,8 +797,8 @@ DateTime.fromObject(
 			-->
 
 			<section>
-				<h4>Timezone in PostgreSQL</h4>
 				<section>
+					<h4>Timezone in PostgreSQL</h4>
 					<h4><code>timestamptz</code> column</h4>
 					<ul>
 						<li>
@@ -832,6 +833,7 @@ DateTime.fromObject(
 				</section>
 				-->
 				<section>
+					<h4>Timezone in PostgreSQL</h4>
 					<p>
 						Postgres can set the timezone in six different places.<br>
 						<small>Server level, connection string, database, user, session, transaction.</small><br>
@@ -1206,13 +1208,14 @@ async def read_timezones(
 			-->
 
 			<section>
-				<h4>Three rules to live by</h4>
 				<section>
+					<h4>Three rules to live by</h4>
 					<p><strong>1. Use timezone-aware datetimes</strong></p>
 					<p>Don't use naive datetimes, or you'll have to do timezone math manually</p>
 					<p>And timezone math is not real math!</p>
 				</section>
 				<section>
+					<h4>Three rules to live by</h4>
 					<p><strong>2. Store in UTC, display in local time</strong></p>
 					<p>UTC is the reliable, unambiguous way<br>to store timestamps</p>
 					<p>Local time is what users expect to see</p>
@@ -1231,6 +1234,7 @@ async def read_timezones(
 					</aside>
 				</section>
 				<section>
+					<h4>Three rules to live by</h4>
 					<p><strong>3. Ask for the timezone for sensitive operations<br>(like fiscal reports)</strong></p>
 					<p>Don't rely on the server's timezone<br>or a fixed timezone for all users</p>
 				</section>

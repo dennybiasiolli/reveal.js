@@ -438,8 +438,8 @@ time.time()
 			</section>
 
 			<section>
-				<h4>Scheduling when something should happen:<br>Store the intent</h4>
 				<section>
+					<h4>Scheduling when something should happen:<br>Store the intent</h4>
 					<p>Finance doesn't want the daily report at <strong>14:00 UTC</strong></p>
 					<p>
 						They want it <strong>at 9:00 AM in their day</strong>,<br>
@@ -447,6 +447,7 @@ time.time()
 					</p>
 				</section>
 				<section>
+					<h4>Scheduling when something should happen:<br>Store the intent</h4>
 					<p>
 						If you store a fixed UTC time and DST changes,
 						the report suddenly runs at the wrong local time
@@ -589,9 +590,9 @@ next_run = now + timedelta(days=1)</code></pre>
 			</section>
 
 			<section>
-				<h4>Timezone in Python</h4>
 
 				<section>
+					<h4>Timezone in Python</h4>
 					<h4><code>datetime</code> object</h4>
 					<ul>
 						<li>
@@ -612,6 +613,7 @@ next_run = now + timedelta(days=1)</code></pre>
 					</p>
 				</section>
 				<section>
+					<h4>Timezone in Python</h4>
 					<h4>Example</h4>
 					<pre><code class="language-py">from datetime import datetime
 from zoneinfo import ZoneInfo # Python 3.9+
@@ -642,8 +644,8 @@ tzlocal.get_localzone()</code></pre>
 			</section>
 
 			<section>
-				<h4>Timezone in JavaScript</h4>
 				<section>
+					<h4>Timezone in JavaScript</h4>
 					<h4><code>Date</code> object</h4>
 					<p>
 						Tracks time in UTC internally, but typically accepts input and produces
@@ -661,6 +663,7 @@ tzlocal.get_localzone()</code></pre>
 					</p>
 				</section>
 				<section>
+					<h4>Timezone in JavaScript</h4>
 					<h4>Example</h4>
 					<pre><code class="language-js">new Date() // current date and time in local timezone
 
@@ -672,6 +675,7 @@ Intl.DateTimeFormat().resolvedOptions().timeZone</code></pre>
 					<small>Note: months are 0-indexed (January is 0, December is 11)</small>
 				</section>
 				<section>
+					<h4>Timezone in JavaScript</h4>
 					<h4>Working with other timezones</h4>
 					<p>
 						You can use third-party libraries like <code>luxon</code> or <code>Day.js</code> to handle
@@ -690,8 +694,8 @@ DateTime.fromObject(
 			</section>
 
 			<section>
-				<h4>Timezone in PostgreSQL</h4>
 				<section>
+					<h4>Timezone in PostgreSQL</h4>
 					<h4><code>timestamptz</code> column</h4>
 					<p>
 						Short name for <code>timestamp with time zone</code>
@@ -708,6 +712,7 @@ DateTime.fromObject(
 				</section>
 
 				<section>
+					<h4>Timezone in PostgreSQL</h4>
 					<p>Configuring the timezone in PostgreSQL</p>
 					<ol>
 						<li>Server level in the <code>postgresql.conf</code> file<br>
@@ -735,6 +740,7 @@ DateTime.fromObject(
 				</section>
 
 				<section>
+					<h4>Timezone in PostgreSQL</h4>
 					<p>Configuring the timezone in PostgreSQL</p>
 					<ol start="5">
 						<li>For a single session<br>
@@ -1128,8 +1134,8 @@ timezone.activate(zoneinfo.ZoneInfo("America/New_York"))</code></pre>
 			</section>
 
 			<section>
-				<h4>Django Middleware solution</h4>
 				<section>
+					<h4>Django Middleware solution</h4>
 					<p>Pick one, or combine them!</p>
 					<pre><code class="language-py">import zoneinfo
 from django.utils import timezone</code></pre>
@@ -1146,6 +1152,7 @@ if tzname:
     timezone.activate(zoneinfo.ZoneInfo(tzname))</code></pre>
 				</section>
 				<section>
+					<h4>Django Middleware solution</h4>
 					<p>
 						In the frontend (JavaScript), you can set the timezone
 						in a cookie or a custom header when making requests
@@ -1162,6 +1169,7 @@ fetch("/api/some-endpoint", {
 });</code></pre>
 				</section>
 				<section>
+					<h4>Django Middleware solution</h4>
 					<p>
 						Django will automatically convert the timestamps
 						to the selected timezone when retrieving records
@@ -1230,18 +1238,20 @@ async def read_timezones(
 			-->
 
 			<section>
-				<h4>Three rules to live by</h4>
 				<section>
+					<h4>Three rules to live by</h4>
 					<p><strong>1. Use timezone-aware datetimes</strong></p>
 					<p>Don't use naive datetimes, or you'll have to do timezone math manually</p>
 					<p>And timezone math is not real math!</p>
 				</section>
 				<section>
+					<h4>Three rules to live by</h4>
 					<p><strong>2. Store in UTC, display in local time</strong></p>
 					<p>UTC is the reliable, unambiguous way<br>to store timestamps</p>
 					<p>Local time is what users expect to see<br>when they look at dates and times</p>
 				</section>
 				<section>
+					<h4>Three rules to live by</h4>
 					<p><strong>3. Ask for the timezone for sensitive operations<br>(like fiscal reports)</strong></p>
 					<p>Don't rely on the server's timezone<br>or a fixed timezone for all users</p>
 				</section>
