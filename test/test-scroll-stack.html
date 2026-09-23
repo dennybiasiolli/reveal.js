@@ -30,6 +30,15 @@
 					</section>
 				</section>
 
+				<section>
+					<p class="keep-outside">Keep me</p>
+					<div>
+						<section>
+							<p>Nested only</p>
+						</section>
+					</div>
+				</section>
+
 			</div>
 
 		</div>
@@ -64,12 +73,26 @@
 						assert.strictEqual( headers[0].textContent, 'Stack Header', 'page ' + ( i + 1 ) + ' header text matches' );
 					} );
 
-					const stray = Array.from( document.querySelectorAll( '.slides > section, .slides > h4' ) );
-					assert.strictEqual( stray.length, 0, 'no stack shell left outside the scroll pages' );
+					const strayHeader = Array.from( document.querySelectorAll( '.slides > section' ) ).filter( section => {
+						return section.querySelector( 'h4' ) && section.querySelector( 'h4' ).textContent === 'Stack Header';
+					} );
+					assert.strictEqual( strayHeader.length, 0, 'stack shell is not left outside the scroll pages' );
 
 					const title = document.querySelector( '.scroll-page' );
 					assert.ok( title && /Title/.test( title.textContent ), 'first page is the title slide' );
 					assert.notOk( title.querySelector( 'h4' ), 'title slide does not show the stack header' );
+				});
+
+				QUnit.test( 'Content around a nested section is kept', assert => {
+					const kept = document.querySelectorAll( '.keep-outside' );
+					assert.strictEqual( kept.length, 1, 'surrounding content is not deleted' );
+					assert.strictEqual( kept[0].textContent, 'Keep me', 'surrounding text is unchanged' );
+
+					const nestedPages = Array.from( document.querySelectorAll( '.scroll-page' ) ).filter( page => {
+						return /Nested only/.test( page.textContent );
+					} );
+					assert.strictEqual( nestedPages.length, 1, 'nested section still becomes a scroll page' );
+					assert.notOk( nestedPages[0].querySelector( '.keep-outside' ), 'surrounding content is not copied onto it' );
 				});
 
 			} );

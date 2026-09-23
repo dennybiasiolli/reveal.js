@@ -127,30 +127,34 @@ export default class ScrollView {
 		horizontalSlides.forEach( ( horizontalSlide, h ) => {
 
 			if( this.Reveal.isVerticalStack( horizontalSlide ) ) {
-				// A stack can hold a shared title beside its <section> children.
-				// Copy that content onto each vertical slide. Scroll view can
-				// activate from layout() before those parents have the stack
-				// class, so this must not depend on that class.
+				// A real stack has <section> children directly inside it.
+				// A <section> nested inside other markup is not one: there is
+				// no child slide to copy onto, and removing the other nodes
+				// would discard the slide. Scroll view can also activate from
+				// layout() before the stack class exists, so this must not
+				// depend on that class.
 				const childSections = horizontalSlide.querySelectorAll( ':scope > section' );
-				const nonSectionChildren = Array.from( horizontalSlide.childNodes ).filter( child => {
-					if( child.nodeType === Node.ELEMENT_NODE && child.nodeName === 'SECTION' ) return false;
-					if( child.nodeType === Node.TEXT_NODE && !child.textContent.trim() ) return false;
-					return true;
-				} );
 
-				childSections.forEach( section => {
-					for( let i = nonSectionChildren.length - 1; i >= 0; i-- ) {
-						section.insertBefore( nonSectionChildren[i].cloneNode( true ), section.firstChild );
-					}
-				} );
+				if( childSections.length > 0 ) {
+					const nonSectionChildren = Array.from( horizontalSlide.childNodes ).filter( child => {
+						if( child.nodeType === Node.ELEMENT_NODE && child.nodeName === 'SECTION' ) return false;
+						if( child.nodeType === Node.TEXT_NODE && !child.textContent.trim() ) return false;
+						return true;
+					} );
 
-				nonSectionChildren.forEach( child => child.remove() );
+					childSections.forEach( section => {
+						for( let i = nonSectionChildren.length - 1; i >= 0; i-- ) {
+							section.insertBefore( nonSectionChildren[i].cloneNode( true ), section.firstChild );
+						}
+					} );
+
+					nonSectionChildren.forEach( child => child.remove() );
+					emptiedStacks.push( horizontalSlide );
+				}
 
 				horizontalSlide.querySelectorAll( 'section' ).forEach( ( verticalSlide, v ) => {
 					createPageElement( verticalSlide, h, v, true );
 				});
-
-				emptiedStacks.push( horizontalSlide );
 			}
 			else {
 				createPageElement( horizontalSlide, h, 0 );
